@@ -1,20 +1,8 @@
 {
-  inputs = {
-    nixpkgs.url = github:NixOS/nixpkgs-channels/nixos-unstable;
-    # nur.url = github:nix-community/NUR;
+  inputs = { unstable.url = github:NixOS/nixpkgs-channels/nixos-unstable; };
+
+  outputs = inputs: {
+    defaultPackage.x86_64-linux = import ./configuration.nix { npkgs = inputs.unstable; };
   };
 
-  outputs = { nixpkgs, nix, self, ... }@inputs: {
-    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules =
-        [ (import ./configuration.nix) ];
-      # specialArgs = { inherit inputs; };
-    };
-   packages.x86_64-linux.nixpkgs-review = import ./. { 
-     nixpkgs = nixpkgs.legacyPackages.x86_64-linux;
-   };
-
-   defaultPackage.x86_64-linux = self.packages.x86_64-linux.nixpkgs-review;
-  };
 }

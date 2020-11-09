@@ -2,8 +2,13 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, npkgs, ... }:
 
+let
+  pkgs = import npkgs { system = "x86_64-linux"; };
+
+  #myScript = pkgs.writeShellScriptBin "helloWorld" "echo Hello World";
+in
 {
   imports =
     [ # Include the results of the hardware scan.
