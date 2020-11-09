@@ -69,14 +69,14 @@ in
      gnupg
      gparted
      haskellPackages.pandoc
-     htop
+     #htop
      jetbrains.pycharm-community
      keepassxc
      kdeApplications.okular
      libreoffice
      oh-my-zsh
      python38Full
-     nodejs
+     #nodejs
      qgis
      rubber
      spectacle
