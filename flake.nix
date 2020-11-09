@@ -1,5 +1,5 @@
 {
-  inputs = {
+  inputs = rec {
         stable.url = "github:NixOS/nixpkgs/nixos-20.03";
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
