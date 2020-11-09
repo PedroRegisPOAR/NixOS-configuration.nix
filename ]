@@ -20,7 +20,7 @@
     };
   };
 
-  outputs = { self, nixpkgs }: {
+  outputs = { self, nixpkgs, system}: {
      # replace 'pedro' with your hostname here.
      nixosConfigurations.pedro = nixpkgs.lib.nixosSystem {
        system = "x86_64-linux";
