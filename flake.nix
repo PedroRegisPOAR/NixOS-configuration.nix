@@ -11,5 +11,10 @@
         [ (import ./configuration.nix) ];
       # specialArgs = { inherit inputs; };
     };
+   packages.x86_64-linux.nixpkgs-review = import ./. { 
+     nixpkgs = nixpkgs.legacyPackages.x86_64-linux;
+   };
+
+   defaultPackage.x86_64-linux = self.packages.x86_64-linux.nixpkgs-review;
   };
 }
