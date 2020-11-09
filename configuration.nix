@@ -70,7 +70,8 @@
      kdeApplications.okular
      libreoffice
      oh-my-zsh
-     python39
+     python38Full
+     nodejs
      qgis
      rubber
      spectacle
