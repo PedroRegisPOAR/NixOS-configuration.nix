@@ -1,14 +1,19 @@
 {
   inputs = {
-    nixpkgs.url = github:NixOS/nixpkgs-channels/nixos-unstable;
-    # nur.url = github:nix-community/NUR;
+        stable.url = "github:NixOS/nixpkgs/nixos-20.03";
+    unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    home-manager = {
+      url = "github:rycee/home-manager";
+      inputs.nixpkgs.follows = "stable";
+    };
+    # nur.url = "github:nix-community/NUR";
+    emacs.url = "github:nix-community/emacs-overlay";
+    nixos-hardware.url = "github:NixOS/nixos-hardware";
 
-    # Modules
-    hardware = {
-      url = "github:NixOS/nixos-hardware";
+    nix-direnv = {
+      url = "github:nix-community/nix-direnv";
       flake = false;
     };
-
   };
 
   outputs = { self, nixpkgs }: {
