@@ -2,6 +2,13 @@
   inputs = {
     nixpkgs.url = github:NixOS/nixpkgs-channels/nixos-unstable;
     # nur.url = github:nix-community/NUR;
+
+    # Modules
+    hardware = {
+      url = "github:NixOS/nixos-hardware";
+      flake = false;
+    };
+
   };
 
   outputs = { self, nixpkgs }: {
