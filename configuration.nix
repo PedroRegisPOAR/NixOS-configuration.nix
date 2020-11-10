@@ -2,13 +2,13 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, npkgs, ... }:
+{ config, nixpkgs, ... }:
 
-let
-  pkgs = import npkgs { system = "x86_64-linux"; };
-
-  #myScript = pkgs.writeShellScriptBin "helloWorld" "echo Hello World";
-in
+#let
+#  pkgs = import npkgs { system = "x86_64-linux"; };
+#
+#  #myScript = pkgs.writeShellScriptBin "helloWorld" "echo Hello World";
+#in
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -19,12 +19,12 @@ in
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  nix = {
-    package = pkgs.nixUnstable;
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
-  };
+#  nix = {
+#    package = pkgs.nixUnstable;
+#    extraOptions = ''
+#      experimental-features = nix-command flakes
+#    '';
+#  };
  
   # networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -51,7 +51,7 @@ in
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = with nixpkgs; [
      anydesk
      amazon-ecs-cli
      awscli
@@ -154,7 +154,7 @@ in
    };
 
    users.extraUsers.pedro= {
-     shell = pkgs.zsh;
+     shell = nixpkgs.zsh;
    };
 
   # This value determines the NixOS release from which the default
@@ -177,7 +177,7 @@ in
   # https://knowledge.rootknecht.net/nixos-configuration
   programs.zsh.enable = true;
   programs.zsh.interactiveShellInit = ''
-    export ZSH=${pkgs.oh-my-zsh}/share/oh-my-zsh/
+    export ZSH=${nixpkgs.oh-my-zsh}/share/oh-my-zsh/
 
     # Customize your oh-my-zsh options here
     ZSH_THEME="agnoster"
@@ -218,7 +218,7 @@ in
   programs.zsh.promptInit = "";
 
   users.extraUsers.USER = {
-    shell = pkgs.zsh;
+    shell = nixpkgs.zsh;
   };
 
 }
