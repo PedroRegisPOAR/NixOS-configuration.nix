@@ -1,6 +1,6 @@
 {
 
-#  inputs = { unstable.url = github:NixOS/nixpkgs-channels/nixos-unstable; };
+  inputs = { unstable.url = github:NixOS/nixpkgs-channels/nixos-unstable; };
 
 #  outputs = inputs: {
 #    defaultPackage.x86_64-linux = import ./configuration.nix { npkgs = inputs.unstable; };
@@ -16,7 +16,9 @@
 
   outputs = { self, nixpkgs, nix, ... }: {
 
-    packages.x86_64-linux = nixpkgs.system.legacyPackages.x86_64-linux;
+    npkgs = inputs.unstable;
+
+    packages.x86_64-linux = npkgs.system.legacyPackages.x86_64-linux;
 
     nixosConfigurations.pedro = nixpkgs.lib.nixosSystem {
       modules = [
