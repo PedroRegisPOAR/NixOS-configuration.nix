@@ -15,6 +15,9 @@
 #  };
 
   outputs = { nixpkgs, ... }: {
+
+    packages.x86_64-linux = system.legacyPackages.x86_64-linux;
+
     nixosConfigurations.mymachine = nixpkgs.lib.nixosSystem {
       modules = [
         # Point this to your original configuration.
