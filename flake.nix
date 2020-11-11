@@ -16,7 +16,7 @@
 
   outputs = { nixpkgs, ... }: {
 
-    packages.x86_64-linux = pkgs.system.legacyPackages.x86_64-linux;
+    packages.x86_64-linux = nixpkgs.system.legacyPackages.x86_64-linux;
 
     nixosConfigurations.mymachine = nixpkgs.lib.nixosSystem {
       modules = [
