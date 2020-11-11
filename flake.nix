@@ -16,7 +16,7 @@
 
   outputs = { self, nixpkgs, nix, ... }: {
 
-    npkgs = inputs.unstable;
+    npkgs = self.inputs.unstable;
 
     packages.x86_64-linux = npkgs.system.legacyPackages.x86_64-linux;
 
