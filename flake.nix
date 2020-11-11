@@ -18,7 +18,7 @@
 
 #    npkgs = self.inputs.unstable;
 
-#    packages.x86_64-linux = npkgs.system.legacyPackages.x86_64-linux;
+    packages.x86_64-linux = nixpkgs.system.legacyPackages.x86_64-linux;
 
     nixosConfigurations.pedro = nixpkgs.lib.nixosSystem {
       modules = [
