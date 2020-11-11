@@ -18,7 +18,7 @@
 
     packages.x86_64-linux = nixpkgs.system.legacyPackages.x86_64-linux;
 
-    nixosConfigurations.mymachine = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.pedro = nixpkgs.lib.nixosSystem {
       modules = [
         # Point this to your original configuration.
         ./configuration.nix
