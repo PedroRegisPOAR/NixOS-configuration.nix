@@ -14,7 +14,7 @@
 #     };
 #  };
 
-  outputs = { self, nixpkgs, ... }: {
+  outputs = { self, nixpkgs, nix, ... }: {
 
     packages.x86_64-linux = nixpkgs.system.legacyPackages.x86_64-linux;
 
