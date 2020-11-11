@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, nixpkgs, ... }:
+{ config, pkgs, ... }:
 
 #let
 #  pkgs = import npkgs { system = "x86_64-linux"; };
@@ -51,7 +51,7 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with nixpkgs; [
+  environment.systemPackages = with pkgs; [
      anydesk
      amazon-ecs-cli
      awscli
@@ -154,7 +154,7 @@
    };
 
    users.extraUsers.pedro= {
-     shell = nixpkgs.zsh;
+     shell = pkgs.zsh;
    };
 
   # This value determines the NixOS release from which the default
@@ -177,7 +177,7 @@
   # https://knowledge.rootknecht.net/nixos-configuration
   programs.zsh.enable = true;
   programs.zsh.interactiveShellInit = ''
-    export ZSH=${nixpkgs.oh-my-zsh}/share/oh-my-zsh/
+    export ZSH=${pkgs.oh-my-zsh}/share/oh-my-zsh/
 
     # Customize your oh-my-zsh options here
     ZSH_THEME="agnoster"
@@ -218,7 +218,7 @@
   programs.zsh.promptInit = "";
 
   users.extraUsers.USER = {
-    shell = nixpkgs.zsh;
+    shell = pkgs.zsh;
   };
 
 }
