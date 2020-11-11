@@ -17,8 +17,10 @@
   outputs = { self, nixpkgs, nix, ... }: {
 
 #    npkgs = self.inputs.unstable;
-
-    packages.x86_64-linux = nixpkgs.system.legacyPackages.x86_64-linux;
+    let
+      pkgs = import <nixpkgs> {};
+    in
+    packages.x86_64-linux = pkgs.system.legacyPackages.x86_64-linux;
 
     nixosConfigurations.pedro = nixpkgs.lib.nixosSystem {
       modules = [
