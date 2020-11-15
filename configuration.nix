@@ -52,7 +52,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-     anydesk
+     #anydesk
      amazon-ecs-cli
      awscli
      curl
@@ -62,20 +62,20 @@
      docker-compose
      firefox
      file
-     freeoffice
+     #freeoffice
      gcc
      git
      gnumake
      gnupg
      gparted
-     haskellPackages.pandoc
+     #haskellPackages.pandoc
      #htop
      jetbrains.pycharm-community
      keepassxc
      kdeApplications.okular
-     libreoffice
+     #libreoffice
      oh-my-zsh
-     python38Full
+     #python38Full
      #nodejs
      qgis
      rubber
@@ -88,9 +88,9 @@
      unrar
      unzip
      vim
-     vscode-with-extensions
+     #vscode-with-extensions
      wget
-     wxmaxima
+     #wxmaxima
      xorg.xkill
      zsh
   ];
@@ -168,9 +168,9 @@
   virtualisation.docker.enable = true;
   nixpkgs.config.allowUnfree = true;  
 
-  virtualisation.virtualbox.host.enable = true;
-  users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
-  virtualisation.virtualbox.host.enableExtensionPack = true;
+  #virtualisation.virtualbox.host.enable = true;
+  #users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
+  #virtualisation.virtualbox.host.enableExtensionPack = true;
 
   # programs.gnupg.agent.enable = true;
 
