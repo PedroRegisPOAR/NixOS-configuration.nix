@@ -2,14 +2,25 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
+
+let
+
+  # Import unstable channel.
+  # sudo nix-channel --add http://nixos.org/channels/nixos-unstable nixos-unstable
+  # sudo nix-channel --update nixos-unstable
+  nixos-unstable = import inputs.nixos-unstable { config = config.nixpkgs.config; localSystem = "x86_64-linux"; };
+
+in {
+
+#{ config, pkgs, ... }:
 
 #let
 #  pkgs = import npkgs { system = "x86_64-linux"; };
 #
 #  #myScript = pkgs.writeShellScriptBin "helloWorld" "echo Hello World";
 #in
-{
+#{
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
