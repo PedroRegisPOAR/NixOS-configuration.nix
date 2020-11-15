@@ -12,225 +12,296 @@ let
   nixos-unstable = import inputs.nixos-unstable { config = config.nixpkgs.config; localSystem = "x86_64-linux"; };
 
 in {
-
-#{ config, pkgs, ... }:
-
-#let
-#  pkgs = import npkgs { system = "x86_64-linux"; };
-#
-#  #myScript = pkgs.writeShellScriptBin "helloWorld" "echo Hello World";
-#in
-#{
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
-
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  imports = [ # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   nix = {
-    package = pkgs.nixUnstable;
+    package = nixos-unstable.nixFlakes;
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
   };
- 
-  # networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+
+  # TODO: check https://github.com/srid/nix-config
+  # https://github.com/colemickens/nixpkgs-wayland
+  # nixpkgs.overlays = [
+  #   (import (builtins.fetchTarball https://github.com/nix-community/emacs-overlay/archive/master.tar.gz))
+  # ];
+  nixpkgs.config = { allowUnfree = true; };
+  # Use the GRUB 2 boot loader.
+  boot.loader.grub = {
+    enable = true;
+    version = 2;
+    device = "/dev/sda";
+    #    enableCryptodisk = true;
+    gfxmodeEfi = "1024x768";
+    extraEntries = ''
+      menuentry "NixOS experimental" {
+      chainloader (hd0,msdos1)+1
+      }
+    '';
+  };
+
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.extraModulePackages = with config.boot.kernelPackages;
+    [
+      # v4l2loopback
+      exfat-nofuse
+      wireguard
+    ];
 
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
   # Per-interface useDHCP will be mandatory in the future, so this generated config
   # replicates the default behaviour.
+
+  time.timeZone = "Europe/Moscow";
+
+  networking.hostName = "xenia";
   networking.useDHCP = false;
   networking.interfaces.enp2s0.useDHCP = true;
+  networking.interfaces.enp3s0.useDHCP = true;
+  networking.firewall = {
+    allowedUDPPorts = [ 51820 ];
+    allowedTCPPorts = [ 22 ];
+  };
+
+  # networking.wireguard.interfaces = {
+  #   # "wg0" is the network interface name. You can name the interface arbitrarily.
+  #   wg0 = {
+  #     # Determines the IP address and subnet of the client's end of the tunnel interface.
+  #     # ips = [ "10.100.0.2/24" ];
+
+  #     # Path to the private key file.
+  #     #
+  #     # Note: The private key can also be included inline via the privateKey option,
+  #     # but this makes the private key world-readable; thus, using privateKeyFile is
+  #     # recommended.
+  #     privateKeyFile = "../client.privatekey";
+
+  #     peers = [
+  #       # For a client configuration, one peer entry for the server will suffice.
+  #       {
+  #         # Public key of the server (not a file path).
+  #         publicKey = "hZroNzudF4v3KgCF0zZqe5ZY3yHt85yjxOOY4vS5bxA=";
+
+  #         # Forward all the traffic via VPN.
+  #         allowedIPs = [ "0.0.0.0/0" ];
+  #         # Or forward only particular subnets
+  #         #allowedIPs = [ "10.100.0.1" "91.108.12.0/22" ];
+
+  #         # Set this to the server IP and port.
+  #         endpoint = "13.49.18.164:51820";
+
+  #         # Send keepalives every 25 seconds. Important to keep NAT tables alive.
+  #         persistentKeepalive = 25;
+  #       }
+  #     ];
+  #   };
+  # };
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Select internationalisation properties.
-  # i18n.defaultLocale = "en_US.UTF-8";
-  # console = {
-  #   font = "Lat2-Terminus16";
-  #   keyMap = "us";
+  # i18n = {
+  #   consoleFont = "Lat2-Terminus16";
+  #   consoleKeyMap = "us";
+  #   defaultLocale = "en_US.UTF-8";
   # };
+  console.useXkbConfig = true;
+  
+  environment.sessionVariables.TERMINAL = [ "alacritty" ];
+  environment.variables = { BROWSER = "chromium"; };
 
-  # Set your time zone.
-  # time.timeZone = "Europe/Amsterdam";
-
-  # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-     #anydesk
-     amazon-ecs-cli
-     awscli
-     curl
-     direnv
-     discord
-     docker
-     docker-compose
-     firefox
-     file
-     #freeoffice
-     gcc
-     git
-     gnumake
-     gnupg
-     gparted
-     #haskellPackages.pandoc
-     #htop
-     jetbrains.pycharm-community
-     keepassxc
-     kdeApplications.okular
-     #libreoffice
-     oh-my-zsh
-     #python38Full
-     #nodejs
-     qgis
-     rubber
-     spectacle
-     spotify
-     tdesktop
-     tectonic
-     tilix
-     tree
-     unrar
-     unzip
-     vim
-     #vscode-with-extensions
-     wget
-     #wxmaxima
-     xorg.xkill
-     zsh
+    ledger
+    nixos-unstable.chromium
+    firefox
+    brave
+    nixos-unstable.next
+    nixos-unstable.streamlink
+    cura
+    python2
+
+    alacritty
+    # emacsGit
+    emacs
+    sqlite
+    graphviz
+    git
+    nixos-unstable.tmux
+    direnv
+    htop
+
+    wireguard
+    pass
+    nixos-unstable.gopass
+    nixos-unstable.sway
+
+    #    nixos-unstable.steam
+    vanilla-dmz
+    tdesktop
+    gnome3.nautilus
+    gromit-mpx
+    scrcpy
+    feh
+    unzip
+    ripgrep
+    mpv
+    imagemagick
+    ffmpeg
+    maim
+    xclip
+
+    gimp
+    obs-studio
+
+    wireguard
+    nixfmt
+    awscli
+    nixos-unstable.nix-simple-deploy
+
+    pavucontrol
+    alsaUtils
   ];
 
+  services.compton = {
+    enable = true;
+    # inactiveOpacity = "0.8";
+    backend = "glx";
+    # vSync = "opengl";
+    settings = {
+      paint-on-overlay = true;
+      glx-no-stencil = true;
+      glx-no-rebind-pixmap = true;
+    };
+  };
+  hardware.pulseaudio = {
+    enable = true;
+    tcp.enable = true; # need for mpd
+    support32Bit = true; # need for steam
+    package = pkgs.pulseaudioFull;
+  };
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  #   pinentryFlavor = "gnome3";
-  # };
-
-  # List services that you want to enable:
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
 
   # Enable sound.
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
+  # sound.enable = true;
+  # hardware.pulseaudio.enable = true;
 
-  # https://github.com/NixOS/nixpkgs/blob/release-20.03/nixos/modules/hardware/all-firmware.nix
-  hardware.enableRedistributableFirmware = true;
+  fonts.enableFontDir = true;
+  fonts.enableGhostscriptFonts = true;
+  fonts.fontconfig.dpi = 192;
+  fonts.fonts = with pkgs; [
+    corefonts # Micrsoft free fonts
+    nixos-unstable.font-awesome
+    fira-code
+    hack-font
+    hasklig
+    inconsolata
+    iosevka
+    source-code-pro
+    open-sans # need for telegram app
+    unifont
+    #    nixos-unstable.nerdfonts
+  ];
+  fonts.fontconfig.defaultFonts.monospace = [ "Iosevka" ];
 
-  # Enable the X11 windowing system.
-    services.xserver.enable = true;
-    services.xserver.layout = "us";
-  # services.xserver.xkbOptions = "eurosign:e";
-
-  # Enable touchpad support.
-  # services.xserver.libinput.enable = true;
-
-  # Enable the KDE Desktop Environment.
-    services.xserver.displayManager.sddm.enable = true;
-    services.xserver.desktopManager.plasma5.enable = true;
-   
-   # https://github.com/NixOS/nixpkgs/pull/44896
-  # services.xserver.desktopManager = {
-  #  xfce.enable = true;
-  #  default = "xfce";
-  #};
-
-  services.xserver.displayManager.defaultSession = "xfce"; 
-
-  # services.xserver.desktopManager.gnome3.enable = true;
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-   users.users.pedro = {
-     isNormalUser = true;
-     extraGroups = [ "wheel" "pedro" "docker" "kvm"]; # Enable ‘sudo’ for the user.
-   };
-
-   users.extraUsers.pedro= {
-     shell = pkgs.zsh;
-   };
-
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "20.03"; # Did you read the comment?
-
-  virtualisation.docker.enable = true;
-  nixpkgs.config.allowUnfree = true;  
-
-  #virtualisation.virtualbox.host.enable = true;
-  #users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
-  #virtualisation.virtualbox.host.enableExtensionPack = true;
-
-  # programs.gnupg.agent.enable = true;
-
-  # https://knowledge.rootknecht.net/nixos-configuration
-  programs.zsh.enable = true;
-  programs.zsh.interactiveShellInit = ''
-    export ZSH=${pkgs.oh-my-zsh}/share/oh-my-zsh/
-
-    # Customize your oh-my-zsh options here
-    ZSH_THEME="agnoster"
-
-    bindkey '\e[5~' history-beginning-search-backward
-    bindkey '\e[6~' history-beginning-search-forward
-
-    HISTFILESIZE=500000
-    HISTSIZE=500000
-    setopt SHARE_HISTORY
-    setopt HIST_IGNORE_ALL_DUPS
-    setopt HIST_IGNORE_DUPS
-    setopt INC_APPEND_HISTORY
-    autoload -U compinit && compinit
-    unsetopt menu_complete
-    setopt completealiases
-
-    if [ -f ~/.aliases ]; then
-      source ~/.aliases
-    fi
-
-    plugins=(
-       colored-man-pages
-       docker
-       git
-       zsh-autosuggestions
-       zsh-syntax-highlighting
-       )
-    
-    # https://keybase.pub/peterwilli/NixOS%20Shared%20Stuff/configuration.nix
-    # Custom Git Commands
-    # git config --global alias.ac '!git add -A && git commit' 2> /dev/null # O que isso faz?
-    git config --global user.email "pedroregispoar@gmail.com" 2> /dev/null
-    git config --global user.name "Pedro Regis" 2> /dev/null
-
-    source $ZSH/oh-my-zsh.sh
-  '';
-  programs.zsh.promptInit = "";
-
-  users.extraUsers.USER = {
-    shell = pkgs.zsh;
+  fileSystems."/mnt/olorin/public" = {
+    device = "//olorin.lan/public";
+    fsType = "cifs";
+    options = let
+      # this line prevents hanging on network split
+      automount_opts =
+        "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
+    in [
+      "${automount_opts},vers=3.0,credentials=/home/abcdw/.private/smbpasswd,gid=100,uid=1000"
+    ];
   };
 
-}
+  users.extraUsers.abcdw = {
+    isNormalUser = true;
+    uid = 1000;
+    extraGroups = [
+      "users"
+      "wheel"
+      "input"
+      "audio"
+      "networkmanager"
+      "docker"
+#      "sway"
+      "adbusers"
+    ];
+  };
 
+  services.lorri.enable = true;
+  services.xserver = {
+    displayManager.lightdm.enable = true;
+    displayManager.lightdm.greeters.gtk.cursorTheme = {
+      name = "Vanilla-DMZ";
+      package = pkgs.vanilla-dmz;
+      size = 128;
+    };
+    deviceSection = ''Option "MetaModeOrientation" "DP-0 RightOf HDMI-1"'';
+    xrandrHeads = [
+      {
+        output = "DP-0";
+        primary = true;
+      }
+      {
+        monitorConfig = ''
+          Option "Rotate" "left"
+        '';
+        output = "HDMI-1";
+      }
+    ];
+
+    videoDrivers = [ "nvidia" ];
+    dpi = 192;
+    enable = true;
+    layout = "us,ru";
+    xkbVariant = "dvorak,";
+    xkbOptions =
+      "ctrl:nocaps, grp:win_space_toggle, grp:rctrl_switch, grp:alt_shift_toggle";
+
+    desktopManager = {
+      xterm.enable = false;
+      wallpaper.mode = "fill";
+    };
+    displayManager.defaultSession = "none+i3";
+    windowManager.i3 = {
+      enable = true;
+      extraPackages = with pkgs; [ rofi dmenu i3status i3lock i3blocks ];
+      package = nixos-unstable.i3-gaps;
+    };
+  };
+
+  services.nginx = {
+    enable = true;
+    config = "";
+  };
+
+  users.defaultUserShell = pkgs.zsh;
+  programs.adb.enable = true;
+  programs.zsh = {
+    enable = true;
+    autosuggestions.enable = true;
+  };
+  virtualisation.docker.enable = true;
+
+  system.stateVersion = "19.09"; # Did you read the comment?
+}
