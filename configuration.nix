@@ -59,7 +59,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-     anydesk
+     #anydesk
      amazon-ecs-cli
      awscli
      curl
@@ -79,9 +79,9 @@
      #haskellPackages.pandoc
      htop
      jetbrains.pycharm-community
-     keepassxc
-     kdeApplications.okular
-     libreoffice
+     #keepassxc
+     #kdeApplications.okular
+     #libreoffice
      oh-my-zsh
      python38Full
      #nodejs
@@ -91,7 +91,7 @@
      #spotify
      tdesktop
      #tectonic
-     tilix
+     #tilix
      tree
      unrar
      unzip
