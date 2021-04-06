@@ -1,7 +1,7 @@
 
 
 
-
+`sudo nixos-rebuild switch --flake '/etc/nixos#pedroregispoar'`
 
 
 To list all generations:
@@ -41,5 +41,11 @@ Adapted from: [gist](https://gist.github.com/xeppaka/f6126eebe030a000aa14ed63cc6
 
 
 
-[how to find which packages are installed system-wide in NixOS?](https://unix.stackexchange.com/questions/422147/how-to-find-which-packages-are-installed-system-wide-in-nixos)
-	
+[how to find which packages are installed system-wide in NixOS?](https://unix.stackexchange.com/questions/422147/how-to-find-which-packages-are-installed-system-wide-in-nixos). I think it is related, what about packages intalled with `nix-shell`? See `nix-env --query --installed --out-path | cat` and https://nixos.wiki/wiki/Nix_command/profile and https://www.reddit.com/r/NixOS/comments/j4k2zz/does_anyone_use_flakes_to_manage_their_entire/ghrs271/?utm_source=reddit&utm_medium=web2x&context=3
+
+
+TODO:
+- https://gist.github.com/mx00s/ea2462a3fe6fdaa65692fe7ee824de3e
+- https://grahamc.com/blog/erase-your-darlings
+- https://news.ycombinator.com/item?id=22856199
+

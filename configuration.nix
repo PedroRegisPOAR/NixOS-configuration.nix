@@ -26,6 +26,9 @@
     '';
    };
 
+   # TODO:
+   # https://knowledge.rootknecht.net/nixos-configuration#automaticgarbagecollection
+
 #  nix = {
 #    package = pkgs.nixUnstable;
 #    extraOptions = ''
@@ -55,54 +58,88 @@
 
   # Set your time zone.
   # time.timeZone = "Europe/Amsterdam";
-
+  
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+     
+     # shell stuff
+     direnv
+     fzf
+     neovim
+     oh-my-zsh
+     zsh
+     zsh-autosuggestions
+     zsh-completions
+     bottom  # the binary is btm 
+     
+     # Some utils
+     binutils
+     coreutils
+     dnsutils
+     file
+     findutils
+     #inetutils # TODO: it was causing a conflict, insvestigate it!
+     nixpkgs-fmt
+     ripgrep
+     strace
+     util-linux
+     unzip
+     tree
+
+     gzip
+     unrar
+     unzip
+     
+     curl    
+     wget
+    
+     graphviz # dot command comes from here
+     jq
+     unixtools.xxd
+    
+     # Caching compilers
+     gcc
+     gcc6
+     
      anydesk
+     discord
+     firefox
+     freeoffice     
+     gitkraken
+     klavaro
+     spectacle
+     spotify
+     tdesktop
+     vlc
+     xorg.xkill
+     
      amazon-ecs-cli
      awscli
-     curl
-     direnv
-     discord
      docker
      docker-compose
-     firefox
-     file
-     freeoffice
-     gcc
      git
-     gitkraken
      gnumake
      gnupg
      gparted
-     #haskellPackages.pandoc
+     
+     youtube-dl
      htop
      jetbrains.pycharm-community
      keepassxc
      okular
      libreoffice
-     oh-my-zsh
      python38Full
+
      #nodejs
      #qgis
      #rubber
-     spectacle
-     spotify
-     tdesktop
      #tectonic
-     #tilix
-     tree
-     unrar
-     unzip
-     vim
+     #haskellPackages.pandoc
      #vscode-with-extensions
-     wget
      #wxmaxima
-     xorg.xkill
-     zsh
   ];
-
+  
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -161,7 +198,7 @@
      extraGroups = [ "wheel" "pedro" "docker" "kvm"]; # Enable ‘sudo’ for the user.
    };
 
-   users.extraUsers.pedro= {
+   users.extraUsers.pedro = {
      shell = pkgs.zsh;
    };
 
@@ -174,6 +211,21 @@
   system.stateVersion = "20.03"; # Did you read the comment?
 
   virtualisation.docker.enable = true;
+  
+  virtualisation.podman = {
+      enable = true;
+      # Create a `docker` alias for podman, to use it as a drop-in replacement
+      #dockerCompat = true;
+    };
+
+  environment.etc."containers/registries.conf" = {
+    mode="0644";
+    text=''
+      [registries.search]
+      registries = ['docker.io', 'localhost']
+    '';
+  };
+
   nixpkgs.config.allowUnfree = true;  
 
   #virtualisation.virtualbox.host.enable = true;
@@ -182,8 +234,12 @@
 
   # programs.gnupg.agent.enable = true;
 
+  /*
   # https://knowledge.rootknecht.net/nixos-configuration
   programs.zsh.enable = true;
+
+  programs.zsh.enableCompletion = true;
+
   programs.zsh.interactiveShellInit = ''
     export ZSH=${pkgs.oh-my-zsh}/share/oh-my-zsh/
 
@@ -222,20 +278,58 @@
     git config --global user.name "Pedro Regis" 2> /dev/null
 
     source $ZSH/oh-my-zsh.sh
-  '';
-  
+  '';  
   programs.zsh.promptInit = "";
-
-  users.extraUsers.USER = {
-    shell = pkgs.zsh;
-  };
+  */
   
+  # https://github.com/NixOS/nixpkgs/blob/3a44e0112836b777b176870bb44155a2c1dbc226/nixos/modules/programs/zsh/oh-my-zsh.nix#L119 
+  # https://discourse.nixos.org/t/nix-completions-for-zsh/5532
+  # https://github.com/NixOS/nixpkgs/blob/09aa1b23bb5f04dfc0ac306a379a464584fc8de7/nixos/modules/programs/zsh/zsh.nix#L230-L231
+  programs.zsh = {
+    enable = true;
+    shellAliases = {
+      vim = "nvim";
+    };
+    enableCompletion = true;
+    autosuggestions.enable = true;
+    interactiveShellInit = ''
+      export ZSH=${pkgs.oh-my-zsh}/share/oh-my-zsh
+      export ZSH_THEME="agnoster"
+      export ZSH_CUSTOM=${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions
+      plugins=( 
+                colored-man-pages
+                docker
+                git
+                #zsh-autosuggestions # Why this causes an warn?
+                #zsh-syntax-highlighting
+              )
+      source $ZSH/oh-my-zsh.sh
+    '';
+    ohMyZsh.custom = "${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions";
+    promptInit = "";
+  };
+
   # TODO: study about this
   # https://github.com/thiagokokada/dotfiles/blob/a221bf1186fd96adcb537a76a57d8c6a19592d0f/_nixos/etc/nixos/misc-configuration.nix#L124-L128
   zramSwap = {
     enable = true;
     algorithm = "zstd";
   };
+
+  # Probably solve many warns about fonts
+  # https://gist.github.com/kendricktan/8c33019cf5786d666d0ad64c6a412526
+  fonts = {
+    fontDir.enable = true;
+    fonts = with pkgs; [
+      corefonts		  # Microsoft free fonts
+      fira	      	  # Monospace
+      inconsolata     	  # Monospace
+      powerline-fonts
+      ubuntu_font_family
+      unifont		  # International languages
+    ];
+  };
+  
 
 }
 
