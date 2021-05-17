@@ -130,6 +130,9 @@
      okular
      libreoffice
      python38Full
+     peek
+     insomnia
+     terraform     
 
      #nodejs
      #qgis
@@ -228,9 +231,9 @@
 
   nixpkgs.config.allowUnfree = true;  
 
-  #virtualisation.virtualbox.host.enable = true;
-  #users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
-  #virtualisation.virtualbox.host.enableExtensionPack = true;
+  virtualisation.virtualbox.host.enable = true;
+  users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
+  virtualisation.virtualbox.host.enableExtensionPack = true;
 
   # programs.gnupg.agent.enable = true;
 
