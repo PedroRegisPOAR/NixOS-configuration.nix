@@ -231,9 +231,9 @@
 
   nixpkgs.config.allowUnfree = true;  
 
-  virtualisation.virtualbox.host.enable = true;
-  users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
-  virtualisation.virtualbox.host.enableExtensionPack = true;
+  # virtualisation.virtualbox.host.enable = true;
+  # users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
+  # virtualisation.virtualbox.host.enableExtensionPack = true;
 
   # programs.gnupg.agent.enable = true;
 
@@ -314,10 +314,10 @@
 
   # TODO: study about this
   # https://github.com/thiagokokada/dotfiles/blob/a221bf1186fd96adcb537a76a57d8c6a19592d0f/_nixos/etc/nixos/misc-configuration.nix#L124-L128
-  zramSwap = {
-    enable = true;
-    algorithm = "zstd";
-  };
+  # zramSwap = {
+  #   enable = true;
+  #  algorithm = "zstd";
+  # };
 
   # Probably solve many warns about fonts
   # https://gist.github.com/kendricktan/8c33019cf5786d666d0ad64c6a412526

@@ -4,6 +4,16 @@
 `sudo nixos-rebuild switch --flake '/etc/nixos#pedroregispoar'`
 
 
+```bash
+sudo su
+
+nix flake update \
+&& nixos-rebuild switch --flake '/etc/nixos#pedroregispoar' \
+&& nix store gc \
+&& nix-collect-garbage --delete-old \
+&& nix store optimise
+```
+
 To list all generations:
 `sudo nix-env --profile /nix/var/nix/profiles/system --list-generations`
 
