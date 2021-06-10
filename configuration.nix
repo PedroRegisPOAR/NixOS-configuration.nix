@@ -195,6 +195,8 @@
 
   # services.xserver.desktopManager.gnome3.enable = true;
 
+  services.smartd.enable = true;
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
    users.users.pedro = {
      isNormalUser = true;
@@ -214,7 +216,7 @@
   system.stateVersion = "20.03"; # Did you read the comment?
 
   virtualisation.docker.enable = true;
-  
+ 
   virtualisation.podman = {
       enable = true;
       # Create a `docker` alias for podman, to use it as a drop-in replacement
