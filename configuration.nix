@@ -79,7 +79,7 @@
      dnsutils
      file
      findutils
-     #inetutils # TODO: it was causing a conflict, insvestigate it!
+     # inetutils # TODO: it was causing a conflict, insvestigate it!
      nixpkgs-fmt
      ripgrep
      strace
@@ -185,7 +185,7 @@
     services.xserver.displayManager.sddm.enable = true;
     services.xserver.desktopManager.plasma5.enable = true;
    
-   # https://github.com/NixOS/nixpkgs/pull/44896
+  # https://github.com/NixOS/nixpkgs/pull/44896
   # services.xserver.desktopManager = {
   #  xfce.enable = true;
   #  default = "xfce";
@@ -197,6 +197,10 @@
 
   # https://t.me/nixosbrasil/26612
   services.smartd.enable = true;
+
+  # Supposedly better for the SSD.
+  # https://discourse.nixos.org/t/update-build-config-error/5889/7
+  fileSystems."/".options = [ "noatime" "nodiratime" "discard" ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
    users.users.pedro = {
@@ -216,7 +220,8 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "20.03"; # Did you read the comment?
 
-  virtualisation.docker.enable = true;
+  # Is it usefull for some other thing?
+  # virtualisation.docker.enable = true;
  
   virtualisation.podman = {
       enable = true;
@@ -335,7 +340,19 @@
       unifont		  # International languages
     ];
   };
-  
+
+  # https://discourse.nixos.org/t/cpu-governor-powersave-no-effect/7973/3
+  # powerManagement = {
+  #  enable = true;
+  #  powertop.enable = false;
+  # };
+  #
+  # https://github.com/NixOS/nixpkgs/issues/19757#issuecomment-255536338
+  # https://github.com/NixOS/nixpkgs/issues/19757#issuecomment-255537336
+  powerManagement = {
+    enable = true;
+    cpuFreqGovernor = "performance";
+  };  
 
 }
 
