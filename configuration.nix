@@ -198,6 +198,10 @@
   # https://t.me/nixosbrasil/26612
   services.smartd.enable = true;
 
+  # Supposedly better for the SSD.
+  # https://discourse.nixos.org/t/update-build-config-error/5889/7
+  fileSystems."/".options = [ "noatime" "nodiratime" "discard" ];
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
    users.users.pedro = {
      isNormalUser = true;
@@ -266,7 +270,7 @@
     setopt completealiases
 
     if [ -f ~/.aliases ]; then
-      source ~/.aliases
+      source ~/.aliase
     fi
 
     plugins=(
