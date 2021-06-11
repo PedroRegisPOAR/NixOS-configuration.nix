@@ -22,18 +22,7 @@
     '';
   };
 
-  # TODO:
-  # https://knowledge.rootknecht.net/nixos-configuration#automaticgarbagecollection
-
-  # nix = {
-  #   package = pkgs.nixUnstable;
-  #   extraOptions = ''
-  #     experimental-features = nix-command flakes
-  #   '';
-  # };
-
-  # networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  nixpkgs.config.allowUnfree = true;
 
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
   # Per-interface useDHCP will be mandatory in the future, so this generated config
@@ -41,26 +30,9 @@
   networking.useDHCP = false;
   networking.interfaces.enp2s0.useDHCP = true;
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Select internationalisation properties.
-  # i18n.defaultLocale = "en_US.UTF-8";
-  # console = {
-  #   font = "Lat2-Terminus16";
-  #   keyMap = "us";
-  # };
-
-  # Set your time zone.
-  # time.timeZone = "Europe/Amsterdam";
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
   environment.systemPackages = with pkgs; [
 
     # shell stuff
-    direnv
     fzf
     neovim
     oh-my-zsh
@@ -70,25 +42,25 @@
     bottom # the binary is btm 
 
     # Some utils
-    binutils
+    # binutils
     coreutils
-    dnsutils
-    file
-    findutils
+    # dnsutils
+    # file
+    # findutils
     # inetutils # TODO: it was causing a conflict, insvestigate it!
-    nixpkgs-fmt
-    ripgrep
-    strace
-    util-linux
-    unzip
-    tree
+    # nixpkgs-fmt
+    # ripgrep
+    # strace
+    # util-linux
+    # unzip
+    # tree
 
-    gzip
-    unrar
-    unzip
+    # gzip
+    # unrar
+    # unzip
 
-    curl
-    wget
+    # curl
+    # wget
 
     # graphviz # dot command comes from here
     # jq
@@ -99,25 +71,25 @@
     # gcc6
 
     # anydesk
-    discord
+    # discord
     firefox
     # freeoffice     
     gitkraken
-    klavaro
-    spectacle
+    # klavaro
+    # spectacle # to printscreen
     # spotify
-    tdesktop
-    vlc
-    xorg.xkill
+    # tdesktop
+    # vlc
+    # xorg.xkill
 
     # amazon-ecs-cli
     # awscli
     # docker
     # docker-compose
     git
-    gnumake
-    gnupg
-    gparted
+    # gnumake
+    # gnupg
+    # gparted
 
     # youtube-dl
     htop
@@ -201,7 +173,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.pedro = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "pedro" "docker" "kvm" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "pedro" "kvm" ]; # Enable ‘sudo’ for the user.
   };
 
   users.extraUsers.pedro = {
@@ -218,28 +190,25 @@
 
   # virtualisation.docker.enable = true;
 
-  virtualisation.podman = {
-    enable = true;
-    # Create a `docker` alias for podman, to use it as a drop-in replacement
-    #dockerCompat = true;
-  };
+  # virtualisation.podman = {
+  #  enable = true;
+  #  # Create a `docker` alias for podman, to use it as a drop-in replacement
+  #  #dockerCompat = true;
+  # };
 
-  environment.etc."containers/registries.conf" = {
-    mode = "0644";
-    text = ''
-      [registries.search]
-      registries = ['docker.io', 'localhost']
-    '';
-  };
-
-  nixpkgs.config.allowUnfree = true;
+  # environment.etc."containers/registries.conf" = {
+  #  mode = "0644";
+  #  text = ''
+  #    [registries.search]
+  #    registries = ['docker.io', 'localhost']
+  #  '';
+  # };
 
   # virtualisation.virtualbox.host.enable = true;
   # users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
   # virtualisation.virtualbox.host.enableExtensionPack = true;
 
   # programs.gnupg.agent.enable = true;
-
 
   # https://github.com/NixOS/nixpkgs/blob/3a44e0112836b777b176870bb44155a2c1dbc226/nixos/modules/programs/zsh/oh-my-zsh.nix#L119 
   # https://discourse.nixos.org/t/nix-completions-for-zsh/5532
@@ -288,5 +257,19 @@
       unifont # International languages
     ];
   };
+
+  # https://discourse.nixos.org/t/cpu-governor-powersave-no-effect/7973/3
+  # powerManagement = {
+  #  enable = true;
+  #  powertop.enable = false;
+  # };
+  #
+  # https://github.com/NixOS/nixpkgs/issues/19757#issuecomment-255536338
+  # https://github.com/NixOS/nixpkgs/issues/19757#issuecomment-255537336
+  powerManagement = {
+    enable = true;
+    cpuFreqGovernor = "performance";
+  };
+
 }
 
