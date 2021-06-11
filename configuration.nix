@@ -4,14 +4,10 @@
 
 { config, pkgs, ... }:
 
-#let
-#  pkgs = import npkgs { system = "x86_64-linux"; };
-#
-#  #myScript = pkgs.writeShellScriptBin "helloWorld" "echo Hello World";
-#in
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
 
@@ -19,23 +15,23 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-   nix = {
+  nix = {
     package = pkgs.nixFlakes;
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
-   };
+  };
 
-   # TODO:
-   # https://knowledge.rootknecht.net/nixos-configuration#automaticgarbagecollection
+  # TODO:
+  # https://knowledge.rootknecht.net/nixos-configuration#automaticgarbagecollection
 
-#  nix = {
-#    package = pkgs.nixUnstable;
-#    extraOptions = ''
-#      experimental-features = nix-command flakes
-#    '';
-#  };
- 
+  # nix = {
+  #   package = pkgs.nixUnstable;
+  #   extraOptions = ''
+  #     experimental-features = nix-command flakes
+  #   '';
+  # };
+
   # networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -58,91 +54,91 @@
 
   # Set your time zone.
   # time.timeZone = "Europe/Amsterdam";
-  
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-     
-     # shell stuff
-     direnv
-     fzf
-     neovim
-     oh-my-zsh
-     zsh
-     zsh-autosuggestions
-     zsh-completions
-     bottom  # the binary is btm 
-     
-     # Some utils
-     binutils
-     coreutils
-     dnsutils
-     file
-     findutils
-     #inetutils # TODO: it was causing a conflict, insvestigate it!
-     nixpkgs-fmt
-     ripgrep
-     strace
-     util-linux
-     unzip
-     tree
 
-     gzip
-     unrar
-     unzip
-     
-     curl    
-     wget
-    
-     graphviz # dot command comes from here
-     jq
-     unixtools.xxd
-    
-     # Caching compilers
-     gcc
-     gcc6
-     
-     # anydesk
-     discord
-     firefox
-     # freeoffice     
-     gitkraken
-     klavaro
-     spectacle
-     # spotify
-     tdesktop
-     vlc
-     xorg.xkill
-     
-     amazon-ecs-cli
-     awscli
-     docker
-     docker-compose
-     git
-     gnumake
-     gnupg
-     gparted
-     
-     youtube-dl
-     htop
-     jetbrains.pycharm-community
-     keepassxc
-     okular
-     # libreoffice
-     python38Full
-     peek
-     insomnia
-     # terraform     
+    # shell stuff
+    direnv
+    fzf
+    neovim
+    oh-my-zsh
+    zsh
+    zsh-autosuggestions
+    zsh-completions
+    bottom # the binary is btm 
 
-     #nodejs
-     #qgis
-     #rubber
-     #tectonic
-     #haskellPackages.pandoc
-     #vscode-with-extensions
-     #wxmaxima
+    # Some utils
+    binutils
+    coreutils
+    dnsutils
+    file
+    findutils
+    # inetutils # TODO: it was causing a conflict, insvestigate it!
+    nixpkgs-fmt
+    ripgrep
+    strace
+    util-linux
+    unzip
+    tree
+
+    gzip
+    unrar
+    unzip
+
+    curl
+    wget
+
+    # graphviz # dot command comes from here
+    # jq
+    # unixtools.xxd
+
+    # Caching compilers
+    # gcc
+    # gcc6
+
+    # anydesk
+    discord
+    firefox
+    # freeoffice     
+    gitkraken
+    klavaro
+    spectacle
+    # spotify
+    tdesktop
+    vlc
+    xorg.xkill
+
+    # amazon-ecs-cli
+    # awscli
+    # docker
+    # docker-compose
+    git
+    gnumake
+    gnupg
+    gparted
+
+    # youtube-dl
+    htop
+    jetbrains.pycharm-community
+    # keepassxc
+    # okular
+    # libreoffice
+    # python38Full
+    # peek
+    # insomnia
+    # terraform     
+
+    #nodejs
+    #qgis
+    #rubber
+    #tectonic
+    #haskellPackages.pandoc
+    #vscode-with-extensions
+    #wxmaxima
   ];
-  
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -174,24 +170,24 @@
   hardware.enableRedistributableFirmware = true;
 
   # Enable the X11 windowing system.
-    services.xserver.enable = true;
-    services.xserver.layout = "us";
+  services.xserver.enable = true;
+  services.xserver.layout = "us";
   # services.xserver.xkbOptions = "eurosign:e";
 
   # Enable touchpad support.
   # services.xserver.libinput.enable = true;
 
   # Enable the KDE Desktop Environment.
-    services.xserver.displayManager.sddm.enable = true;
-    services.xserver.desktopManager.plasma5.enable = true;
-   
-   # https://github.com/NixOS/nixpkgs/pull/44896
+  services.xserver.displayManager.sddm.enable = true;
+  services.xserver.desktopManager.plasma5.enable = true;
+
+  # https://github.com/NixOS/nixpkgs/pull/44896
   # services.xserver.desktopManager = {
   #  xfce.enable = true;
   #  default = "xfce";
   #};
 
-  services.xserver.displayManager.defaultSession = "xfce"; 
+  services.xserver.displayManager.defaultSession = "xfce";
 
   # services.xserver.desktopManager.gnome3.enable = true;
 
@@ -203,14 +199,14 @@
   fileSystems."/".options = [ "noatime" "nodiratime" "discard" ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-   users.users.pedro = {
-     isNormalUser = true;
-     extraGroups = [ "wheel" "pedro" "docker" "kvm"]; # Enable ‘sudo’ for the user.
-   };
+  users.users.pedro = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" "pedro" "docker" "kvm" ]; # Enable ‘sudo’ for the user.
+  };
 
-   users.extraUsers.pedro = {
-     shell = pkgs.zsh;
-   };
+  users.extraUsers.pedro = {
+    shell = pkgs.zsh;
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
@@ -220,23 +216,23 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "20.03"; # Did you read the comment?
 
-  virtualisation.docker.enable = true;
- 
+  # virtualisation.docker.enable = true;
+
   virtualisation.podman = {
-      enable = true;
-      # Create a `docker` alias for podman, to use it as a drop-in replacement
-      #dockerCompat = true;
-    };
+    enable = true;
+    # Create a `docker` alias for podman, to use it as a drop-in replacement
+    #dockerCompat = true;
+  };
 
   environment.etc."containers/registries.conf" = {
-    mode="0644";
-    text=''
+    mode = "0644";
+    text = ''
       [registries.search]
       registries = ['docker.io', 'localhost']
     '';
   };
 
-  nixpkgs.config.allowUnfree = true;  
+  nixpkgs.config.allowUnfree = true;
 
   # virtualisation.virtualbox.host.enable = true;
   # users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
@@ -244,54 +240,7 @@
 
   # programs.gnupg.agent.enable = true;
 
-  /*
-  # https://knowledge.rootknecht.net/nixos-configuration
-  programs.zsh.enable = true;
 
-  programs.zsh.enableCompletion = true;
-
-  programs.zsh.interactiveShellInit = ''
-    export ZSH=${pkgs.oh-my-zsh}/share/oh-my-zsh/
-
-    # Customize your oh-my-zsh options here
-    ZSH_THEME="agnoster"
-
-    bindkey '\e[5~' history-beginning-search-backward
-    bindkey '\e[6~' history-beginning-search-forward
-
-    HISTFILESIZE=500000
-    HISTSIZE=500000
-    setopt SHARE_HISTORY
-    setopt HIST_IGNORE_ALL_DUPS
-    setopt HIST_IGNORE_DUPS
-    setopt INC_APPEND_HISTORY
-    autoload -U compinit && compinit
-    unsetopt menu_complete
-    setopt completealiases
-
-    if [ -f ~/.aliases ]; then
-      source ~/.aliase
-    fi
-
-    plugins=(
-       colored-man-pages
-       docker
-       git
-       zsh-autosuggestions
-       zsh-syntax-highlighting
-       )
-    
-    # https://keybase.pub/peterwilli/NixOS%20Shared%20Stuff/configuration.nix
-    # Custom Git Commands
-    # git config --global alias.ac '!git add -A && git commit' 2> /dev/null # O que isso faz?
-    git config --global user.email "pedroregispoar@gmail.com" 2> /dev/null
-    git config --global user.name "Pedro Regis" 2> /dev/null
-
-    source $ZSH/oh-my-zsh.sh
-  '';  
-  programs.zsh.promptInit = "";
-  */
-  
   # https://github.com/NixOS/nixpkgs/blob/3a44e0112836b777b176870bb44155a2c1dbc226/nixos/modules/programs/zsh/oh-my-zsh.nix#L119 
   # https://discourse.nixos.org/t/nix-completions-for-zsh/5532
   # https://github.com/NixOS/nixpkgs/blob/09aa1b23bb5f04dfc0ac306a379a464584fc8de7/nixos/modules/programs/zsh/zsh.nix#L230-L231
@@ -331,15 +280,13 @@
   fonts = {
     fontDir.enable = true;
     fonts = with pkgs; [
-      corefonts		  # Microsoft free fonts
-      fira	      	  # Monospace
-      inconsolata     	  # Monospace
+      corefonts # Microsoft free fonts
+      fira # Monospace
+      inconsolata # Monospace
       powerline-fonts
       ubuntu_font_family
-      unifont		  # International languages
+      unifont # International languages
     ];
   };
-  
-
 }
 
