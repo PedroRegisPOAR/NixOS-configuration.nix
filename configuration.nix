@@ -195,6 +195,7 @@
 
   # services.xserver.desktopManager.gnome3.enable = true;
 
+  # https://t.me/nixosbrasil/26612
   services.smartd.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
