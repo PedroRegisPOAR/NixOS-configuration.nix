@@ -22,8 +22,12 @@
    nix = {
     package = pkgs.nixFlakes;
     extraOptions = ''
-      experimental-features = nix-command flakes
+      experimental-features = nix-command flakes ca-references ca-derivations
     '';
+    
+    # From: https://github.com/sherubthakur/dotfiles/blob/be96fe7c74df706a8b1b925ca4e7748cab703697/system/configuration.nix
+    # https://github.com/NixOS/nixpkgs/issues/124215
+    sandboxPaths = [ "/bin/sh=${pkgs.bash}/bin/sh"];
    };
 
    # TODO:
@@ -168,22 +172,27 @@
 
   # Enable sound.
   sound.enable = true;
+  hardware.bluetooth.enable = true;
   hardware.pulseaudio.enable = true;
-
   # https://github.com/NixOS/nixpkgs/blob/release-20.03/nixos/modules/hardware/all-firmware.nix
   hardware.enableRedistributableFirmware = true;
 
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+  }; 
+
   # Enable the X11 windowing system.
-    services.xserver.enable = true;
-    services.xserver.layout = "us";
+  services.xserver.enable = true;
+  services.xserver.layout = "us";
   # services.xserver.xkbOptions = "eurosign:e";
 
   # Enable touchpad support.
   # services.xserver.libinput.enable = true;
 
   # Enable the KDE Desktop Environment.
-    services.xserver.displayManager.sddm.enable = true;
-    services.xserver.desktopManager.plasma5.enable = true;
+  services.xserver.displayManager.sddm.enable = true;
+  services.xserver.desktopManager.plasma5.enable = true;
    
   # https://github.com/NixOS/nixpkgs/pull/44896
   # services.xserver.desktopManager = {
@@ -205,7 +214,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
    users.users.pedro = {
      isNormalUser = true;
-     extraGroups = [ "wheel" "pedro" "docker" "kvm"]; # Enable ‘sudo’ for the user.
+     extraGroups = [ "audio" "wheel" "pedro" "docker" "kvm"]; # Enable ‘sudo’ for the user.
    };
 
    users.extraUsers.pedro = {
@@ -239,9 +248,9 @@
 
   nixpkgs.config.allowUnfree = true;  
 
-  # virtualisation.virtualbox.host.enable = true;
-  # users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
-  # virtualisation.virtualbox.host.enableExtensionPack = true;
+  virtualisation.virtualbox.host.enable = true;
+  users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
+  virtualisation.virtualbox.host.enableExtensionPack = true;
 
   # programs.gnupg.agent.enable = true;
 

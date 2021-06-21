@@ -59,3 +59,11 @@ TODO:
 - https://grahamc.com/blog/erase-your-darlings
 - https://news.ycombinator.com/item?id=22856199
 
+
+```bash
+nix \
+build \
+github:PedroRegisPOAR/NixOS-configuration.nix#nixosConfigurations.pedroregispoar.config.system.build.toplevel
+
+result/init
+```
