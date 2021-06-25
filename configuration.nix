@@ -182,6 +182,12 @@
     driSupport = true;
   }; 
 
+  # https://nixos.wiki/wiki/Libvirt
+  boot.extraModprobeConfig = "options kvm_intel nested=1";
+
+  # https://github.com/NixOS/nixpkgs/issues/27930#issuecomment-417943781
+  boot.kernelModules = [ "kvm-intel" ];
+
   # Enable the X11 windowing system.
   services.xserver.enable = true;
   services.xserver.layout = "us";
@@ -214,7 +220,9 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
    users.users.pedro = {
      isNormalUser = true;
-     extraGroups = [ "audio" "wheel" "pedro" "docker" "kvm"]; # Enable ‘sudo’ for the user.
+     
+     # https://nixos.wiki/wiki/Libvirt
+     extraGroups = [ "audio" "libvirtd" "wheel" "pedro" "docker" "kvm"]; # Enable ‘sudo’ for the user.
    };
 
    users.extraUsers.pedro = {
@@ -230,7 +238,7 @@
   system.stateVersion = "20.03"; # Did you read the comment?
 
   # Is it usefull for some other thing?
-  # virtualisation.docker.enable = true;
+  virtualisation.docker.enable = true;
  
   virtualisation.podman = {
       enable = true;
