@@ -19,17 +19,19 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-   nix = {
-    package = pkgs.nixFlakes;
-    extraOptions = ''
-      experimental-features = nix-command flakes ca-references ca-derivations
-    '';
-    
-    # From:
-    # https://github.com/sherubthakur/dotfiles/blob/be96fe7c74df706a8b1b925ca4e7748cab703697/system/configuration.nix#L44
-    # pointing to: https://github.com/NixOS/nixpkgs/issues/124215
-    sandboxPaths = [ "/bin/sh=${pkgs.bash}/bin/sh"];
-   };
+ nix = {
+   package = pkgs.nixFlakes;
+   extraOptions = ''
+     experimental-features = nix-command flakes ca-references ca-derivations
+   '';
+
+  # From:
+  # https://github.com/sherubthakur/dotfiles/blob/be96fe7c74df706a8b1b925ca4e7748cab703697/system/configuration.nix#L44
+  # pointing to: https://github.com/NixOS/nixpkgs/issues/124215
+  sandboxPaths = [ "/bin/sh=${pkgs.bash}/bin/sh"];
+  };
+
+   
 
    # TODO:
    # https://knowledge.rootknecht.net/nixos-configuration#automaticgarbagecollection
@@ -219,16 +221,28 @@
   fileSystems."/".options = [ "noatime" "nodiratime" "discard" ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-   users.users.pedro = {
-     isNormalUser = true;
-     
-     # https://nixos.wiki/wiki/Libvirt
-     extraGroups = [ "audio" "libvirtd" "wheel" "pedro" "docker" "kvm"]; # Enable ‘sudo’ for the user.
-   };
+  users.users.pedro = {
+    isNormalUser = true;
+    
+    # https://nixos.wiki/wiki/Libvirt
+    extraGroups = [ "audio" "libvirtd" "wheel" "pedro" "docker" "kvm"]; # Enable ‘sudo’ for the user.
+  };
 
-   users.extraUsers.pedro = {
-     shell = pkgs.zsh;
-   };
+  users.extraUsers.pedro = {
+    shell = pkgs.zsh;
+  };
+
+  # It is a hack, minkube only works if calling `sudo -k -n podman` does NOT ask for password.
+  # The hardcoded path is because i am not using the podman installed in the system, but the one 
+  # in a flake that i am using at work. For now let it be hardcoded :|
+  # 
+  # It looks like there is a bug too:
+  # https://unix.stackexchange.com/questions/377362/in-nixos-how-to-add-a-user-to-the-sudoers-file
+  # https://www.reddit.com/r/NixOS/comments/nzks7u/running_sudo_without_password/
+  # https://github.com/NixOS/nixpkgs/issues/58276
+  security.sudo.extraConfig = ''
+    %wheel	ALL=(root)	NOPASSWD:SETENV: /nix/store/h63yf7a2ccfimas30i0wn54fp8c8h3qf-podman-rootless-derivation/bin/podman 
+  '';
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
