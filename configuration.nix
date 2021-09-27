@@ -191,6 +191,8 @@
   # https://github.com/NixOS/nixpkgs/issues/27930#issuecomment-417943781
   boot.kernelModules = [ "kvm-intel" ];
 
+  boot.kernel.sysctl = { "net.netfilter.nf_conntrack_max" = 131072; };
+
   # Enable the X11 windowing system.
   services.xserver.enable = true;
   services.xserver.layout = "us";

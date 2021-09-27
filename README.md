@@ -1,4 +1,8 @@
 
+```bash
+nixos-version --json | jq -r .nixpkgsRevision
+```
+From: https://www.tweag.io/blog/2020-07-31-nixos-flakes/
 
 
 `sudo nixos-rebuild switch --flake '/etc/nixos#pedroregispoar'`
