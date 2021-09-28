@@ -107,7 +107,7 @@
     
      # Caching compilers
      gcc
-     gcc6
+     # gcc6
      
      # anydesk
      discord
@@ -121,8 +121,8 @@
      vlc
      xorg.xkill
      
-     amazon-ecs-cli
-     awscli
+     # amazon-ecs-cli
+     # awscli
      docker
      docker-compose
      git
@@ -136,7 +136,7 @@
      keepassxc
      okular
      # libreoffice
-     python38Full
+     # python38Full
      peek
      insomnia
      # terraform     
