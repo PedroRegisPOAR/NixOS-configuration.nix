@@ -25,10 +25,13 @@
      experimental-features = nix-command flakes ca-references ca-derivations
    '';
 
-  # From:
-  # https://github.com/sherubthakur/dotfiles/blob/be96fe7c74df706a8b1b925ca4e7748cab703697/system/configuration.nix#L44
-  # pointing to: https://github.com/NixOS/nixpkgs/issues/124215
-  sandboxPaths = [ "/bin/sh=${pkgs.bash}/bin/sh"];
+    # From:
+    # https://github.com/sherubthakur/dotfiles/blob/be96fe7c74df706a8b1b925ca4e7748cab703697/system/configuration.nix#L44
+    # pointing to: https://github.com/NixOS/nixpkgs/issues/124215
+    sandboxPaths = [ "/bin/sh=${pkgs.bash}/bin/sh"];
+    
+    # https://github.com/NixOS/nixpkgs/blob/fd8a7fd07da0f3fc0e27575891f45c2f88e5dd44/nixos/modules/services/misc/nix-daemon.nix#L323
+    readOnlyStore = false;
   };
 
    
