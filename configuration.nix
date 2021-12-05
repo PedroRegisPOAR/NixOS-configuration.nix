@@ -113,7 +113,7 @@
      # gcc6
      
      # anydesk
-     discord
+     # discord
      firefox
      # freeoffice     
      gitkraken
@@ -214,7 +214,7 @@
   #  default = "xfce";
   #};
 
-  services.xserver.displayManager.defaultSession = "xfce"; 
+  # services.xserver.displayManager.defaultSession = "xfce"; 
 
   # services.xserver.desktopManager.gnome3.enable = true;
 
@@ -266,19 +266,19 @@
       #dockerCompat = true;
     };
 
-  environment.etc."containers/registries.conf" = {
-    mode="0644";
-    text=''
-      [registries.search]
-      registries = ['docker.io', 'localhost']
-    '';
-  };
+#  environment.etc."containers/registries.conf" = {
+#    mode="0644";
+#    text=''
+#      [registries.search]
+#      registries = ['docker.io', 'localhost']
+#    '';
+#  };
 
   nixpkgs.config.allowUnfree = true;  
 
-  virtualisation.virtualbox.host.enable = true;
-  users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
-  virtualisation.virtualbox.host.enableExtensionPack = true;
+  # virtualisation.virtualbox.host.enable = true;
+  # users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
+  # virtualisation.virtualbox.host.enableExtensionPack = true;
 
   # programs.gnupg.agent.enable = true;
 
