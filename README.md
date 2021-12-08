@@ -5,7 +5,9 @@ nixos-version --json | jq -r .nixpkgsRevision
 From: https://www.tweag.io/blog/2020-07-31-nixos-flakes/
 
 
-`sudo nixos-rebuild switch --flake '/etc/nixos#pedroregispoar'`
+```bash
+sudo nixos-rebuild switch --flake '/etc/nixos#pedroregispoar'
+```
 
 
 ```bash
@@ -19,37 +21,47 @@ nix flake update \
 ```
 
 To list all generations:
-`sudo nix-env --profile /nix/var/nix/profiles/system --list-generations`
+```bash
+sudo nix-env --profile /nix/var/nix/profiles/system --list-generations
+```
 
 
 
 Lists entries from `/boot/loader/entries`:
-`ls /boot/loader/entries`
+```bash
+ls /boot/loader/entries
+```
 
 
-`sudo nix-env --profile /nix/var/nix/profiles/system --delete-generations old`
+```bash
+sudo nix-env --profile /nix/var/nix/profiles/system --delete-generations old
+```
 
 sudo bash -c "cd /boot/loader/entries; ls | xargs echo"
 
 
 
-`sudo bash -c "cd /boot/loader/entries; ls | grep -v 'nixos-generation-13.conf' | xargs rm"`
+```bash
+sudo bash -c "cd /boot/loader/entries; ls | grep -v 'nixos-generation-13.conf' | xargs rm"
+```
 Adapted from: [gist](https://gist.github.com/xeppaka/f6126eebe030a000aa14ed63cc6e8496)
 
 [--profile-name](https://stackoverflow.com/a/35664788)
 
 
 
-`readlink "$(readlink ~/.nix-profile)"`
+```bash
 
-`nix-env --list-generations | grep current | awk '{print $1}'`
+readlink "$(readlink ~/.nix-profile)"
 
-`tree /nix/var/nix/profiles`
+nix-env --list-generations | grep current | awk '{print $1}'
 
-`sudo nix-env --list-generations --profile /nix/var/nix/profiles/system`
+tree /nix/var/nix/profiles
 
-`sudo nix-env --list-generations --profile /nix/var/nix/profiles/system | grep current | awk '{print $1}'`
+sudo nix-env --list-generations --profile /nix/var/nix/profiles/system
 
+sudo nix-env --list-generations --profile /nix/var/nix/profiles/system | grep current | awk '{print $1}'
+```
 [Current generation number](https://discourse.nixos.org/t/current-generation-number/3029/7)
 
 
@@ -64,10 +76,12 @@ TODO:
 - https://news.ycombinator.com/item?id=22856199
 
 
+Buidind this NixOS system using only `nix` (in future it is going to be the static):
 ```bash
 nix \
 build \
 github:PedroRegisPOAR/NixOS-configuration.nix#nixosConfigurations.pedroregispoar.config.system.build.toplevel
 
-result/init
+ls -al result/init
 ```
+
