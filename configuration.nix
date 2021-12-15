@@ -337,9 +337,11 @@
     enable = true;
     shellAliases = {
       vim = "nvim";
+      shebang="echo '#!/usr/bin/env bash'"; # https://stackoverflow.com/questions/10376206/what-is-the-preferred-bash-shebang#comment72209991_10383546
     };
     enableCompletion = true;
     autosuggestions.enable = true;
+    syntaxHighlighting.enable = true;
     interactiveShellInit = ''
       export ZSH=${pkgs.oh-my-zsh}/share/oh-my-zsh
       export ZSH_THEME="agnoster"
