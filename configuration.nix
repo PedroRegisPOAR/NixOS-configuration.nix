@@ -31,7 +31,7 @@
     sandboxPaths = [ "/bin/sh=${pkgs.bash}/bin/sh"];
     
     # https://github.com/NixOS/nixpkgs/blob/fd8a7fd07da0f3fc0e27575891f45c2f88e5dd44/nixos/modules/services/misc/nix-daemon.nix#L323
-    readOnlyStore = false;
+    readOnlyStore = true;
   };
 
    
@@ -151,6 +151,27 @@
      #haskellPackages.pandoc
      #vscode-with-extensions
      #wxmaxima
+
+     libvirt
+     virtmanager
+     qemu
+
+     pciutils # lspci and others
+     coreboot-utils # acpidump-all
+
+     # Helper script to print the IOMMU groups of PCI devices.
+     (
+       writeScriptBin "list-iommu-groups" ''
+         #! ${pkgs.runtimeShell} -e
+         shopt -s nullglob
+         for g in /sys/kernel/iommu_groups/*; do
+           echo "IOMMU Group ''${g##*/}:"
+           for d in $g/devices/*; do
+             echo -e "\t$(lspci -nns ''${d##*/})"
+           done;
+         done;
+       ''
+     )
   ];
   
   # Some programs need SUID wrappers, can be configured further or are
@@ -189,10 +210,61 @@
   }; 
 
   # https://nixos.wiki/wiki/Libvirt
+  #
   boot.extraModprobeConfig = "options kvm_intel nested=1";
 
+  # https://alexbakker.me/post/nixos-pci-passthrough-qemu-vfio.html
+  # https://wiki.archlinux.org/title/PCI_passthrough_via_OVMF#Setting_up_IOMMU
+  # https://gist.github.com/GrimKriegor/b38fa6d83c3b540844104584fdb7274d#kernel-parameters
+  # https://www.reddit.com/r/VFIO/comments/ma2whf/got_valorant_working_on_a_single_gpu_setup_on/
+  #
+  # IOMMU stuff
+  # https://stackoverflow.com/a/23840271
+  # https://www.kernel.org/doc/Documentation/Intel-IOMMU.txt
+  #
+  # pcie_acs_override=downstream,multifunction stuff
+  # https://forum.level1techs.com/t/x470-taichi-on-board-usb-controller-passthrough/151088/13
+  # https://gist.github.com/jpotier/e4829f9cd7d9442731aa223e00245f3f#file-vfio-nix-L56
+  #
+  # https://github.com/brodyck/nix-bidaya/blob/3a4b7bc0f941338677b7f77dd4189f8bc7c753d5/cfg/gpu-passthrough.nix#L74-L76
+  #
+  # https://github.com/meatcar/dots/blob/10441bd3d851e4176b39c2ad6f8704164ff5f9b3/modules/vfio/default.nix#L3
+  # https://github.com/luis-caldas/nix/blob/72c228f9d488e472417577fe4955f67ef895a4b0/config/survivor/headless.nix#L13
+  #
+  # boot.kernelParams = [
+  #  "iommu=1"
+  #  "intel_iommu=on"
+  #  "iommu=pt"
+  #  "pcie_acs_override=downstream,multifunction"
+  #  "kvm.ignore_msrs=1"
+  #  "kvm.report_ignored_msrs=0"
+  #  "vfio_iommu_type1.allow_unsafe_interrupts=1"
+  #  "rd.driver.pre=vfio-pci"
+  #  "video=vesafb:off,efifb:off"
+  #  "nofb"
+  # ];
+
+  # https://nixos.mayflower.consulting/blog/2020/06/17/windows-vm-performance/
+  # boot.blacklistedKernelModules = ["nouveau"];
+
   # https://github.com/NixOS/nixpkgs/issues/27930#issuecomment-417943781
-  boot.kernelModules = [ "kvm-intel" ];
+  boot.kernelModules = [
+    # "pci-stub"
+    "kvm-intel"
+    # "vfio"
+    # "vfio_iommu_type1"
+    # "vfio_pci"
+    # "vfio_virqfd"
+  ];
+
+  # https://github.com/NixOS/nixpkgs/issues/18473#issuecomment-246069509
+  # https://gist.github.com/jpotier/e4829f9cd7d9442731aa223e00245f3f#file-vfio-nix-L62-L63
+  # boot.initrd.kernelModules = [
+  #  "vfio_virqfd"
+  #  "vfio_pci"
+  #  "vfio_iommu_type1"
+  #  "vfio"
+  # ];
 
   boot.kernel.sysctl = { "net.netfilter.nf_conntrack_max" = 131072; };
 
@@ -274,6 +346,30 @@
 #    '';
 #  };
 
+  # virtualisation.libvirtd = {
+  #   allowedBridges = [
+  #     "nm-bridge"
+  #     "virbr0"
+  #   ];
+  #  enable = true;
+  #  qemu.runAsRoot = false;
+  #  qemu.ovmf.enable = true;
+  #  qemu.ovmf.package = pkgs.OVMFFull;
+
+    # https://gist.github.com/techhazard/1be07805081a4d7a51c527e452b87b26#gistcomment-2087168
+    # qemuVerbatimConfig = ''
+    #  nvram = [ "${pkgs.OVMF}/FV/OVMF.fd:${pkgs.OVMF}/FV/OVMF_VARS.fd" ]
+    #'';
+
+  # };
+
+#  environment.etc."libvirt/qemu.conf" = {
+#    mode="0644";
+#    text=''
+#      nvram = [ "/run/libvirt/nix-ovmf/OVMF_CODE.fd:/run/libvirt/nix-ovmf/OVMF_VARS.fd" ]
+#    '';
+#  };
+
   nixpkgs.config.allowUnfree = true;  
 
   # virtualisation.virtualbox.host.enable = true;
@@ -337,7 +433,8 @@
     enable = true;
     shellAliases = {
       vim = "nvim";
-      shebang="echo '#!/usr/bin/env bash'"; # https://stackoverflow.com/questions/10376206/what-is-the-preferred-bash-shebang#comment72209991_10383546
+      shebang = "echo '#!/usr/bin/env bash'"; # https://stackoverflow.com/questions/10376206/what-is-the-preferred-bash-shebang#comment72209991_10383546
+      nfmt = "nix run nixpkgs#nixpkgs-fmt **/*.nix *.nix";
     };
     enableCompletion = true;
     autosuggestions.enable = true;
