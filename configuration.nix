@@ -185,10 +185,10 @@
          #! ${pkgs.runtimeShell} -e
          
          find ~ \( -name '*.iso' -o -name '*.qcow2*' -o -name '*.img' -o -name 'result' \) -exec echo -n -- {} + | tr ' ' '\n'
-         du -hs "${HOME}"/.cache "${HOME}"/.local
+         du -hs "$HOME"/.cache "$HOME"/.local
          # find ~ \( -iname '*.iso' -o -iname '*.qcow2*' -o -iname '*.img' -o -iname 'result' \) -exec echo -n -- {} + 2> /dev/null | tr ' ' '\n'
          #
-         # sudo rm -fr "${HOME}"/.cache "${HOME}"/.local
+         # sudo rm -fr "$HOME"/.cache "$HOME"/.local
        ''
      )
   ];
