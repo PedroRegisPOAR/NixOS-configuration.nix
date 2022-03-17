@@ -25,7 +25,8 @@ sudo \
 su \
 -c \
 'nix store gc --verbose \
---option keep-derivations false --option keep-outputs false \
+--option keep-derivations false \
+--option keep-outputs false \
 && nix-collect-garbage --delete-old \
 && nix store optimise -v'
 ```
