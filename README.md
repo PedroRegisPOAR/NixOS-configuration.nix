@@ -1,3 +1,5 @@
+# Here are some notes about my NixOS system
+
 
 ```bash
 nixos-version --json | jq -r .nixpkgsRevision
@@ -11,13 +13,20 @@ sudo nixos-rebuild switch --flake '/etc/nixos#pedroregispoar'
 
 
 ```bash
-sudo su
+sudo \
+su \
+-c \
+"nix flake update && nixos-rebuild switch --flake '/etc/nixos#pedroregispoar'" 
+```
 
-nix flake update \
-&& nixos-rebuild switch --flake '/etc/nixos#pedroregispoar' \
-&& nix store gc \
+
+```bash
+sudo \
+su \
+-c \
+'nix store gc -v \
 && nix-collect-garbage --delete-old \
-&& nix store optimise
+&& nix store optimise -v'
 ```
 
 To list all generations:
@@ -25,11 +34,16 @@ To list all generations:
 sudo nix-env --profile /nix/var/nix/profiles/system --list-generations
 ```
 
+```bash
+nix profile list --profile "${HOME}"/.nix-profile
+
+nix show-derivation -r /run/current-system
+```
 
 
 Lists entries from `/boot/loader/entries`:
 ```bash
-ls /boot/loader/entries
+ls -al /boot/loader/entries
 ```
 
 
@@ -37,21 +51,20 @@ ls /boot/loader/entries
 sudo nix-env --profile /nix/var/nix/profiles/system --delete-generations old
 ```
 
+```bash
 sudo bash -c "cd /boot/loader/entries; ls | xargs echo"
-
+```
 
 
 ```bash
 sudo bash -c "cd /boot/loader/entries; ls | grep -v 'nixos-generation-13.conf' | xargs rm"
 ```
-Adapted from: [gist](https://gist.github.com/xeppaka/f6126eebe030a000aa14ed63cc6e8496)
-
+Adapted from: [gist](https://gist.github.com/xeppaka/f6126eebe030a000aa14ed63cc6e8496) and 
 [--profile-name](https://stackoverflow.com/a/35664788)
 
 
 
 ```bash
-
 readlink "$(readlink ~/.nix-profile)"
 
 nix-env --list-generations | grep current | awk '{print $1}'
@@ -76,7 +89,7 @@ TODO:
 - https://news.ycombinator.com/item?id=22856199
 
 
-Buidind this NixOS system using only `nix` (in future it is going to be the static):
+Building this NixOS system using only `nix` (in future it is going to be the nix static one):
 ```bash
 nix \
 build \
@@ -84,4 +97,10 @@ github:PedroRegisPOAR/NixOS-configuration.nix#nixosConfigurations.pedroregispoar
 
 ls -al result/init
 ```
+
+
+```bash
+git remote set-url origin $(git remote show origin | grep "Fetch URL" | sed 's/ *Fetch URL: //' | sed 's/https:\/\/github.com\//git@github.com:/')
+```
+From: TODO
 
