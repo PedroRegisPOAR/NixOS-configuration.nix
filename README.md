@@ -24,7 +24,8 @@ su \
 sudo \
 su \
 -c \
-'nix store gc -v \
+'nix store gc --verbose \
+--option keep-derivations false --option keep-outputs false \
 && nix-collect-garbage --delete-old \
 && nix store optimise -v'
 ```
@@ -98,6 +99,15 @@ github:PedroRegisPOAR/NixOS-configuration.nix#nixosConfigurations.pedroregispoar
 ls -al result/init
 ```
 
+
+
+```bash
+ls -al /nix/store | rg podman
+```
+
+```bash
+nix-store --query --roots /nix/store/lr4k6wly0akiqmwqx573vja08c0gx91y-unit-podman.service
+```
 
 ```bash
 git remote set-url origin $(git remote show origin | grep "Fetch URL" | sed 's/ *Fetch URL: //' | sed 's/https:\/\/github.com\//git@github.com:/')
