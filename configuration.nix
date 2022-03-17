@@ -75,6 +75,7 @@
      
      # shell stuff
      direnv
+     nix-direnv
      fzf
      neovim
      oh-my-zsh
@@ -158,6 +159,10 @@
 
      pciutils # lspci and others
      coreboot-utils # acpidump-all
+
+     # hello
+     # figlet
+     # cowsay
 
      # Helper script to print the IOMMU groups of PCI devices.
      (
