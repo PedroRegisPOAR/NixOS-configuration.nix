@@ -336,9 +336,9 @@
   # https://unix.stackexchange.com/questions/377362/in-nixos-how-to-add-a-user-to-the-sudoers-file
   # https://www.reddit.com/r/NixOS/comments/nzks7u/running_sudo_without_password/
   # https://github.com/NixOS/nixpkgs/issues/58276
-  security.sudo.extraConfig = ''
-    %wheel	ALL=(root)	NOPASSWD:SETENV: /nix/store/h63yf7a2ccfimas30i0wn54fp8c8h3qf-podman-rootless-derivation/bin/podman 
-  '';
+  #security.sudo.extraConfig = ''
+  #  %wheel	ALL=(root)	NOPASSWD:SETENV: /nix/store/h63yf7a2ccfimas30i0wn54fp8c8h3qf-podman-rootless-derivation/bin/podman 
+  #'';
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
