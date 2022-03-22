@@ -359,11 +359,11 @@
   # Is it usefull for some other thing?
   virtualisation.docker.enable = true;
  
-  #virtualisation.podman = {
-  #  enable = true;
-  #  # Create a `docker` alias for podman, to use it as a drop-in replacement
-  #  #dockerCompat = true;
-  #};
+  virtualisation.podman = {
+    enable = true;
+    # Create a `docker` alias for podman, to use it as a drop-in replacement
+    #dockerCompat = true;
+  };
 
 #  environment.etc."containers/registries.conf" = {
 #    mode="0644";
