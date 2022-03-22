@@ -191,6 +191,14 @@
          # sudo rm -fr "$HOME"/.cache "$HOME"/.local
        ''
      )
+
+     # to kill processes that are using an file.
+     # 
+     # https://stackoverflow.com/a/24554952
+     # https://www.baeldung.com/linux/find-process-file-is-busy
+     # 
+     # kill -TERM $(lsof -t filename)
+
   ];
   
   # Some programs need SUID wrappers, can be configured further or are
