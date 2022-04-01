@@ -185,13 +185,37 @@
        writeScriptBin "free-space" ''
          #! ${pkgs.runtimeShell} -e
          
-         find ~ \( -name '*.iso' -o -name '*.qcow2*' -o -name '*.img' -o -name 'result' \) -exec echo -n -- {} + | tr ' ' '\n'
-         du -hs "$HOME"/.cache "$HOME"/.local
+         # find ~ \( -name '*.iso' -o -name '*.qcow2*' -o -name '*.img' -o -name 'result' \) -exec echo -n -- {} + | tr ' ' '\n'
+         # du -hs "$HOME"/.cache "$HOME"/.local
+         
          # find ~ \( -iname '*.iso' -o -iname '*.qcow2*' -o -iname '*.img' -o -iname 'result' \) -exec echo -n -- {} + 2> /dev/null | tr ' ' '\n'
          #
          # sudo rm -fr "$HOME"/.cache "$HOME"/.local
+         #
+         # nix store gc --verbose \
+         # --option keep-derivations false \
+         # --option keep-outputs false
+         #
+         # nix-collect-garbage --delete-old
+         nix profile remove '.*' \
+         && find ~ \( -iname '*.iso' -o -iname '*.qcow2*' -o -iname '*.img' -o -iname 'result' \) -exec rm -fv -- {} + 2> /dev/null | tr ' ' '\n' \
+         && sudo rm -fr "$HOME"/.cache "$HOME"/.local \
+         && nix store gc --verbose \
+              --option keep-derivations false \
+              --option keep-outputs false \
+         && nix-collect-garbage --delete-old
        ''
      )
+
+     # Helper script
+     (
+       writeScriptBin "crw" ''
+         #! ${pkgs.runtimeShell} -e
+         
+	 cat "$(readlink -f "$(which $1)")"	
+       ''
+     )
+
 
      # to kill processes that are using an file.
      # 
