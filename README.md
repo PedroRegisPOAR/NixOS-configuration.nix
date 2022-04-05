@@ -115,3 +115,18 @@ git remote set-url origin $(git remote show origin | grep "Fetch URL" | sed 's/ 
 ```
 From: TODO
 
+
+
+```bash
+git config --list
+
+git config user.name \
+&& git config user.email
+
+cat << EOF > ~/.gitconfig
+[user]
+    name = Pedro O. A. Regis
+    email = pedroalencarregis@hotmail.com
+EOF
+```
+
