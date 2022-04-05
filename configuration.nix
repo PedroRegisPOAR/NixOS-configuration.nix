@@ -502,6 +502,10 @@
                 #zsh-autosuggestions # Why this causes an warn?
                 #zsh-syntax-highlighting
               )
+
+      git config --global user.email "pedroalencarregis@hotmail.com" 2> /dev/null
+      git config --global user.name "Pedro Regis" 2> /dev/null
+
       source $ZSH/oh-my-zsh.sh
     '';
     ohMyZsh.custom = "${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions";
