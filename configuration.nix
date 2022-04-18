@@ -204,6 +204,23 @@
               --option keep-derivations false \
               --option keep-outputs false \
          && nix-collect-garbage --delete-old
+
+
+         docker ps --all --quiet | xargs --no-run-if-empty docker stop \
+         && docker ps --all --quiet | xargs --no-run-if-empty docker rm \
+         && docker images --quiet | xargs --no-run-if-empty docker rmi --force \
+         && docker container prune --force \
+         && docker image prune --force \
+         && docker network prune --force
+
+         podman pod prune --force
+         podman ps --all --quiet | xargs --no-run-if-empty podman rm --force \
+         && podman images --quiet | xargs --no-run-if-empty podman rmi --force \
+         && podman container prune --force \
+         && podman images --quiet | podman image prune --force \
+         && podman network ls --quiet | xargs --no-run-if-empty podman network rm \
+         && podman pod list --quiet | xargs --no-run-if-empty podman pod rm --force
+
        ''
      )
 
