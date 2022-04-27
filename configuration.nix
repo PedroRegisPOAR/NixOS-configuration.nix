@@ -197,14 +197,6 @@
          # --option keep-outputs false
          #
          # nix-collect-garbage --delete-old
-         nix profile remove '.*' \
-         && find ~ \( -iname '*.iso' -o -iname '*.qcow2*' -o -iname '*.img' -o -iname 'result' \) -exec rm -fv -- {} + 2> /dev/null | tr ' ' '\n' \
-         && sudo rm -fr "$HOME"/.cache "$HOME"/.local \
-         && nix store gc --verbose \
-              --option keep-derivations false \
-              --option keep-outputs false \
-         && nix-collect-garbage --delete-old
-
 
          docker ps --all --quiet | xargs --no-run-if-empty docker stop \
          && docker ps --all --quiet | xargs --no-run-if-empty docker rm \
@@ -220,6 +212,14 @@
          && podman images --quiet | podman image prune --force \
          && podman network ls --quiet | xargs --no-run-if-empty podman network rm \
          && podman pod list --quiet | xargs --no-run-if-empty podman pod rm --force
+
+         nix profile remove '.*' \
+         && find ~ \( -iname '*.iso' -o -iname '*.qcow2*' -o -iname '*.img' -o -iname 'result' \) -exec rm -fv -- {} + 2> /dev/null | tr ' ' '\n' \
+         && sudo rm -fr "$HOME"/.cache "$HOME"/.local \
+         && nix store gc --verbose \
+              --option keep-derivations false \
+              --option keep-outputs false \
+         && nix-collect-garbage --delete-old
 
        ''
      )
