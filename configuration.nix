@@ -208,7 +208,7 @@
            && docker network prune --force
          fi                 
 
-         if command -v docker &> /dev/null
+         if command -v podman &> /dev/null
          then
            podman pod prune --force
     
@@ -219,10 +219,14 @@
            && podman network ls --quiet | xargs --no-run-if-empty podman network rm \
            && podman pod list --quiet | xargs --no-run-if-empty podman pod rm --force
          fi
-         nix profile remove '.*' \
-         && find ~ \( -iname '*.iso' -o -iname '*.qcow2*' -o -iname '*.img' -o -iname 'result' \) -exec rm -fv -- {} + 2> /dev/null | tr ' ' '\n' \
-         && sudo rm -fr "$HOME"/.cache "$HOME"/.local \
-         && nix store gc --verbose \
+
+         nix profile remove '.*'
+         
+         find ~ \( -iname '*.iso' -o -iname '*.qcow2*' -o -iname '*.img' -o -iname 'result' \) -exec rm -frv -- {} + 2> /dev/null | tr ' ' '\n'
+         
+         sudo rm -fr "$HOME"/.cache "$HOME"/.local
+         
+         nix store gc --verbose \
               --option keep-derivations false \
               --option keep-outputs false \
          && nix-collect-garbage --delete-old
