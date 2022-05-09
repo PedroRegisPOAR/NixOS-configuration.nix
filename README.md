@@ -116,6 +116,16 @@ git remote set-url origin $(git remote show origin | grep "Fetch URL" | sed 's/ 
 From: TODO
 
 
+```bash
+git rm --cached <file>
+
+# or
+
+git rm -r --cached <folder>
+```
+From: https://stackoverflow.com/a/1274447
+
+
 
 ```bash
 git config --list
