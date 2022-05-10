@@ -239,10 +239,17 @@
        writeScriptBin "crw" ''
          #! ${pkgs.runtimeShell} -e
          
-	 cat "$(readlink -f "$(which $1)")"	
+	 cat "$(readlink -f "$(which $1)")"
        ''
      )
 
+     (
+       writeScriptBin "erw" ''
+         #! ${pkgs.runtimeShell} -e
+
+         echo "$(readlink -f "$(which $1)")"
+       ''
+     )
 
      # to kill processes that are using an file.
      # 
