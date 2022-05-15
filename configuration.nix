@@ -13,6 +13,17 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+
+      
+      # Provide an initial copy of the NixOS channel so that the user
+      # doesn't need to run "nix-channel --update" first.
+      # "${pkgs.nixpkgs}/nixos/modules/installer/cd-dvd/channel.nix"
+
+
+      # For virtualisation settings.
+      # It brings among other things the `.vm` attr need for 
+      # "${pkgs.nixpkgs}/nixos/modules/virtualisation/qemu-vm.nix"
+
     ];
 
   # Use the systemd-boot EFI boot loader.
