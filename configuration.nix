@@ -102,7 +102,7 @@
      dnsutils
      file
      findutils
-     # inetutils # TODO: it was causing a conflict, insvestigate it!
+     inetutils # TODO: it was causing a conflict, insvestigate it!
      nixpkgs-fmt
      ripgrep
      strace
@@ -133,7 +133,7 @@
      klavaro
      spectacle
      # spotify
-     tdesktop
+     # tdesktop
      vlc
      xorg.xkill
      
@@ -151,7 +151,8 @@
      jetbrains.pycharm-community
      keepassxc
      okular
-     # libreoffice
+     libreoffice
+     # freeoffice
      # python38Full
      peek
      insomnia
