@@ -153,6 +153,7 @@
      okular
      libreoffice
      # freeoffice
+     obsidian
      # python38Full
      peek
      insomnia
@@ -365,6 +366,34 @@
   # ];
 
   boot.kernel.sysctl = { "net.netfilter.nf_conntrack_max" = 131072; };
+
+  # https://nix.dev/tutorials/building-bootable-iso-image
+  # Needed for https://github.com/NixOS/nixpkgs/issues/58959
+  # https://www.reddit.com/r/NixOS/comments/ni79b8/list_of_all_nixos_supported_file_systems/
+  #
+  # For allow mount HDD
+  # https://www.reddit.com/r/NixOS/comments/f2e9cb/unable_to_mount_external_drives_properly_in_nixos/
+  boot.supportedFilesystems = [ 
+    # "btrfs"
+    # "cifs"
+    # "exfat"
+    # "ext2"
+    # "ext3"
+    # "ext4"
+    # "f2fs"
+    # "fat16"
+    # "fat32"
+    # "fat8"
+    # "ntfs"
+    # "reiserfs"
+    # "vfat"
+    # "xfs"
+    # "zfs"
+   "ntfs3g"
+   "exfat-utils"
+ ];
+  # boot.supportedFilesystems = pkgs.lib.mkForce [ "btrfs" "reiserfs" "vfat" "f2fs" "xfs" "ntfs" "cifs" ];
+
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
