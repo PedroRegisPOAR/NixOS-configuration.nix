@@ -441,6 +441,28 @@
     shell = pkgs.zsh;
   };
 
+#  users.extraUsers.pedro.subGidRanges = [
+#    {
+#      count = 1;
+#      startGid = 100;
+#    }
+#    {
+#      count = 999;
+#      startGid = 1001;
+#    }
+#  ];
+
+#  users.extraUsers.pedro.subUidRanges = [
+#    {
+#      count = 1;
+#      startUid = 1000;
+#    }
+#    {
+#      count = 65534;
+#      startUid = 100001;
+#    }
+#  ];
+
   # It is a hack, minkube only works if calling `sudo -k -n podman` does NOT ask for password.
   # The hardcoded path is because i am not using the podman installed in the system, but the one 
   # in a flake that i am using at work. For now let it be hardcoded :|
