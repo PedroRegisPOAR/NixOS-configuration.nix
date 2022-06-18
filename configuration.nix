@@ -180,6 +180,15 @@
      # figlet
      # cowsay
 
+     # TODO:
+	#nix \
+	#store \
+	#ls \
+	#--store https://cache.nixos.org/ \
+	#--long \
+	#--recursive \
+	#"$(nix eval --raw nixpkgs#gtk3.dev)"
+
      # Helper script to print the IOMMU groups of PCI devices.
      (
        writeScriptBin "list-iommu-groups" ''
@@ -242,7 +251,7 @@
          
          find ~ \( -iname '*.iso' -o -iname '*.qcow2*' -o -iname '*.img' -o -iname 'result' \) -exec rm -frv -- {} + 2> /dev/null | tr ' ' '\n'
          
-         sudo rm -fr "$HOME"/.cache "$HOME"/.local
+         sudo rm -fr "$HOME"/.cache "$HOME"/.local/share/containers
          
          nix store gc --verbose \
               --option keep-derivations false \
