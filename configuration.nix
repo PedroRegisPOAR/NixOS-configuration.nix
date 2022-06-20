@@ -211,6 +211,7 @@
          
          # Really useful to find folders with huge size
          # du -cksh /* 2> /dev/null | sort -rh
+         # du -cksh "${HOME}"/* 2> /dev/null | sort -rh
 
          # find ~ \( -name '*.iso' -o -name '*.qcow2*' -o -name '*.img' -o -name 'result' \) -exec echo -n -- {} + | tr ' ' '\n'
          # du -hs "$HOME"/.cache "$HOME"/.local
@@ -284,6 +285,10 @@
      # https://www.baeldung.com/linux/find-process-file-is-busy
      # 
      # kill -TERM $(lsof -t filename)
+     
+     # TODO: https://unix.stackexchange.com/a/302792
+     # function manswitch () { man $1 | less -p "^ +$2" }
+     #
 
   ];
   
