@@ -291,6 +291,8 @@
      
      (
        writeScriptBin "mansf" ''
+         #! ${pkgs.runtimeShell} -e
+
          # https://unix.stackexchange.com/a/302792
          # msf, stand for: Man Search Flag
          function mansf () { man $1 | less -p "^ +$2" }
