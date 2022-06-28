@@ -259,7 +259,10 @@
               --option keep-outputs false \
          && nix-collect-garbage --delete-old
 
-       ''
+        du -hs "${TMPDIR}"
+        sudo rm -frv "${TMPDIR}"
+
+        ''
      )
 
      # Helper script
@@ -286,10 +289,16 @@
      # 
      # kill -TERM $(lsof -t filename)
      
-     # TODO: https://unix.stackexchange.com/a/302792
-     # function manswitch () { man $1 | less -p "^ +$2" }
-     #
+     (
+       writeScriptBin "mansf" ''
+         # https://unix.stackexchange.com/a/302792
+         # msf, stand for: Man Search Flag
+         function mansf () { man $1 | less -p "^ +$2" }
 
+         # Call the function
+         mansf $1 $2
+       ''
+     )
   ];
   
   # Some programs need SUID wrappers, can be configured further or are
