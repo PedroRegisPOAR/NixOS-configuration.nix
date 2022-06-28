@@ -259,8 +259,8 @@
               --option keep-outputs false \
          && nix-collect-garbage --delete-old
 
-        du -hs "${TMPDIR}"
-        sudo rm -frv "${TMPDIR}"
+        du -hs "$TMPDIR"
+        sudo rm -frv "$TMPDIR"
 
         ''
      )
