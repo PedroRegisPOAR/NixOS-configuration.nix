@@ -151,7 +151,19 @@
       # git config --global user.email "pedroalencarregis@hotmail.com" 2> /dev/null
       # git config --global user.name "Pedro Regis" 2> /dev/null
       source $ZSH/oh-my-zsh.sh
+
+      prompt_end() {
+        if [[ -n $CURRENT_BG ]]; then
+          echo -n " %{%k%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR"
+        else
+          echo -n "%{%k%}"
+        fi
+      
+        echo -n "\n$%{%f%}"
+        CURRENT_BG=''
+      }
     '';
+
     ohMyZsh.custom = "${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions";
     promptInit = "";
   };
