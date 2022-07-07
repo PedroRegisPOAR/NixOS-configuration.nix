@@ -156,6 +156,14 @@
       # https://www.reddit.com/r/NixOS/comments/qvn0jk/comment/hly69o4/?utm_source=reddit&utm_medium=web2x&context=3
       # export NEWLINE =$'\n'
       # export PROMPT='%n ''${NEWLINE} $ '
+
+      # https://stackoverflow.com/a/44301984
+      autoload -Uz promptinit
+      promptinit
+
+      PROMPT="
+      %n@%m:%~ $ "
+
     '';
 
     ohMyZsh.custom = "${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions";
