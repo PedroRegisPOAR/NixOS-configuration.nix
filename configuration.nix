@@ -154,8 +154,8 @@
 
       # https://stackoverflow.com/questions/41017917/add-newline-to-oh-my-zsh-theme/59095798#59095798
       # https://www.reddit.com/r/NixOS/comments/qvn0jk/comment/hly69o4/?utm_source=reddit&utm_medium=web2x&context=3
-      export NEWLINE =$'\n'
-      export PROMPT='%n ''${NEWLINE} $ '
+      # export NEWLINE =$'\n'
+      # export PROMPT='%n ''${NEWLINE} $ '
     '';
 
     ohMyZsh.custom = "${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions";
