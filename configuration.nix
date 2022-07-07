@@ -79,8 +79,8 @@
   services.xserver.desktopManager.plasma5.enable = true;
 
   # https://github.com/NixOS/nixpkgs/issues/79707#issuecomment-586696145
-  services.xserver.startDbusSession = false;
-  services.dbus.socketActivated = true;
+  # services.xserver.startDbusSession = false;
+  # services.dbus.socketActivated = true;
 
   # Configure keymap in X11
   services.xserver = {
