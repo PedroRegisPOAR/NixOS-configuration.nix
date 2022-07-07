@@ -158,11 +158,11 @@
       # export PROMPT='%n ''${NEWLINE} $ '
 
       # https://stackoverflow.com/a/44301984
-      autoload -Uz promptinit
-      promptinit
-
-      PROMPT="
-      %n@%m:%~ $ "
+      # autoload -Uz promptinit
+      # promptinit
+      # 
+      # PROMPT="
+      # %n@%m:%~ $ "
 
     '';
 
