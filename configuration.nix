@@ -15,6 +15,10 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
+  # The default is false
+  boot.cleanTmpDir = true;
+  # TODO
+  boot.tmpOnTmpfs = true;
 
   # https://nix.dev/tutorials/building-bootable-iso-image
   # Needed for https://github.com/NixOS/nixpkgs/issues/58959
