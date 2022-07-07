@@ -95,7 +95,24 @@
   };
 
   # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
+  # nixpkgs.config.allowUnfree = true;
+   nix = {
+     package = pkgs.nixFlakes;
+     extraOptions = ''
+       experimental-features = nix-command flakes 
+   '';
+
+    # From:
+    # https://github.com/sherubthakur/dotfiles/blob/be96fe7c74df706a8b1b925ca4e7748cab703697/system/configuration.nix#L44
+    # pointing to: https://github.com/NixOS/nixpkgs/issues/124215
+    settings.extra-sandbox-paths= [ "/bin/sh=${pkgs.bash}/bin/sh"];
+    
+    # https://github.com/NixOS/nixpkgs/blob/fd8a7fd07da0f3fc0e27575891f45c2f88e5dd44/nixos/modules/services/misc/nix-daemon.nix#L323
+    # Be carefull if using it as false!
+    # Ohh crap, around 20/06/2022 I ran something like sudo rm -fr $TMPDIR/* and I destroyed 
+    # my system completely because this flag was forced to be false!  
+    readOnlyStore = true;
+  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
