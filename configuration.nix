@@ -119,6 +119,211 @@
   environment.systemPackages = with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
+     # shell stuff
+     direnv
+     nix-direnv
+     fzf
+     neovim
+     oh-my-zsh
+     zsh
+     zsh-autosuggestions
+     zsh-completions
+     bottom  # the binary is btm 
+     
+     # Some utils
+     binutils
+     coreutils
+     dnsutils
+     file
+     findutils
+     inetutils # TODO: it was causing a conflict, insvestigate it!
+     nixpkgs-fmt
+     ripgrep
+     strace
+     util-linux
+     unzip
+     tree
+
+     gzip
+     unrar
+     unzip
+     
+     curl    
+     wget
+    
+     graphviz # dot command comes from here
+     jq
+     unixtools.xxd
+    
+     # Caching compilers
+     gcc
+     # gcc6
+     
+     # anydesk
+     # discord
+     firefox
+     # freeoffice     
+     gitkraken
+     klavaro
+     spectacle
+     # spotify
+     # tdesktop
+     vlc
+     xorg.xkill
+     
+     # amazon-ecs-cli
+     # awscli
+     docker
+     docker-compose
+     git
+     gnumake
+     gnupg
+     gparted
+     
+     youtube-dl
+     htop
+     jetbrains.pycharm-community
+     keepassxc
+     okular
+     libreoffice
+     # freeoffice
+     obsidian
+     # python38Full
+     peek
+     insomnia
+     # terraform     
+
+     #nodejs
+     #qgis
+     #rubber
+     #tectonic
+     #haskellPackages.pandoc
+     #vscode-with-extensions
+     #wxmaxima
+
+     libvirt
+     virtmanager
+     qemu
+
+     pciutils # lspci and others
+     coreboot-utils # acpidump-all
+
+     # hello
+     # figlet
+     # cowsay
+
+     # TODO:
+	#nix \
+	#store \
+	#ls \
+	#--store https://cache.nixos.org/ \
+	#--long \
+	#--recursive \
+	#"$(nix eval --raw nixpkgs#gtk3.dev)"
+
+     # Helper script to print the IOMMU groups of PCI devices.
+     (
+       writeScriptBin "list-iommu-groups" ''
+         #! ${pkgs.runtimeShell} -e
+         shopt -s nullglob
+         for g in /sys/kernel/iommu_groups/*; do
+           echo "IOMMU Group ''${g##*/}:"
+           for d in $g/devices/*; do
+             echo -e "\t$(lspci -nns ''${d##*/})"
+           done;
+         done;
+       ''
+     )
+  
+
+     # Helper script: to free space.
+     (
+       writeScriptBin "free-space" ''
+         #! ${pkgs.runtimeShell} -e
+         
+         # Really useful to find folders with huge size
+         # du -cksh /* 2> /dev/null | sort -rh
+         # du -cksh "$HOME"/* 2> /dev/null | sort -rh
+         # find ~ \( -name '*.iso' -o -name '*.qcow2*' -o -name '*.img' -o -name 'result' \) -exec echo -n -- {} + | tr ' ' '\n'
+         # du -hs "$HOME"/.cache "$HOME"/.local
+         
+         # find ~ \( -iname '*.iso' -o -iname '*.qcow2*' -o -iname '*.img' -o -iname 'result' \) -exec echo -n -- {} + 2> /dev/null | tr ' ' '\n'
+         #
+         # sudo rm -fr "$HOME"/.cache "$HOME"/.local
+         #
+         # nix store gc --verbose \
+         # --option keep-derivations false \
+         # --option keep-outputs false
+         #
+         # nix-collect-garbage --delete-old
+         if command -v docker &> /dev/null
+         then
+           docker ps --all --quiet | xargs --no-run-if-empty docker stop \
+           && docker ps --all --quiet | xargs --no-run-if-empty docker rm \
+           && docker images --quiet | xargs --no-run-if-empty docker rmi --force \
+           && docker container prune --force \
+           && docker image prune --force \
+           && docker network prune --force
+         fi                 
+         if command -v podman &> /dev/null
+         then
+           podman pod prune --force
+    
+           podman ps --all --quiet | xargs --no-run-if-empty podman rm --force \
+           && podman images --quiet | xargs --no-run-if-empty podman rmi --force \
+           && podman container prune --force \
+           && podman images --quiet | podman image prune --force \
+           && podman network ls --quiet | xargs --no-run-if-empty podman network rm \
+           && podman pod list --quiet | xargs --no-run-if-empty podman pod rm --force
+         fi
+         nix profile remove '.*'
+         
+         find ~ \( -iname '*.iso' -o -iname '*.qcow2*' -o -iname '*.img' -o -iname 'result' \) -exec rm -frv -- {} + 2> /dev/null | tr ' ' '\n'
+         
+         sudo rm -fr "$HOME"/.cache "$HOME"/.local/share/containers
+         
+         nix store gc --verbose \
+              --option keep-derivations false \
+              --option keep-outputs false \
+         && nix-collect-garbage --delete-old
+        du -hs "$TMPDIR"
+        sudo rm -frv "$TMPDIR"
+        ''
+     )
+
+     # Helper script
+     (
+       writeScriptBin "crw" ''
+         #! ${pkgs.runtimeShell} -e
+         
+	 cat "$(readlink -f "$(which $1)")"
+       ''
+     )
+
+     (
+       writeScriptBin "erw" ''
+         #! ${pkgs.runtimeShell} -e
+         echo "$(readlink -f "$(which $1)")"
+       ''
+     )
+
+     # to kill processes that are using an file.
+     # 
+     # https://stackoverflow.com/a/24554952
+     # https://www.baeldung.com/linux/find-process-file-is-busy
+     # 
+     # kill -TERM $(lsof -t filename)
+     
+     (
+       writeScriptBin "mansf" ''
+         #! ${pkgs.runtimeShell} -e
+         # https://unix.stackexchange.com/a/302792
+         # msf, stand for: Man Search Flag
+         function mansf () { man $1 | less -p "^ +$2" }
+         # Call the function
+         mansf $1 $2
+       ''
+     )
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
