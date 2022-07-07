@@ -123,6 +123,60 @@
     shell = pkgs.zsh;
   };
 
+
+  # https://github.com/NixOS/nixpkgs/blob/3a44e0112836b777b176870bb44155a2c1dbc226/nixos/modules/programs/zsh/oh-my-zsh.nix#L119 
+  # https://discourse.nixos.org/t/nix-completions-for-zsh/5532
+  # https://github.com/NixOS/nixpkgs/blob/09aa1b23bb5f04dfc0ac306a379a464584fc8de7/nixos/modules/programs/zsh/zsh.nix#L230-L231
+  programs.zsh = {
+    enable = true;
+    shellAliases = {
+      vim = "nvim";
+      shebang = "echo '#!/usr/bin/env bash'"; # https://stackoverflow.com/questions/10376206/what-is-the-preferred-bash-shebang#comment72209991_10383546
+      nfmt = "nix run nixpkgs#nixpkgs-fmt **/*.nix *.nix";
+    };
+    enableCompletion = true;
+    autosuggestions.enable = true;
+    syntaxHighlighting.enable = true;
+    interactiveShellInit = ''
+      export ZSH=${pkgs.oh-my-zsh}/share/oh-my-zsh
+      export ZSH_THEME="agnoster"
+      export ZSH_CUSTOM=${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions
+      plugins=( 
+                colored-man-pages
+                docker
+                git
+                #zsh-autosuggestions # Why this causes an warn?
+                #zsh-syntax-highlighting
+              )
+      # git config --global user.email "pedroalencarregis@hotmail.com" 2> /dev/null
+      # git config --global user.name "Pedro Regis" 2> /dev/null
+      source $ZSH/oh-my-zsh.sh
+    '';
+    ohMyZsh.custom = "${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions";
+    promptInit = "";
+  };
+
+  # TODO: study about this
+  # https://github.com/thiagokokada/dotfiles/blob/a221bf1186fd96adcb537a76a57d8c6a19592d0f/_nixos/etc/nixos/misc-configuration.nix#L124-L128
+  # zramSwap = {
+  #   enable = true;
+  #   algorithm = "zstd";
+  # };
+
+  # Probably solve many warns about fonts
+  # https://gist.github.com/kendricktan/8c33019cf5786d666d0ad64c6a412526
+  fonts = {
+    fontDir.enable = true;
+    fonts = with pkgs; [
+      corefonts		  # Microsoft free fonts
+      fira	      	  # Monospace
+      inconsolata     	  # Monospace
+      powerline-fonts
+      ubuntu_font_family
+      unifont		  # International languages
+    ];
+  };
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
   
