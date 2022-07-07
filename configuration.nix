@@ -15,6 +15,34 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
+
+  # https://nix.dev/tutorials/building-bootable-iso-image
+  # Needed for https://github.com/NixOS/nixpkgs/issues/58959
+  # https://www.reddit.com/r/NixOS/comments/ni79b8/list_of_all_nixos_supported_file_systems/
+  #
+  # For allow mount HDD
+  # https://www.reddit.com/r/NixOS/comments/f2e9cb/unable_to_mount_external_drives_properly_in_nixos/
+  boot.supportedFilesystems = [ 
+    # "btrfs"
+    # "cifs"
+    # "exfat"
+    # "ext2"
+    # "ext3"
+    # "ext4"
+    # "f2fs"
+    # "fat16"
+    # "fat32"
+    # "fat8"
+    # "ntfs"
+    # "reiserfs"
+    # "vfat"
+    # "xfs"
+    # "zfs"
+   "ntfs3g"
+   "exfat-utils"
+ ];
+  # boot.supportedFilesystems = pkgs.lib.mkForce [ "btrfs" "reiserfs" "vfat" "f2fs" "xfs" "ntfs" "cifs" ];  
+
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -86,17 +114,20 @@
   users.users.pedro = {
     isNormalUser = true;
     description = "Pedro Regis";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "audio" "libvirtd" "wheel" "pedro" "docker" "kvm" ];
     packages = with pkgs; [
       firefox
       kate
     #  thunderbird
     ];
+    shell = pkgs.zsh;
   };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-   nix = {
+  
+  #
+  nix = {
      package = pkgs.nixFlakes;
      extraOptions = ''
        experimental-features = nix-command flakes 
