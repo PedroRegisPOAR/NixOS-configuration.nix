@@ -92,6 +92,13 @@
     xkbVariant = "nodeadkeys";
   };
 
+
+  virtualisation.podman = {
+    enable = true;
+    # Create a `docker` alias for podman, to use it as a drop-in replacement
+    #dockerCompat = true;
+  };
+
   # Configure console keymap
   console.keyMap = "br-abnt2";
 
