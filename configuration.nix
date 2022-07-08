@@ -99,6 +99,13 @@
     #dockerCompat = true;
   };
 
+
+  virtualisation.libvirtd.enable = true;
+
+  environment.variables = {
+    VAGRANT_DEFAULT_PROVIDER = "libvirt";
+  };
+
   # Configure console keymap
   console.keyMap = "br-abnt2";
 
@@ -129,10 +136,11 @@
   users.users.pedro = {
     isNormalUser = true;
     description = "Pedro Regis";
-    extraGroups = [ "networkmanager" "audio" "libvirtd" "wheel" "pedro" "docker" "kvm" ];
+    extraGroups = [ "networkmanager" "audio" "libvirtd" "wheel" "pedro" "docker" "kvm" "qemu-libvirtd" "video" "disk" ];
     packages = with pkgs; [
       firefox
       kate
+      vagrant
     #  thunderbird
     ];
     shell = pkgs.zsh;
