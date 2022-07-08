@@ -247,8 +247,8 @@
      nixpkgs-fmt
      ripgrep
      strace
-     util-linux
-     unzip
+     # util-linux
+     # unzip
      tree
 
      gzip
@@ -263,14 +263,14 @@
      unixtools.xxd
     
      # Caching compilers
-     gcc
+     # gcc
      # gcc6
      
      # anydesk
      # discord
      firefox
      # freeoffice     
-     gitkraken
+     # gitkraken
      klavaro
      spectacle
      # spotify
@@ -280,24 +280,24 @@
      
      # amazon-ecs-cli
      # awscli
-     docker
-     docker-compose
+     # docker
+     # docker-compose
      git
      gnumake
      gnupg
      gparted
      
-     youtube-dl
+     # youtube-dl
      htop
-     jetbrains.pycharm-community
+     # jetbrains.pycharm-community
      keepassxc
-     okular
-     libreoffice
+     # okular
+     # libreoffice
      # freeoffice
-     obsidian
+     # obsidian
      # python38Full
-     peek
-     insomnia
+     # peek
+     # insomnia
      # terraform     
 
      #nodejs
@@ -308,25 +308,25 @@
      #vscode-with-extensions
      #wxmaxima
 
-     libvirt
-     virtmanager
-     qemu
+     # libvirt
+     # virtmanager
+     # qemu
 
-     pciutils # lspci and others
-     coreboot-utils # acpidump-all
+     # pciutils # lspci and others
+     # coreboot-utils # acpidump-all
 
      # hello
      # figlet
      # cowsay
 
      # TODO:
-	#nix \
-	#store \
-	#ls \
-	#--store https://cache.nixos.org/ \
-	#--long \
-	#--recursive \
-	#"$(nix eval --raw nixpkgs#gtk3.dev)"
+     # nix \
+     # store \
+     # ls \
+     # --store https://cache.nixos.org/ \
+     # --long \
+     # --recursive \
+     # "$(nix eval --raw nixpkgs#gtk3.dev)"
 
      # Helper script to print the IOMMU groups of PCI devices.
      (
