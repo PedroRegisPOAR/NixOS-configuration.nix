@@ -258,7 +258,7 @@
      dnsutils
      file
      findutils
-     inetutils # TODO: it was causing a conflict, insvestigate it!
+     # inetutils # TODO: it was causing a conflict, insvestigate it!
      nixpkgs-fmt
      ripgrep
      strace
@@ -278,14 +278,16 @@
      unixtools.xxd
     
      # Caching compilers
-     # gcc
+     gcc
      # gcc6
      
-     # anydesk
+     anydesk
      # discord
      firefox
-     # freeoffice     
-     # gitkraken
+     google-chrome
+     chromium
+     freeoffice     
+     gitkraken
      klavaro
      spectacle
      # spotify
@@ -302,17 +304,17 @@
      gnupg
      gparted
      
-     # youtube-dl
+     youtube-dl
      htop
-     # jetbrains.pycharm-community
+     jetbrains.pycharm-community
      keepassxc
-     # okular
-     # libreoffice
+     okular
+     libreoffice
      # freeoffice
-     # obsidian
+     obsidian
      # python38Full
-     # peek
-     # insomnia
+     peek
+     insomnia
      # terraform     
 
      #nodejs
@@ -327,8 +329,8 @@
      # virtmanager
      # qemu
 
-     # pciutils # lspci and others
-     # coreboot-utils # acpidump-all
+     pciutils # lspci and others
+     coreboot-utils # acpidump-all
 
      # hello
      # figlet
