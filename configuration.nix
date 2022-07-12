@@ -435,7 +435,7 @@
      writeScriptBin "gcup" ''
        #! ${pkgs.runtimeShell} -e
        
-       git commit -m 'Updates commit's sha256' && git push
+       git commit -m "Updates commit's sha256" && git push
      ''         
      )
 
