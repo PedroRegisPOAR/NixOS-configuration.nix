@@ -436,7 +436,7 @@
        #! ${pkgs.runtimeShell} -e
        
        git commit -m 'Updates commit's sha256' && git push
-         
+     ''         
      )
 
      # to kill processes that are using an file.
