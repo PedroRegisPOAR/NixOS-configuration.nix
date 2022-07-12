@@ -432,12 +432,55 @@
      )
 
      (
-     writeScriptBin "gcup" ''
+     writeScriptBin "gacup" ''
        #! ${pkgs.runtimeShell} -e
        
-       git commit -m "Updates commit's sha256" && git push
+       git add . && git commit -m "Updates commit's sha256" && git push
+     ''
+     )
+
+     (
+     writeScriptBin "gacp" ''
+       #! ${pkgs.runtimeShell} -e
+
+       git add . && git commit -m "$1" && git push
      ''         
      )
+
+     (
+     writeScriptBin "ga" ''
+       #! ${pkgs.runtimeShell} -e
+
+       git add "$1"
+     ''         
+     )
+
+     (
+     writeScriptBin "gc" ''
+       #! ${pkgs.runtimeShell} -e
+
+       git commit -m "$1" 
+     ''         
+     )
+
+
+     (
+     writeScriptBin "gd" ''
+       #! ${pkgs.runtimeShell} -e
+
+       git diff
+     ''         
+     )
+
+
+     (
+     writeScriptBin "gp" ''
+       #! ${pkgs.runtimeShell} -e
+
+       git push
+     ''         
+     )
+
 
      # to kill processes that are using an file.
      # 
