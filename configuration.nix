@@ -231,8 +231,8 @@
     
     # https://github.com/NixOS/nixpkgs/blob/fd8a7fd07da0f3fc0e27575891f45c2f88e5dd44/nixos/modules/services/misc/nix-daemon.nix#L323
     # Be carefull if using it as false!
-    # Ohh crap, around 20/06/2022 I ran something like sudo rm -fr $TMPDIR/* and I destroyed 
-    # my system completely because this flag was forced to be false!  
+    # Ohh crap, in 30/06/2022 I ran something like sudo rm -fr $TMPDIR/* and I destroyed 
+    # my system completely because this flag was forced by my self to be false!  
     readOnlyStore = true;
   };
 
@@ -429,6 +429,14 @@
          #! ${pkgs.runtimeShell} -e
          echo "$(readlink -f "$(which $1)")"
        ''
+     )
+
+     (
+     writeScriptBin "gcup" ''
+       #! ${pkgs.runtimeShell} -e
+       
+       git commit -m 'Updates commit's sha256' && git push
+         
      )
 
      # to kill processes that are using an file.
