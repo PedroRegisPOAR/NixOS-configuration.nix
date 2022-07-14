@@ -27,6 +27,16 @@ update \
 --override-input nixpkgs "$(nix flake metadata github:NixOS/nixpkgs/nixos-22.05 --json | jq -r .url)"
 ```
 
+
+
+```bash
+nix \
+flake \
+update \
+--override-input nixpkgs-unstable "$(nix flake metadata github:NixOS/nixpkgs/nixpkgs-unstable --json | jq -r .url)"
+```
+
+
 ```bash
 sudo \
 su \
