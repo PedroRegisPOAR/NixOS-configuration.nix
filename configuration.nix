@@ -8,6 +8,8 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+
+      # "${config.nixpkgs}/nixos/modules/virtualisation/qemu-vm.nix"
     ];
 
   # Bootloader.
