@@ -1,5 +1,13 @@
 {
-  outputs = { self, nixpkgs }: {
+
+  description = "Configuration for my NixOS system";
+
+  inputs = {
+    nixpkgs = { url = "github:nixos/nixpkgs/nixos-22.05"; };
+    nixos-unstable = { url = "github:nixos/nixpkgs/nixos-unstable"; };
+  };
+
+  outputs = { self, nixpkgs, nixos-unstable }: {
      nixosConfigurations.pedroregispoar= nixpkgs.lib.nixosSystem {
        system = "x86_64-linux";
        modules = [
@@ -11,7 +19,7 @@
 
                    # For virtualisation settings.
                    # It brings among other things the `.vm` attr need for 
-                   "${nixpkgs}/nixos/modules/virtualisation/qemu-vm.nix"
+                   # "${nixpkgs}/nixos/modules/virtualisation/qemu-vm.nix"
                  ];
      };
           
