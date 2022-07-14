@@ -11,7 +11,7 @@
 
                    # For virtualisation settings.
                    # It brings among other things the `.vm` attr need for 
-                   # "${nixpkgs}/nixos/modules/virtualisation/qemu-vm.nix"
+                   "${nixpkgs}/nixos/modules/virtualisation/qemu-vm.nix"
                  ];
      };
           
