@@ -21,6 +21,13 @@ su \
 
 
 ```bash
+nix \
+flake \
+update \
+--override-input nixpkgs "$(nix flake metadata github:NixOS/nixpkgs/nixos-22.05 --json | jq .url)"
+```
+
+```bash
 sudo \
 su \
 -c \
