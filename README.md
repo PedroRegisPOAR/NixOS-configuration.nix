@@ -152,7 +152,7 @@ git config user.name \
 
 cat << EOF > ~/.gitconfig
 [user]
-    name = Pedro O. A. Regis
+    name = PedroRegisPOAR
     email = pedroalencarregis@hotmail.com
 EOF
 ```
