@@ -22,6 +22,13 @@
   # TODO
   boot.tmpOnTmpfs = true;
 
+  # TODO: study about this
+  # https://github.com/thiagokokada/dotfiles/blob/a221bf1186fd96adcb537a76a57d8c6a19592d0f/_nixos/etc/nixos/misc-configuration.nix#L124-L128
+  zramSwap = {
+    enable = true;
+    algorithm = "zstd";
+  };
+
   # https://nix.dev/tutorials/building-bootable-iso-image
   # Needed for https://github.com/NixOS/nixpkgs/issues/58959
   # https://www.reddit.com/r/NixOS/comments/ni79b8/list_of_all_nixos_supported_file_systems/
