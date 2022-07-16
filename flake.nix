@@ -2,12 +2,12 @@
 
   description = "Configuration for my NixOS system";
 
-  inputs = {
-    nixpkgs = { url = "github:nixos/nixpkgs/nixos-22.05"; };
-    nixos-unstable = { url = "github:nixos/nixpkgs/nixos-unstable"; };
-  };
+  #inputs = {
+ #   nixpkgs = { url = "github:nixos/nixpkgs/nixos-22.05"; };
+    # nixos-unstable = { url = "github:nixos/nixpkgs/nixos-unstable"; };
+#  };
 
-  outputs = { self, nixpkgs, nixos-unstable }:
+  outputs = { self, nixpkgs }:
     let
       system = "x86_64-linux";
 

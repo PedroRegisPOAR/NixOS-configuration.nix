@@ -28,6 +28,13 @@ update \
 ```
 
 
+```bash
+nix \
+flake \
+metadata \
+'github:NixOS/nix?ref=2.10.2' --json | jq -r .url
+```
+
 
 ```bash
 nix \
