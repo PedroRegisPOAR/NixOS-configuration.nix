@@ -449,6 +449,14 @@
      )
 
      (
+     writeScriptBin "gacpwip" ''
+       #! ${pkgs.runtimeShell} -e
+
+       git add . && git commit -m "Work In Progess (WIP)" && git push
+     ''
+     )
+
+     (
      writeScriptBin "gacp" ''
        #! ${pkgs.runtimeShell} -e
 
