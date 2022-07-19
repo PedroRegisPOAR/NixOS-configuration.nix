@@ -220,6 +220,25 @@
       powerline-fonts
       ubuntu_font_family
       unifont		  # International languages
+
+      arphic-ukai
+      arphic-uming
+      # corefonts # Microsoft free fonts
+      dejavu_fonts
+      font-awesome
+      noto-fonts-emoji
+      noto-fonts-extra
+      # powerline-fonts
+      source-sans-pro
+      source-han-sans-japanese
+      source-han-sans-korean
+      source-han-sans-simplified-chinese
+      source-han-sans-traditional-chinese
+      source-sans-pro
+      # symbola # TODO: Was broken
+      # ubuntu_font_family
+      wqy_microhei
+      wqy_zenhei
     ];
   };
 
