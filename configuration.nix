@@ -224,11 +224,15 @@
       arphic-ukai
       arphic-uming
       # corefonts # Microsoft free fonts
+      dina-font
+      hack-font
       dejavu_fonts
       font-awesome
       noto-fonts-emoji
       noto-fonts-extra
+      # nerdfonts # Really big and now broken
       # powerline-fonts
+      sudo-font
       source-sans-pro
       source-han-sans-japanese
       source-han-sans-korean
@@ -237,6 +241,7 @@
       source-sans-pro
       # symbola # TODO: Was broken
       # ubuntu_font_family
+      xkcd-font
       wqy_microhei
       wqy_zenhei
     ];
