@@ -283,8 +283,9 @@
      zsh
      zsh-autosuggestions
      zsh-completions
-     bottom  # the binary is btm 
-     
+     # bottom  # the binary is btm 
+     bpytop
+    
      # Some utils
      binutils
      coreutils
