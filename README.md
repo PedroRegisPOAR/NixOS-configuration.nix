@@ -8,6 +8,21 @@ From: https://www.tweag.io/blog/2020-07-31-nixos-flakes/
 
 
 ```bash
+nix flake metadata '/etc/nixos#pedroregispoar'
+```
+
+### Testing
+
+
+
+```bash
+sudo nixos-rebuild test --flake '/etc/nixos#pedroregispoar'
+```
+
+It brings up to PATH new scripts and does other stuff too.
+
+
+```bash
 sudo nixos-rebuild switch --flake '/etc/nixos#pedroregispoar'
 ```
 
