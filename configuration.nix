@@ -472,7 +472,7 @@
          && nix store optimise --verbose
          '
 
-        test -z "$TMPDIR" || du -hs "$TMPDIR
+        test -z "$TMPDIR" || du -hs "$TMPDIR"
         # Too agressive?
         # sudo rm -frv "$TMPDIR"
         ''

@@ -226,7 +226,7 @@ nix repl --expr 'import <nixpkgs>{}'
 Refs.:
 - https://discourse.nixos.org/t/nix-2-10-0-released/20291
 
-Part 2 (tip, hit tab after the `.` in `nixosConfigurations.'):
+Part 2 (tip, hit tab after the `.` in `nixosConfigurations.`):
 ```bash
 nix repl> :lf /etc/nixos
 nix repl> nixosConfigurations.
