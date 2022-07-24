@@ -11,12 +11,15 @@ From: https://www.tweag.io/blog/2020-07-31-nixos-flakes/
 sudo nixos-rebuild switch --flake '/etc/nixos#pedroregispoar'
 ```
 
-
+TODO: test it
 ```bash
 sudo \
 su \
 -c \
-"nix flake update && nixos-rebuild switch --flake '/etc/nixos#pedroregispoar'" 
+"
+nix flake update \
+&& nixos-rebuild switch --flake '/etc/nixos#pedroregispoar'
+"
 ```
 
 
@@ -24,7 +27,9 @@ su \
 nix \
 flake \
 update \
---override-input nixpkgs "$(nix flake metadata github:NixOS/nixpkgs/nixos-22.05 --json | jq -r .url)"
+--override-input \
+nixpkgs \
+"$(nix flake metadata github:NixOS/nixpkgs/nixos-22.05 --json | jq -r .url)"
 ```
 
 
@@ -32,7 +37,7 @@ update \
 nix \
 flake \
 metadata \
-'github:NixOS/nix?ref=2.10.2' --json | jq -r .url
+'github:NixOS/nix?ref=2.10.3' --json | jq -r .url
 ```
 
 
@@ -40,7 +45,9 @@ metadata \
 nix \
 flake \
 update \
---override-input nixpkgs-unstable "$(nix flake metadata github:NixOS/nixpkgs/nixpkgs-unstable --json | jq -r .url)"
+--override-input \
+nixpkgs-unstable \
+"$(nix flake metadata github:NixOS/nixpkgs/nixpkgs-unstable --json | jq -r .url)"
 ```
 
 
@@ -48,11 +55,16 @@ update \
 sudo \
 su \
 -c \
-'nix store gc --verbose \
+'
+nix \
+store \
+gc \
+--verbose \
 --option keep-derivations false \
 --option keep-outputs false \
 && nix-collect-garbage --delete-old \
-&& nix store optimise -v'
+&& nix store optimise --verbose
+'
 ```
 
 To list all generations:
@@ -60,28 +72,39 @@ To list all generations:
 sudo nix-env --profile /nix/var/nix/profiles/system --list-generations
 ```
 
+
+
 ```bash
 nix profile list --profile "${HOME}"/.nix-profile
+nix profile install nixpkgs#hello
+nix profile list --profile "${HOME}"/.nix-profile
+```
 
-nix show-derivation -r /run/current-system
+```bash
+nix show-derivation /run/current-system
 ```
 
 
 Lists entries from `/boot/loader/entries`:
 ```bash
-ls -al /boot/loader/entries
+[ -d /sys/firmware/efi/efivars ] && ls -al /boot/efi/loader/entries/nixos-generation-* || ls -al /boot/loader/entries
+# test -d /sys/firmware/efi/efivars && ls -al /boot/efi/loader/entries/nixos-generation-* || ls -al /boot/loader/entries
 ```
+Refs.:
+- https://nixos.wiki/wiki/Bootloader
 
 
 ```bash
 sudo nix-env --profile /nix/var/nix/profiles/system --delete-generations old
 ```
 
+TODO: it only works in legacy mode!
 ```bash
 sudo bash -c "cd /boot/loader/entries; ls | xargs echo"
 ```
 
 
+Really hacky/broken code.
 ```bash
 sudo bash -c "cd /boot/loader/entries; ls | grep -v 'nixos-generation-13.conf' | xargs rm"
 ```
@@ -130,14 +153,18 @@ ls -al result/init
 ls -al /nix/store | rg podman
 ```
 
-```bash
-nix-store --query --roots /nix/store/lr4k6wly0akiqmwqx573vja08c0gx91y-unit-podman.service
-```
+
+#### Change https to ssh local git repository
 
 ```bash
-git remote set-url origin $(git remote show origin | grep "Fetch URL" | sed 's/ *Fetch URL: //' | sed 's/https:\/\/github.com\//git@github.com:/')
+git \
+remote \
+set-url \
+origin \
+$(git remote show origin | grep "Fetch URL" | sed 's/ *Fetch URL: //' | sed 's/https:\/\/github.com\//git@github.com:/')
 ```
-From: TODO
+Refs.:
+- missing it
 
 
 ```bash
@@ -152,12 +179,13 @@ From: https://stackoverflow.com/a/1274447
 
 
 ```bash
-git config --list
+# git config --list
+# 
+# git config user.name \
+# && git config user.email
 
-git config user.name \
-&& git config user.email
-
-cat << EOF > ~/.gitconfig
+{ git config user.name \
+&& git config user.emai } || cat << EOF > ~/.gitconfig
 [user]
     name = PedroRegisPOAR
     email = pedroalencarregis@hotmail.com
@@ -165,12 +193,30 @@ EOF
 ```
 
 
+### nix repl
+
 For flake systems:
 
+
+```bash
+nix repl
+```
+
+Part 1:
+**or**
+
+```bash
+nix repl --expr 'import <nixpkgs>{}'
+```
+Refs.:
+- https://discourse.nixos.org/t/nix-2-10-0-released/20291
+
+Part 2 (tip, hit tab after the `.` in `nixosConfigurations.'):
 ```bash
 nix repl> :lf /etc/nixos
-nix repl> nixosConfigurations.<hostname>
+nix repl> nixosConfigurations.
 ```
-From: https://www.reddit.com/r/NixOS/comments/u6fl8j/how_to_the_entire_configurationnix_into_nix_repl/
+Refs.:
+- https://www.reddit.com/r/NixOS/comments/u6fl8j/how_to_the_entire_configurationnix_into_nix_repl/
 
 
