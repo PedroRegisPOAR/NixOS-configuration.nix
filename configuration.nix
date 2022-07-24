@@ -370,14 +370,18 @@
      # figlet
      # cowsay
 
-     # TODO:
-     # nix \
-     # store \
-     # ls \
-     # --store https://cache.nixos.org/ \
-     # --long \
-     # --recursive \
-     # "$(nix eval --raw nixpkgs#gtk3.dev)"
+     (
+       writeScriptBin "nslsr" ''
+         #! ${pkgs.runtimeShell} -e
+         nix \
+         store \
+         ls \
+         --store https://cache.nixos.org/ \
+         --long \
+         --recursive \
+        "$(nix eval --raw nixpkgs#$1)"
+       ''
+     )
 
      # Helper script to print the IOMMU groups of PCI devices.
      (
@@ -414,6 +418,7 @@
          # --option keep-outputs false
          #
          # nix-collect-garbage --delete-old
+
          if command -v docker &> /dev/null
          then
            docker ps --all --quiet | xargs --no-run-if-empty docker stop \
@@ -423,6 +428,7 @@
            && docker image prune --force \
            && docker network prune --force
          fi                 
+
          if command -v podman &> /dev/null
          then
            podman pod prune --force
@@ -434,18 +440,41 @@
            && podman network ls --quiet | xargs --no-run-if-empty podman network rm \
            && podman pod list --quiet | xargs --no-run-if-empty podman pod rm --force
          fi
+
          nix profile remove '.*'
          
          find ~ \( -iname '*.iso' -o -iname '*.qcow2*' -o -iname '*.img' -o -iname 'result' \) -exec rm -frv -- {} + 2> /dev/null | tr ' ' '\n'
          
          sudo rm -fr "$HOME"/.cache "$HOME"/.local/share/containers
+
+         nix profile remove '.*'
          
-         nix store gc --verbose \
-              --option keep-derivations false \
-              --option keep-outputs false \
+         nix \
+         store \
+         gc \
+         --verbose \
+         --option keep-derivations false \
+         --option keep-outputs false \
          && nix-collect-garbage --delete-old
-        du -hs "$TMPDIR"
-        sudo rm -frv "$TMPDIR"
+         
+         # TODO: what is removed when using sudo?
+         sudo \
+         su \
+         -c \
+         '
+         nix \
+         store \
+         gc \
+         --verbose \
+         --option keep-derivations false \
+         --option keep-outputs false \
+         && nix-collect-garbage --delete-old \
+         && nix store optimise --verbose
+         '
+
+        test -z "$TMPDIR" || du -hs "$TMPDIR
+        # Too agressive?
+        # sudo rm -frv "$TMPDIR"
         ''
      )
 
