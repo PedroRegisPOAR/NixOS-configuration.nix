@@ -383,6 +383,14 @@
        ''
      )
 
+
+     (
+       writeScriptBin "grh" ''
+         #! ${pkgs.runtimeShell} -e
+         git reset --hard
+       ''
+     )
+
      # Helper script to print the IOMMU groups of PCI devices.
      (
        writeScriptBin "list-iommu-groups" ''
