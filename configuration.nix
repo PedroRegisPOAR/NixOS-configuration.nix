@@ -391,6 +391,21 @@
        ''
      )
 
+     (
+       writeScriptBin "chownme" ''
+         #! ${pkgs.runtimeShell} -e
+         chown "$(id -u)"':'"$(id -g)" "$@"         
+       ''
+     )
+
+
+     (
+       writeScriptBin "schownme" ''
+         #! ${pkgs.runtimeShell} -e
+         sudo -k chown "$(id -u)"':'"$(id -g)" "$@"         
+       ''
+     )
+
      # Helper script to print the IOMMU groups of PCI devices.
      (
        writeScriptBin "list-iommu-groups" ''
@@ -503,6 +518,21 @@
      )
 
      (
+       writeScriptBin "snrt" ''
+         #! ${pkgs.runtimeShell} -e
+         sudo nixos-rebuild test --flake '/etc/nixos#pedroregispoar'
+       ''
+     )
+
+     (
+       writeScriptBin "snrs" ''
+         #! ${pkgs.runtimeShell} -e
+         sudo nixos-rebuild switch --flake '/etc/nixos#pedroregispoar'
+       ''
+     )
+
+
+     (
      writeScriptBin "gacup" ''
        #! ${pkgs.runtimeShell} -e
        
@@ -535,7 +565,7 @@
      )
 
      (
-     writeScriptBin "gc" ''
+     writeScriptBin "g3tc6t" ''
        #! ${pkgs.runtimeShell} -e
 
        git commit -m "$1" 
@@ -544,7 +574,7 @@
 
 
      (
-     writeScriptBin "gd" ''
+     writeScriptBin "g3td" ''
        #! ${pkgs.runtimeShell} -e
 
        git diff
@@ -553,7 +583,7 @@
 
 
      (
-     writeScriptBin "gp" ''
+     writeScriptBin "g3tp" ''
        #! ${pkgs.runtimeShell} -e
 
        git push
