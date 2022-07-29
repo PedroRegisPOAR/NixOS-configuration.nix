@@ -20,13 +20,13 @@
   # The default is false
   boot.cleanTmpDir = true;
   # TODO
-  boot.tmpOnTmpfs = true;
-
+  boot.tmpOnTmpfs = false;
+  # 
   # https://github.com/NixOS/nixpkgs/issues/23912#issuecomment-1079692626
-  services.logind.extraConfig = ''
-    RuntimeDirectorySize=8G
-    RuntimeDirectoryInodesMax=1048576  
-  '';
+  # services.logind.extraConfig = ''
+  #   RuntimeDirectorySize=8G
+  #  RuntimeDirectoryInodesMax=1048576  
+  # '';
 
   # TODO: study about this
   # https://github.com/thiagokokada/dotfiles/blob/a221bf1186fd96adcb537a76a57d8c6a19592d0f/_nixos/etc/nixos/misc-configuration.nix#L124-L128
