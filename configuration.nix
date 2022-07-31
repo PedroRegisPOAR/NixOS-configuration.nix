@@ -105,8 +105,8 @@
 
   # Configure keymap in X11
   services.xserver = {
-    layout = "br";
-    xkbVariant = "nodeadkeys";
+    layout = "us";
+    # xkbVariant = "nodeadkeys";
   };
 
 
