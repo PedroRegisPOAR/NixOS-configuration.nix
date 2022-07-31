@@ -20,9 +20,9 @@
   # The default is false
   boot.cleanTmpDir = true;
   # TODO
-  boot.tmpOnTmpfs = false;
+  boot.tmpOnTmpfs = true;
   # https://github.com/AtilaSaraiva/nix-dotfiles/blob/main/lib/modules/configHost/default.nix#L271-L273
-  boot.tmpOnTmpfsSize = "180%";
+  boot.tmpOnTmpfsSize = "185%";
   # 
   # https://github.com/NixOS/nixpkgs/issues/23912#issuecomment-1079692626
   # services.logind.extraConfig = ''
