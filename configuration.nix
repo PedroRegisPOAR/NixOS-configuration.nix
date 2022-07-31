@@ -104,6 +104,14 @@
   # services.dbus.socketActivated = true;
 
   # Configure keymap in X11
+  #
+  # It solved my problem:
+  # https://www.vivaolinux.com.br/topico/Debian/Configuracao-de-teclado-abnt2
+  #
+  # To check the configuration built:
+  # cat /etc/X11/xorg.conf.d/00-keyboard.conf
+  # 
+  # https://nixos.wiki/wiki/Keyboard_Layout_Customization
   services.xserver = {
     layout = "br";
     xkbVariant = "abnt2";
