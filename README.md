@@ -237,4 +237,4 @@ Refs.:
 Other refs.:
 - https://nix.dev/anti-patterns/language
 - https://bnikolic.co.uk/nix-cheatsheet.html
-
+- https://nixos.wiki/wiki/Nix_Quirks#Q:_Why_not_x:x.3F
