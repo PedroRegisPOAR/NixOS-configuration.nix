@@ -160,10 +160,23 @@
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
+  # https://search.nixos.org/options?channel=22.05&show=users.users.%3Cname%3E.uid&from=0&size=50&sort=relevance&type=packages&query=users.
   users.users.pedro = {
+    createHome = true;
     isNormalUser = true;
     description = "Pedro Regis";
-    extraGroups = [ "networkmanager" "audio" "libvirtd" "wheel" "pedro" "docker" "kvm" "qemu-libvirtd" "video" "disk" ];
+    extraGroups = [
+      "networkmanager"
+      "audio"
+      "libvirtd"
+      "wheel"
+      "pedro"
+      "docker"
+      "kvm"
+      "qemu-libvirtd"
+      "video"
+      "disk"
+    ];
     packages = with pkgs; [
       firefox
       kate
@@ -171,9 +184,14 @@
     #  thunderbird
     ];
     shell = pkgs.zsh;
-    uid = 12321;
+    uid = 12321;    
   };
 
+  # users.groups = {   
+  #  users = {
+  #    gid = pkgs.lib.mkForce 32123;
+  #  };
+  # };
 
   # https://github.com/NixOS/nixpkgs/blob/3a44e0112836b777b176870bb44155a2c1dbc226/nixos/modules/programs/zsh/oh-my-zsh.nix#L119 
   # https://discourse.nixos.org/t/nix-completions-for-zsh/5532
