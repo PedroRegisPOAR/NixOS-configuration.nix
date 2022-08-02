@@ -187,7 +187,7 @@
     #  thunderbird
     ];
     shell = pkgs.zsh;
-    uid = 12321;    
+    # uid = 12321;    
   };
 
   # users.groups = {   
