@@ -228,6 +228,7 @@
   # Probably solve many warns about fonts
   # https://gist.github.com/kendricktan/8c33019cf5786d666d0ad64c6a412526
   # https://discourse.nixos.org/t/imagemagicks-convert-command-fails-due-to-fontconfig-error/20518/5
+  # https://github.com/NixOS/nixpkgs/issues/176081#issuecomment-1145825623
   fonts = {
     fontDir.enable = true;
     fonts = with pkgs; [
