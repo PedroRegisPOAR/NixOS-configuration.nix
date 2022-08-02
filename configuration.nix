@@ -81,7 +81,7 @@
   # The installer was broken!
   # https://github.com/NixOS/nixpkgs/issues/182631#issuecomment-1193307060
   # i18n.defaultLocale = "en_US.UTF-8";
-  i18n.defaultLocale = "all";
+  i18n.allLocales = "all";
 
   i18n.extraLocaleSettings = {
   #  LC_ADDRESS = "pt_BR.utf8";
