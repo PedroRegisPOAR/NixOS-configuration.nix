@@ -227,6 +227,7 @@
 
   # Probably solve many warns about fonts
   # https://gist.github.com/kendricktan/8c33019cf5786d666d0ad64c6a412526
+  # https://discourse.nixos.org/t/imagemagicks-convert-command-fails-due-to-fontconfig-error/20518/5
   fonts = {
     fontDir.enable = true;
     fonts = with pkgs; [
@@ -244,6 +245,7 @@
       hack-font
       dejavu_fonts
       font-awesome
+      freefont_ttf
       noto-fonts-emoji
       noto-fonts-extra
       # nerdfonts # Really big and now broken
