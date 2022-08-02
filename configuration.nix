@@ -18,7 +18,7 @@
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
   # The default is false
-  boot.cleanTmpDir = true;
+  boot.cleanTmpDir = false;
   # TODO
   boot.tmpOnTmpfs = false;
   # https://github.com/AtilaSaraiva/nix-dotfiles/blob/main/lib/modules/configHost/default.nix#L271-L273
