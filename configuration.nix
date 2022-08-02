@@ -35,6 +35,7 @@
   zramSwap = {
     enable = true;
     algorithm = "zstd";
+    memoryPercent = 90;
   };
 
   # https://nix.dev/tutorials/building-bootable-iso-image
@@ -100,6 +101,8 @@
   # Enable the KDE Plasma Desktop Environment.
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
+
+  services.xserver.displayManager.sddm.autoNumlock = true;
 
   # https://github.com/NixOS/nixpkgs/issues/79707#issuecomment-586696145
   # services.xserver.startDbusSession = false;
