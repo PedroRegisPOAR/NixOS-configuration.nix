@@ -35,7 +35,7 @@
   zramSwap = {
     enable = true;
     algorithm = "zstd";
-    memoryPercent = 90;
+    memoryPercent = 20;
   };
 
   # https://nix.dev/tutorials/building-bootable-iso-image
