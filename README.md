@@ -243,3 +243,19 @@ Other refs.:
 - https://nix.dev/anti-patterns/language
 - https://bnikolic.co.uk/nix-cheatsheet.html
 - https://nixos.wiki/wiki/Nix_Quirks#Q:_Why_not_x:x.3F
+
+
+###
+
+
+```bash
+DEFAULT_ROUTE=$(ip route show default | awk '/default/ {print $3}')
+ping -c 1 $DEFAULT_ROUTE
+```
+
+ip route show default 0.0.0.0/0
+
+```bash
+ip -j a s $(ip -j r s default | jq -r '.[].dev') | jq -r '.[0].addr_info[0].local'
+```
+
