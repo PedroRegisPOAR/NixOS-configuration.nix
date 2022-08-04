@@ -235,6 +235,8 @@ Refs.:
 - https://www.reddit.com/r/NixOS/comments/u6fl8j/how_to_the_entire_configurationnix_into_nix_repl/
 
 
+Search for `nix-repl` in https://xeiaso.net/blog/nix-flakes-3-2022-04-07
+
 Tip: use `:t` to print the type of the thing
 Refs.:
 - https://nixos.wiki/wiki/Nix_Expression_Language
