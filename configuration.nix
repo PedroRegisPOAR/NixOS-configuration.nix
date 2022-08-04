@@ -38,6 +38,16 @@
     memoryPercent = 20;
   };
 
+  # Is it a must for k8s?
+  # Take a look into:
+  # https://github.com/NixOS/nixpkgs/blob/9559834db0df7bb274062121cf5696b46e31bc8c/nixos/modules/services/cluster/kubernetes/kubelet.nix#L255-L259
+  boot.kernel.sysctl = {
+    # If it is enabled it conflicts with what kubelet is doing
+    # "net.bridge.bridge-nf-call-ip6tables" = 1;
+    # "net.bridge.bridge-nf-call-iptables" = 1;
+    "vm.swappiness" = 0;
+  };
+
   # https://nix.dev/tutorials/building-bootable-iso-image
   # Needed for https://github.com/NixOS/nixpkgs/issues/58959
   # https://www.reddit.com/r/NixOS/comments/ni79b8/list_of_all_nixos_supported_file_systems/
