@@ -200,7 +200,7 @@ From: https://stackoverflow.com/a/1274447
 # && git config user.email
 
 { git config user.name \
-&& git config user.emai } || cat << EOF > ~/.gitconfig
+&& git config user.email } || cat << EOF > ~/.gitconfig
 [user]
     name = PedroRegisPOAR
     email = pedroalencarregis@hotmail.com
