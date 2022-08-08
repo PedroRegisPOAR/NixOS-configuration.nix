@@ -35,7 +35,7 @@
   zramSwap = {
     enable = true;
     algorithm = "zstd";
-    memoryPercent = 20;
+    memoryPercent = 10;
   };
 
   # Is it a must for k8s?
