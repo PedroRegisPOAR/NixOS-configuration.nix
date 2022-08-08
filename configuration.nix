@@ -32,6 +32,13 @@
 
   # TODO: study about this
   # https://github.com/thiagokokada/dotfiles/blob/a221bf1186fd96adcb537a76a57d8c6a19592d0f/_nixos/etc/nixos/misc-configuration.nix#L124-L128
+  # 
+  # 
+  # zramctl
+  # swapon -s
+  # free -m
+  # https://discourse.nixos.org/t/zramswap-enable-true-does-nothing/6734/3
+  # https://unix.stackexchange.com/questions/606868/high-ram-and-swap-usage-out-of-seemingly-nowhere#comment1132721_606868
   zramSwap = {
     enable = true;
     algorithm = "zstd";
