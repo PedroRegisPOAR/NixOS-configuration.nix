@@ -273,37 +273,37 @@
   fonts = {
     fontDir.enable = true;
     fonts = with pkgs; [
-      corefonts		  # Microsoft free fonts
-      fira	      	  # Monospace
-      inconsolata     	  # Monospace
-      powerline-fonts
-      ubuntu_font_family
-      unifont		  # International languages
-
-      arphic-ukai
-      arphic-uming
-      # corefonts # Microsoft free fonts
-      dina-font
-      hack-font
-      dejavu_fonts
-      font-awesome
-      freefont_ttf
-      noto-fonts-emoji
-      noto-fonts-extra
-      # nerdfonts # Really big and now broken
+      # corefonts		  # Microsoft free fonts
+      # fira	      	  # Monospace
+      # inconsolata     	  # Monospace
       # powerline-fonts
-      sudo-font
-      source-sans-pro
-      source-han-sans-japanese
-      source-han-sans-korean
-      source-han-sans-simplified-chinese
-      source-han-sans-traditional-chinese
-      source-sans-pro
-      # symbola # TODO: Was broken
       # ubuntu_font_family
-      xkcd-font
-      wqy_microhei
-      wqy_zenhei
+      # unifont		  # International languages
+
+      # arphic-ukai
+      # arphic-uming
+      ## corefonts # Microsoft free fonts
+      # dina-font
+      # hack-font
+      # dejavu_fonts
+      # font-awesome
+      # freefont_ttf
+      # noto-fonts-emoji
+      # noto-fonts-extra
+      ## nerdfonts # Really big and now broken
+      ## powerline-fonts
+      # sudo-font
+      # source-sans-pro
+      # source-han-sans-japanese
+      # source-han-sans-korean
+      # source-han-sans-simplified-chinese
+      # source-han-sans-traditional-chinese
+      # source-sans-pro
+      ## symbola # TODO: Was broken
+      # ubuntu_font_family
+      # xkcd-font
+      # wqy_microhei
+      # wqy_zenhei
     ];
   };
 
@@ -315,12 +315,14 @@
      package = pkgs.nixFlakes;
      extraOptions = ''
        experimental-features = nix-command flakes 
-   '';
-
+     '';
+    
+    # 
+    sandbox = relaxed;
     # From:
     # https://github.com/sherubthakur/dotfiles/blob/be96fe7c74df706a8b1b925ca4e7748cab703697/system/configuration.nix#L44
     # pointing to: https://github.com/NixOS/nixpkgs/issues/124215
-    settings.extra-sandbox-paths= [ "/bin/sh=${pkgs.bash}/bin/sh"];
+    # settings.extra-sandbox-paths= [ "/bin/sh=${pkgs.bash}/bin/sh"];
     
     # https://github.com/NixOS/nixpkgs/blob/fd8a7fd07da0f3fc0e27575891f45c2f88e5dd44/nixos/modules/services/misc/nix-daemon.nix#L323
     # Be carefull if using it as false!
@@ -465,6 +467,21 @@
          sudo -k chown "$(id -u)"':'"$(id -g)" "$@"         
        ''
      )
+
+     (
+       writeScriptBin "nfmn" ''
+         #! ${pkgs.runtimeShell} -e
+         nix flake metadata nixpkgs --json | jq -r '.url'
+       ''
+     )
+
+     (
+       writeScriptBin "nfm" ''
+         #! ${pkgs.runtimeShell} -e
+         nix flake metadata $1 --json | jq -r '.url'
+       ''
+     )
+
 
      # Helper script to print the IOMMU groups of PCI devices.
      (
