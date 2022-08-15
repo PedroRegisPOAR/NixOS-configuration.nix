@@ -318,7 +318,7 @@
      '';
     
     # 
-    sandbox = relaxed;
+    sandbox = "relaxed";
     # From:
     # https://github.com/sherubthakur/dotfiles/blob/be96fe7c74df706a8b1b925ca4e7748cab703697/system/configuration.nix#L44
     # pointing to: https://github.com/NixOS/nixpkgs/issues/124215
