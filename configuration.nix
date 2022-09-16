@@ -32,7 +32,7 @@
 
   boot.binfmt.emulatedSystems = ["aarch64-linux"];
 
-  virtualisation.libvirtd.enable = true;
+  # virtualisation.libvirtd.enable = true;
   programs.dconf.enable = true;
   # environment.systemPackages = with pkgs; [ virt-manager ];  
 
