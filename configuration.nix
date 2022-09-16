@@ -431,6 +431,7 @@
      # libvirt
      # virtmanager
      # qemu
+     virt-manager
 
      pciutils # lspci and others
      coreboot-utils # acpidump-all
