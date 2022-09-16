@@ -30,7 +30,11 @@
   #  RuntimeDirectoryInodesMax=1048576  
   # '';
 
-  # boot.binfmt.emulatedSystems = ["aarch64-linux"];
+  boot.binfmt.emulatedSystems = ["aarch64-linux"];
+
+  virtualisation.libvirtd.enable = true;
+  programs.dconf.enable = true;
+  # environment.systemPackages = with pkgs; [ virt-manager ];  
 
   # TODO: study about this
   # https://github.com/thiagokokada/dotfiles/blob/a221bf1186fd96adcb537a76a57d8c6a19592d0f/_nixos/etc/nixos/misc-configuration.nix#L124-L128
