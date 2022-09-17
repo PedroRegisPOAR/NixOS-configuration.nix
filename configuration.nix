@@ -140,6 +140,9 @@
   # cat /etc/X11/xorg.conf.d/00-keyboard.conf
   # 
   # https://nixos.wiki/wiki/Keyboard_Layout_Customization
+  # 
+  # nix repl --expr 'import <nixpkgs> {}'
+  # nixosConfigurations.pedroregispoar.config.services.xserver.xkbVariant
   services.xserver = {
     layout = "br";
     xkbVariant = "abnt2";
