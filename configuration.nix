@@ -462,7 +462,7 @@
  
          nix build nixpkgs#$1 --no-link
          nix-store --query --graph --include-outputs \
-         "$(nix path-info nixpkgs#$1)" \       
+         "$(nix path-info nixpkgs#$1)" \
          | dot -Tpdf > $1.pdf
        ''
      )
