@@ -225,6 +225,7 @@ nix repl --expr 'import <nixpkgs>{}'
 Refs.:
 - https://discourse.nixos.org/t/nix-2-10-0-released/20291
 
+
 Part 2 (tip, hit tab after the `.` in `nixosConfigurations.`):
 ```bash
 nix repl> :lf /etc/nixos
@@ -240,6 +241,9 @@ Tip: use `:t` to print the type of the thing
 Refs.:
 - https://nixos.wiki/wiki/Nix_Expression_Language
 
+
+
+
 Other refs.:
 - https://nix.dev/anti-patterns/language
 - https://bnikolic.co.uk/nix-cheatsheet.html
@@ -254,7 +258,9 @@ DEFAULT_ROUTE=$(ip route show default | awk '/default/ {print $3}')
 ping -c 1 $DEFAULT_ROUTE
 ```
 
+
 ip route show default 0.0.0.0/0
+
 
 ```bash
 ip -j a s $(ip -j r s default | jq -r '.[].dev') | jq -r '.[0].addr_info[0].local'
