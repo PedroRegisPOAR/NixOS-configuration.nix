@@ -160,12 +160,14 @@
   };
 
 
-  virtualisation.libvirtd = {
-    enable = true;
-    # Used for UEFI boot
-    # https://myme.no/posts/2021-11-25-nixos-home-assistant.html
-    qemuOvmf = true;
-  }
+  virtualisation = {
+    libvirtd = {
+      enable = true;
+      # Used for UEFI boot
+      # https://myme.no/posts/2021-11-25-nixos-home-assistant.html
+      qemu.ovmf.enable = true;
+    };
+  };
 
   environment.variables = {
     VAGRANT_DEFAULT_PROVIDER = "libvirt";
