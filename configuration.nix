@@ -1,3 +1,4 @@
+
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
@@ -30,9 +31,12 @@
   #  RuntimeDirectoryInodesMax=1048576  
   # '';
 
+  #
+  # https://www.reddit.com/r/NixOS/comments/wcxved/i_gave_an_adhoc_lightning_talk_at_mch2022/
+  # Matthew Croughan - Use flake.nix, not Dockerfile - MCH2022
+  # https://www.youtube.com/embed/0uixRE8xlbY?start=707&end=827&version=3
   boot.binfmt.emulatedSystems = ["aarch64-linux"];
 
-  # virtualisation.libvirtd.enable = true;
   programs.dconf.enable = true;
   # environment.systemPackages = with pkgs; [ virt-manager ];  
 
@@ -156,7 +160,12 @@
   };
 
 
-  virtualisation.libvirtd.enable = true;
+  virtualisation.libvirtd = {
+    enable = true;
+    # Used for UEFI boot
+    # https://myme.no/posts/2021-11-25-nixos-home-assistant.html
+    qemuOvmf = true;
+  }
 
   environment.variables = {
     VAGRANT_DEFAULT_PROVIDER = "libvirt";
