@@ -479,6 +479,12 @@
      )
 
      (
+       writeScriptBin "ix" ''
+          "$@" | curl -F 'f:1=<-' ix.io
+       ''
+     )
+
+     (
        writeScriptBin "grh" ''
          #! ${pkgs.runtimeShell} -e
          git reset --hard
