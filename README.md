@@ -243,6 +243,10 @@ Refs.:
 
 
 
+```bash
+nix repl --expr 'import <nixpkgs> {}' <<<':doc builtins.getFlake'
+```
+
 
 Other refs.:
 - https://nix.dev/anti-patterns/language
