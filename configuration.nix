@@ -382,6 +382,7 @@
      # util-linux
      # unzip
      tree
+     nix-index
 
      gzip
      unrar
