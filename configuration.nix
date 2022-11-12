@@ -584,8 +584,11 @@
          
          find ~ \( -iname '*.iso' -o -iname '*.qcow2*' -o -iname '*.img' -o -iname 'result' \) -exec rm -frv -- {} + 2> /dev/null | tr ' ' '\n'
          
-         sudo rm -fr "$HOME"/.cache "$HOME"/.local/share/containers
-
+         # TODO:         
+         # sudo rm -fr "$HOME"/.cache 
+         sudo rm -fr "$HOME"/.local/share/containers
+         sudo rm -frv /var/{tmp,lib,log}/*
+         
          nix profile remove '.*'
          
          nix \
