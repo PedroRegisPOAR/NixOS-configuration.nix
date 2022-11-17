@@ -375,6 +375,7 @@
      dnsutils
      file
      findutils
+     lsof
      # inetutils # TODO: it was causing a conflict, insvestigate it!
      nixpkgs-fmt
      ripgrep
