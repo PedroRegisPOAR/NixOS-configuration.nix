@@ -18,7 +18,9 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
   
+  # https://nixos.wiki/wiki/Libvirt
   # https://discourse.nixos.org/t/set-up-vagrant-with-libvirt-qemu-kvm-on-nixos/14653
+  boot.extraModprobeConfig = "options kvm_intel nested=1";
   boot.kernelModules = [ "kvm-amd" "kvm-intel" ];
 
   # The default is false
