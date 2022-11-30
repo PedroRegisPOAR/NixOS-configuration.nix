@@ -247,6 +247,14 @@ Refs.:
 nix repl --expr 'import <nixpkgs> {}' <<<':doc builtins.getFlake'
 ```
 
+```bash
+nix repl --expr 'import <nixpkgs> {}' <<<'builtins.attrNames gcc'
+```
+
+```bash
+nix repl --expr 'import <nixpkgs> {}' <<<'builtins.attrNames python3Packages' | tr ' ' '\n' | wc -l
+```
+
 
 Other refs.:
 - https://nix.dev/anti-patterns/language
