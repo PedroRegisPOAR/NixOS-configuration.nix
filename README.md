@@ -255,6 +255,10 @@ nix repl --expr 'import <nixpkgs> {}' <<<'builtins.attrNames gcc'
 nix repl --expr 'import <nixpkgs> {}' <<<'builtins.attrNames python3Packages' | tr ' ' '\n' | wc -l
 ```
 
+```bash
+# see uname -a output
+nix repl --expr 'import <nixpkgs> {}' <<<'stdenv.hostPlatform.system'
+```
 
 Other refs.:
 - https://nix.dev/anti-patterns/language
