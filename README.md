@@ -260,6 +260,9 @@ nix repl --expr 'import <nixpkgs> {}' <<<'builtins.attrNames python3Packages' | 
 nix repl --expr 'import <nixpkgs> {}' <<<'stdenv.hostPlatform.system'
 ```
 
+```bash
+nix repl --expr 'import <nixpkgs> {}' <<<'builtins.attrNames yarn2nix'
+```
 Other refs.:
 - https://nix.dev/anti-patterns/language
 - https://bnikolic.co.uk/nix-cheatsheet.html
