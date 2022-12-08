@@ -248,7 +248,15 @@ nix repl --expr 'import <nixpkgs> {}' <<<':doc builtins.getFlake'
 ```
 
 ```bash
+nix repl --expr 'import <nixpkgs> {}' <<<'(builtins.getFlake "github:edolstra/dwarffs").rev'
+```
+
+```bash
 nix repl --expr 'import <nixpkgs> {}' <<<'builtins.attrNames gcc'
+```
+
+```bash
+nix repl --expr 'import <nixpkgs> {}' <<<'lib.attrNames yarn.override.__functionArgs'
 ```
 
 ```bash
