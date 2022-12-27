@@ -355,6 +355,10 @@
     # Ohh crap, in 30/06/2022 I ran something like sudo rm -fr $TMPDIR/* and I destroyed 
     # my system completely because this flag was forced by my self to be false!  
     readOnlyStore = true;
+
+    # nixPath
+    # https://github.com/thiagokokada/nix-configs/blob/639501c3acad5971f3abdaffedf9366196e55432/shared/nix.nix#L10-L22
+    # https://github.com/NixOS/nix/blob/26c7602c390f8c511f326785b570918b2f468892/tests/setuid.nix#L17
   };
 
   # List packages installed in system profile. To search, run:
@@ -405,19 +409,23 @@
      gcc
      # gcc6
      
-     anydesk
+     # anydesk
      # discord
      firefox
-     google-chrome
-     chromium
-     freeoffice     
+     # google-chrome
+     # chromium
+     # freeoffice     
      gitkraken
      klavaro
      spectacle
+     # discord
      # spotify
      # tdesktop
      vlc
      xorg.xkill
+     # discord
+     # spotify 
+     # tdesktop
      
      # amazon-ecs-cli
      # awscli
