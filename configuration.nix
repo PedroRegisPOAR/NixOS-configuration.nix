@@ -489,7 +489,7 @@
          nix build nixpkgs#$1 --no-link
          nix-store --query --graph --include-outputs \
          "$(nix path-info nixpkgs#$1)" \
-         | dot -Tpdf > $1.pdf
+         | dot -Tps > $1.pdf
        ''
      )
 
@@ -665,6 +665,7 @@
      (
        writeScriptBin "snrs" ''
          #! ${pkgs.runtimeShell} -e
+         # sudo nixos-rebuild switch --flake /etc/nixos#"$(hostname)"
          sudo nixos-rebuild switch --flake '/etc/nixos#pedroregispoar'
        ''
      )
