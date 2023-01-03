@@ -263,6 +263,23 @@ nix repl --expr 'import <nixpkgs> {}' <<<'lib.attrNames yarn.override.__function
 nix repl --expr 'import <nixpkgs> {}' <<<'builtins.attrNames python3Packages' | tr ' ' '\n' | wc -l
 ```
 
+
+```bash
+nix repl --expr 'import <nixpkgs> {}' <<<'builtins.attrNames nodePackages_latest' | tr ' ' '\n' | wc -l
+```
+
+
+
+```bash
+nix repl --expr 'import <nixpkgs> {}' <<<'builtins.attrNames aspellDicts' | tr ' ' '\n' | wc -l
+```
+
+
+```bash
+nix repl --expr 'import <nixpkgs> {}' <<<'builtins.attrNames hunspellDicts' | tr ' ' '\n' | wc -l
+```
+
+
 ```bash
 # see uname -a output
 nix repl --expr 'import <nixpkgs> {}' <<<'stdenv.hostPlatform.system'
