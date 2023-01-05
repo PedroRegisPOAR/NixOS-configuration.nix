@@ -696,6 +696,15 @@
      )
 
      (
+     writeScriptBin "gac" ''
+       #! ${pkgs.runtimeShell} -e
+
+       git add . && git commit -m "$1"
+     ''         
+     )
+
+
+     (
      writeScriptBin "ga" ''
        #! ${pkgs.runtimeShell} -e
 
