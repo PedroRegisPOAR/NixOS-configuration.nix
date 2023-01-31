@@ -499,9 +499,23 @@
        ''
      )
 
+     # The best? https://stackoverflow.com/a/7045517
+     # https://serverfault.com/a/397537
+     # https://serverfault.com/questions/377943/how-do-i-read-multiple-lines-from-stdin-into-a-variable/397537#comment1200050_397537
+     # https://stackoverflow.com/questions/1167746/how-to-assign-a-heredoc-value-to-a-variable-in-bash
+     # https://stackoverflow.com/a/37222377
+     # https://serverfault.com/questions/72476/clean-way-to-write-complex-multi-line-string-to-a-variable
+     #
+     # coreutils fold: 
+     # - https://unix.stackexchange.com/a/25174
+     # - https://askubuntu.com/a/1398721
+     # - https://unix.stackexchange.com/a/231915
      (
        writeScriptBin "ytt" ''
-          cat $1 | grep -vE '[0-9][0-9]:[0-9][0-9]$' | tr '\n' ' ' | fold -sw 80
+         myVar=$(</dev/stdin)
+         
+         # echo "$myVar"
+         echo "$myVar" | grep -vE '[0-9][0-9]:[0-9][0-9]$' | tr '\n' ' ' | fold -sw 80
        ''
      )
 
