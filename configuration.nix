@@ -500,6 +500,12 @@
      )
 
      (
+       writeScriptBin "ytt" ''
+          cat $1 | grep -vE '[0-9][0-9]:[0-9][0-9]$' | tr '\n' ' ' | fold -sw 80
+       ''
+     )
+
+     (
        writeScriptBin "grh" ''
          #! ${pkgs.runtimeShell} -e
          git reset --hard
