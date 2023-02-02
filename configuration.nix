@@ -499,6 +499,12 @@
        ''
      )
 
+     (
+       writeScriptBin "yte" ''
+         echo "https://www.youtube.com/embed/""$1""?start=""$2""&end=""$3""&version=3"
+       ''
+     )
+
      # The best? https://stackoverflow.com/a/7045517
      # https://serverfault.com/a/397537
      # https://serverfault.com/questions/377943/how-do-i-read-multiple-lines-from-stdin-into-a-variable/397537#comment1200050_397537
