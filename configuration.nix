@@ -315,8 +315,8 @@
       # freefont_ttf
       # noto-fonts-emoji
       # noto-fonts-extra
-      ## nerdfonts # Really big and now broken
-      ## powerline-fonts
+      nerdfonts
+      # powerline-fonts
       # sudo-font
       # source-sans-pro
       # source-han-sans-japanese
@@ -387,12 +387,15 @@
      lsof
      # inetutils # TODO: it was causing a conflict, insvestigate it!
      nixpkgs-fmt
+     nixos-option
+     hydra-check
      ripgrep
      strace
      # util-linux
      # unzip
      tree
      nix-index
+     xorg.xhost
 
      gzip
      unrar
@@ -700,7 +703,8 @@
      (
      writeScriptBin "gacup" ''
        #! ${pkgs.runtimeShell} -e
-       
+       git status .
+
        git add . && git commit -m "Updates commit's sha256" && git push
      ''
      )
@@ -708,7 +712,8 @@
      (
      writeScriptBin "gacpwip" ''
        #! ${pkgs.runtimeShell} -e
-
+       
+       git status .
        git add . && git commit -m "Work In Progess (WIP)" && git push
      ''
      )
@@ -716,7 +721,7 @@
      (
      writeScriptBin "gacp" ''
        #! ${pkgs.runtimeShell} -e
-
+       git status .
        git add . && git commit -m "$1" && git push
      ''         
      )
@@ -724,7 +729,7 @@
      (
      writeScriptBin "gac" ''
        #! ${pkgs.runtimeShell} -e
-
+       git status .
        git add . && git commit -m "$1"
      ''         
      )
@@ -741,6 +746,7 @@
      (
      writeScriptBin "g3tc6t" ''
        #! ${pkgs.runtimeShell} -e
+       git status .
 
        git commit -m "$1" 
      ''         
@@ -784,7 +790,29 @@
          man $1 | less -p "^ +$2"
        ''
      )
+
+     (
+       writeScriptBin "pppi" ''
+         #! ${pkgs.runtimeShell} -e
+         podman pull $1
+         podman inspect $1 | jq ".[].Digest"
+       ''
+     )
+
   ];
+
+
+  # TODO: testar
+  # https://www.reddit.com/r/NixOS/comments/fsummx/how_to_list_all_installed_packages_on_nixos/
+  # https://discourse.nixos.org/t/can-i-inspect-the-installed-versions-of-system-packages/2763/15
+  # https://functor.tokyo/blog/2018-02-20-show-packages-installed-on-nixos
+  #  environment.etc."current-system-packages".text =
+  #    let
+  #      packages = builtins.map (p: "${p.name}") config.environment.systemPackages;
+  #      sortedUnique = builtins.sort builtins.lessThan (pkgs.lib.unique packages);
+  #      formatted = builtins.concatStringsSep "\n" sortedUnique;
+  #    in
+  #    formatted;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -814,3 +842,4 @@
   system.stateVersion = "22.05"; # Did you read the comment?
 
 }
+
