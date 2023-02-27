@@ -130,6 +130,9 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
+  # TODO: document it
+  services.xserver.excludePackages = with pkgs.xorg; [ fontmiscmisc fontcursormisc ];
+
   # Enable the KDE Plasma Desktop Environment.
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
@@ -298,38 +301,9 @@
   fonts = {
     fontDir.enable = true;
     fonts = with pkgs; [
-      # corefonts		  # Microsoft free fonts
-      # fira	      	  # Monospace
-      # inconsolata     	  # Monospace
-      # powerline-fonts
-      # ubuntu_font_family
-      # unifont		  # International languages
 
-      # arphic-ukai
-      # arphic-uming
-      ## corefonts # Microsoft free fonts
-      # dina-font
-      # hack-font
-      # dejavu_fonts
-      # font-awesome
-      # freefont_ttf
-      # noto-fonts-emoji
-      # noto-fonts-extra
-      nerdfonts
-      # powerline-fonts
-      # sudo-font
-      # source-sans-pro
-      # source-han-sans-japanese
-      # source-han-sans-korean
-      # source-han-sans-simplified-chinese
-      # source-han-sans-traditional-chinese
-      # source-sans-pro
-      ## symbola # TODO: Was broken
-      # ubuntu_font_family
-      # xkcd-font
-      # wqy_microhei
-      # wqy_zenhei
     ];
+    enableDefaultFonts = false;
   };
 
   # Allow unfree packages
@@ -395,7 +369,7 @@
      # unzip
      tree
      nix-index
-     xorg.xhost
+     # xorg.xhost
 
      gzip
      unrar
