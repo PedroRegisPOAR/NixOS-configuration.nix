@@ -115,7 +115,7 @@
   # https://github.com/NixOS/nixpkgs/issues/182631#issuecomment-1193307060
   i18n.defaultLocale = "en_US.UTF-8";
   i18n.extraLocaleSettings = {
-    LANG = "en_US.UTF-8";
+    # LANG = "en_US.UTF-8";
     LC_ALL = "en_US.UTF-8";
   #  LC_ADDRESS = "pt_BR.utf8";
   #  LC_IDENTIFICATION = "pt_BR.utf8";
@@ -638,6 +638,8 @@ xkcd-font
      zsh-completions
      # bottom  # the binary is btm 
      bpytop
+     fontforge-gtk # Really helps: https://joyofhaskell.com/posts/2018-11-30-font-name.html
+
     
      # Some utils
      binutils
@@ -728,7 +730,8 @@ xkcd-font
 
      pciutils # lspci and others
      coreboot-utils # acpidump-all
-
+     
+     # sl
      # hello
      # figlet
      # cowsay
