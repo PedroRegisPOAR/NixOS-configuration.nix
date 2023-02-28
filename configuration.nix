@@ -304,35 +304,35 @@
     fontDir.enable = true;
       fontconfig = {
 
-        # https://gist.github.com/IgnoredAmbience/7c99b6cf9a8b73c9312a71d1209d9bbb?permalink_comment_id=3502481#gistcomment-3502481
-        localConf = ''
-            <?xml version="1.0" encoding="UTF-8"?>
-            <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
-            <!--
-            Noto Mono + Color Emoji Font Configuration.
-            This config seems to ensure that *all* monospace fonts are affected without breaking
-            <code> blocks elsewhere. The significant change appears to be setting binding="weak"
-            on line 22.
-            Currently the only Terminal Emulator I'm aware that supports colour fonts is Konsole.
-            Usage:
-            0. Ensure that the Noto fonts are installed on your machine.
-            1. Install this file to ~/.config/fontconfig/conf.d/99-noto-mono-color-emoji.conf
-            2. Run `fc-cache`
-            3. Set Konsole to use "Noto Mono" as the font.
-            4. Restart Konsole.
-            -->
-            <fontconfig>
-              <match>
-                <test name="family"><string>Monospace</string></test>
-                <edit name="family" mode="append_last" binding="weak">
-                  <string>Noto Color Emoji</string>
-                </edit>
-              </match>
-            </fontconfig>
-        '';
+#        # https://gist.github.com/IgnoredAmbience/7c99b6cf9a8b73c9312a71d1209d9bbb?permalink_comment_id=3502481#gistcomment-3502481
+#        localConf = ''
+#            <?xml version="1.0" encoding="UTF-8"?>
+#            <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+#            <!--
+#            Noto Mono + Color Emoji Font Configuration.
+#            This config seems to ensure that *all* monospace fonts are affected without breaking
+#            <code> blocks elsewhere. The significant change appears to be setting binding="weak"
+#            on line 22.
+#            Currently the only Terminal Emulator I'm aware that supports colour fonts is Konsole.
+#            Usage:
+#            0. Ensure that the Noto fonts are installed on your machine.
+#            1. Install this file to ~/.config/fontconfig/conf.d/99-noto-mono-color-emoji.conf
+#            2. Run `fc-cache`
+#            3. Set Konsole to use "Noto Mono" as the font.
+#            4. Restart Konsole.
+#            -->
+#            <fontconfig>
+#              <match>
+#                <test name="family"><string>Monospace</string></test>
+#                <edit name="family" mode="append_last" binding="weak">
+#                  <string>Noto Color Emoji</string>
+#                </edit>
+#              </match>
+#            </fontconfig>
+#        '';
 
 #        localConf = ''
-#        <?xml version="1.0"?>
+#        <?xml version="1.0" encoding="UTF-8"?>
 #        <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
 #        <fontconfig>
 #
@@ -365,30 +365,30 @@
 #        </fontconfig>
 #        '';
 
-#        localConf = ''
-#        <?xml version="1.0"?>
-#        <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
-#        <fontconfig>
-#          <alias binding="weak">
-#            <family>monospace</family>
-#            <prefer>
-#              <family>emoji</family>
-#            </prefer>
-#          </alias>
-#          <alias binding="weak">
-#            <family>sans-serif</family>
-#            <prefer>
-#              <family>emoji</family>
-#            </prefer>
-#          </alias>
-#          <alias binding="weak">
-#            <family>serif</family>
-#            <prefer>
-#              <family>emoji</family>
-#            </prefer>
-#          </alias>
-#        </fontconfig>
-#      '';
+        localConf = ''
+            <?xml version="1.0" encoding="UTF-8"?>
+            <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+            <fontconfig>
+              <alias binding="weak">
+                <family>monospace</family>
+                <prefer>
+                  <family>emoji</family>
+                </prefer>
+              </alias>
+              <alias binding="weak">
+                <family>sans-serif</family>
+                <prefer>
+                  <family>emoji</family>
+                </prefer>
+              </alias>
+              <alias binding="weak">
+                <family>serif</family>
+                <prefer>
+                  <family>emoji</family>
+                </prefer>
+              </alias>
+            </fontconfig>
+        '';
 
 #      defaultFonts = {
 #        emoji = [ "Noto Color Emoji" ];
