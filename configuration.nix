@@ -302,6 +302,14 @@
     fontDir.enable = true;
     fonts = with pkgs; [
        # fontconfig
+
+noto-fonts-emoji-blob-bin
+noto-fonts-emoji
+twemoji-color-font
+openmoji-color
+openmoji-black
+twitter-color-emoji
+
 andagii
 anonymousPro
 # apple-fonts
