@@ -589,6 +589,8 @@
         nerdfonts
         powerline
         powerline-fonts
+        twitter-color-emoji
+        noto-fonts-emoji
 
     ];
     enableDefaultFonts = false;
