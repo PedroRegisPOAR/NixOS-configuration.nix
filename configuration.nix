@@ -309,7 +309,7 @@ twemoji-color-font
 openmoji-color
 openmoji-black
 twitter-color-emoji
-
+rxvt-unicode-emoji
 andagii
 anonymousPro
 # apple-fonts
