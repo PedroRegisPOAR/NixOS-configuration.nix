@@ -116,6 +116,8 @@
   # i18n.defaultLocale = "en_US.UTF-8";
 
   i18n.extraLocaleSettings = {
+    LANG = "en_US.UTF-8";
+    LC_ALL = "en_US.UTF-8";
   #  LC_ADDRESS = "pt_BR.utf8";
   #  LC_IDENTIFICATION = "pt_BR.utf8";
   #  LC_MEASUREMENT = "pt_BR.utf8";
@@ -131,7 +133,8 @@
   services.xserver.enable = true;
 
   # TODO: document it
-  services.xserver.excludePackages = with pkgs.xorg; [ fontmiscmisc fontcursormisc ];
+  # It was not working
+  # services.xserver.excludePackages = with pkgs.xorg; [ fontmiscmisc fontcursormisc ];
 
   # Enable the KDE Plasma Desktop Environment.
   services.xserver.displayManager.sddm.enable = true;
