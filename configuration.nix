@@ -301,39 +301,39 @@
   fonts = {
     fontDir.enable = true;
       fontconfig = {
-localConf = ''
-<?xml version="1.0"?>
-<!DOCTYPE fontconfig SYSTEM "fonts.dtd">
-<fontconfig>
-
- <alias>
-   <family>sans-serif</family>
-   <prefer>
-     <family>Main sans-serif font name goes here</family>
-     <family>Noto Color Emoji</family>
-     <family>Noto Emoji</family>
-   </prefer> 
- </alias>
-
- <alias>
-   <family>serif</family>
-   <prefer>
-     <family>Main serif font name goes here</family>
-     <family>Noto Color Emoji</family>
-     <family>Noto Emoji</family>
-   </prefer>
- </alias>
-
- <alias>
-  <family>monospace</family>
-  <prefer>
-    <family>Main monospace font name goes here</family>
-    <family>Noto Color Emoji</family>
-    <family>Noto Emoji</family>
-   </prefer>
- </alias>
-</fontconfig>
-'';
+#        localConf = ''
+#        <?xml version="1.0"?>
+#        <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+#        <fontconfig>
+#
+#         <alias>
+#           <family>sans-serif</family>
+#           <prefer>
+#             <family>Main sans-serif font name goes here</family>
+#             <family>Noto Color Emoji</family>
+#             <family>Noto Emoji</family>
+#           </prefer>
+#         </alias>
+#
+#         <alias>
+#           <family>serif</family>
+#           <prefer>
+#             <family>Main serif font name goes here</family>
+#             <family>Noto Color Emoji</family>
+#             <family>Noto Emoji</family>
+#           </prefer>
+#         </alias>
+#
+#         <alias>
+#          <family>monospace</family>
+#          <prefer>
+#            <family>Main monospace font name goes here</family>
+#            <family>Noto Color Emoji</family>
+#            <family>Noto Emoji</family>
+#           </prefer>
+#         </alias>
+#        </fontconfig>
+#        '';
 
 #        localConf = ''
 #        <?xml version="1.0"?>
@@ -359,26 +359,35 @@ localConf = ''
 #          </alias>
 #        </fontconfig>
 #      '';
-      defaultFonts = {
-        emoji = [ "Noto Color Emoji" ];
-        monospace = [ "FreeMono" ];
-        sansSerif = [ "FreeSans" ];
-        serif = [ "FreeSerif" ];
-      };
+
+#      defaultFonts = {
+#        emoji = [ "Noto Color Emoji" ];
+#        monospace = [ "FreeMono" ];
+#        sansSerif = [ "FreeSans" ];
+#        serif = [ "FreeSerif" ];
+#      };
     };
     fonts = with pkgs; [
        # fontconfig
 
-noto-fonts-emoji-blob-bin
-noto-fonts-emoji
-twemoji-color-font
-openmoji-color
-openmoji-black
-twitter-color-emoji
-rxvt-unicode-emoji
+# apple-fonts
+# cantarell_fonts
+# fira-code-symbol
+# fontconfig-penultimate # It was a fork of the abandoned
+# maple-mono-SC-NF
+# material-symbols
+# mplus-outline-fonts
+# pragmataPro
+# pxplus-ibm-vga8-bin
+# sf-mono-liga
+# sfmono
+# terminus # terminus has been removed, it was unmaintained in nixpkgs
+# terminus-td1
+# ttf-ms-win10
+# ttfautohunt
+# unfree
 andagii
 anonymousPro
-# apple-fonts
 arc-icon-theme
 arkpandora_ttf
 arphic-ukai
@@ -389,7 +398,6 @@ baekmuk-ttf
 cabin
 caladea
 cantarell-fonts
-# cantarell_fonts
 carlito
 cascadia-code
 clearlyU
@@ -416,7 +424,6 @@ faba-mono-icons
 fantasque-sans-mono
 fira                # Monospace
 fira-code
-# fira-code-symbol
 fira-code-symbols
 fira-mono
 font-awesome
@@ -425,7 +432,6 @@ font-awesome_4
 font-awesome_5
 font-awesome_5 # 6 breaks polybar?
 font-manager
-# fontconfig-penultimate # It was a fork of the abandoned
 freefont_ttf
 ftgl
 gbdfed
@@ -470,11 +476,9 @@ lmodern
 lobster-two
 lxappearance
 maia-icon-theme
-# maple-mono-SC-NF
 marathi-cursive
 material-design-icons
 material-icons
-# material-symbols
 meslo-lg
 meslo-lgs-nf
 migu
@@ -483,7 +487,6 @@ monoid # https://larsenwork.com/monoid/
 mononoki
 montserrat
 mph_2b_damase
-# mplus-outline-fonts
 mro-unicode
 nafees
 nerdfonts
@@ -505,6 +508,7 @@ oldsindhi
 oldstandard
 open-dyslexic
 open-sans
+openmoji-black
 openmoji-color
 overpass
 oxygen-icons5
@@ -518,10 +522,8 @@ plantuml
 poly
 powerline
 powerline-fonts
-# pragmataPro
 profont
 proggyfonts
-# pxplus-ibm-vga8-bin
 quattrocento
 quattrocento-sans
 raleway
@@ -529,14 +531,12 @@ recursive
 roboto
 roboto-mono
 roboto-slab
+rxvt-unicode-emoji
 sampradaya
 sarasa-gothic # A CJK programming font based on Iosevka and Source Han Sans
 scientifica
-# sf-mono-liga
-# sfmono
 shrikhand
 signwriting
-siji
 siji # bitmap icons
 silver-searcher
 soundfont-fluid
@@ -559,21 +559,17 @@ symbola
 tai-ahom
 tango-icon-theme
 tempora_lgc
-# terminus # terminus has been removed, it was unmaintained in nixpkgs
-# terminus-td1
 terminus_font
 terminus_font_ttf
 tewi-font
 tewi-font # bitmap icons + letters
 theano
 tipa
-# ttf-ms-win10
 ttf_bitstream_vera
-# ttfautohunt
 ttmkfdir
 twemoji-color-font
+twitter-color-emoji
 ubuntu_font_family
-# unfree
 uni-vga
 unifont             # International languages
 unifont_upper
