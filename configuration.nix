@@ -305,6 +305,7 @@
        arphic-ukai
        arphic-uming
        aurulent-sans
+       babelstone-han # https://www.reddit.com/r/NixOS/comments/10lyw6d/certain_asian_characters_show_as_boxes/
        comic-relief
        corefonts           # Microsoft free fonts
        dejavu_fonts
@@ -316,15 +317,16 @@
        font-awesome_4
        freefont_ttf
        hack-font
+       hanazono
        hasklig
        inconsolata         # Monospace
        lato
        liberation_ttf
-       # lineicons
        montserrat
-       # mplus-outline-fonts
        nerdfonts # Really big
        noto-fonts
+       noto-fonts-cjk-sans
+       noto-fonts-cjk-serif
        noto-fonts-emoji
        noto-fonts-extra
        powerline
