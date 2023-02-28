@@ -390,12 +390,12 @@
             </fontconfig>
         '';
 
-#      defaultFonts = {
-#        emoji = [ "Noto Color Emoji" ];
-#        monospace = [ "FreeMono" ];
-#        sansSerif = [ "FreeSans" ];
-#        serif = [ "FreeSerif" ];
-#      };
+      defaultFonts = {
+        emoji = [ "Noto Color Emoji" ];
+        monospace = [ "FreeMono" ];
+        sansSerif = [ "FreeSans" ];
+        serif = [ "FreeSerif" ];
+      };
     };
     fonts = with pkgs; [
        # fontconfig
