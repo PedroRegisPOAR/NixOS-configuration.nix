@@ -114,7 +114,7 @@
   # The installer was broken!
   # https://github.com/NixOS/nixpkgs/issues/182631#issuecomment-1193307060
   # i18n.defaultLocale = "en_US.UTF-8";
-  console.font = "Noto Color Emoji";
+  console.font = "Noto Color Emoji"; # https://stackoverflow.com/questions/51922651/in-nixos-is-there-a-way-to-get-a-list-of-available-console-fonts
   i18n.extraLocaleSettings = {
     # LANG = "en_US.UTF-8";
     LC_ALL = "en_US.UTF-8";
@@ -366,29 +366,51 @@
 #        </fontconfig>
 #        '';
 
+#        localConf = ''
+#            <?xml version="1.0" encoding="UTF-8"?>
+#            <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+#            <fontconfig>
+#              <alias binding="weak">
+#                <family>monospace</family>
+#                <prefer>
+#                  <family>emoji</family>
+#                </prefer>
+#              </alias>
+#              <alias binding="weak">
+#                <family>sans-serif</family>
+#                <prefer>
+#                  <family>emoji</family>
+#                </prefer>
+#              </alias>
+#              <alias binding="weak">
+#                <family>serif</family>
+#                <prefer>
+#                  <family>emoji</family>
+#                </prefer>
+#              </alias>
+#            </fontconfig>
+#        '';
+
         localConf = ''
-            <?xml version="1.0" encoding="UTF-8"?>
-            <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
-            <fontconfig>
-              <alias binding="weak">
-                <family>monospace</family>
-                <prefer>
-                  <family>emoji</family>
-                </prefer>
-              </alias>
-              <alias binding="weak">
-                <family>sans-serif</family>
-                <prefer>
-                  <family>emoji</family>
-                </prefer>
-              </alias>
-              <alias binding="weak">
-                <family>serif</family>
-                <prefer>
-                  <family>emoji</family>
-                </prefer>
-              </alias>
-            </fontconfig>
+            <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+            <match>
+             <test name="family"><string>sans-serif</string></test>
+             <edit name="family" mode="prepend" binding="strong">
+             <string>Noto Color Emoji</string>
+             </edit>
+             </match>
+            <match>
+             <test name="family"><string>serif</string></test>
+             <edit name="family" mode="prepend" binding="strong">
+             <string>Noto Color Emoji</string>
+             </edit>
+             </match>
+            <match>
+             <test name="family"><string>Apple Color Emoji</string></test>
+             <edit name="family" mode="prepend" binding="strong">
+             <string>Noto Color Emoji</string>
+             </edit>
+             </match>
         '';
 
       defaultFonts = {
