@@ -301,30 +301,64 @@
   fonts = {
     fontDir.enable = true;
       fontconfig = {
-        localConf = ''
-        <?xml version="1.0"?>
-        <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
-        <fontconfig>
-          <alias binding="weak">
-            <family>monospace</family>
-            <prefer>
-              <family>emoji</family>
-            </prefer>
-          </alias>
-          <alias binding="weak">
-            <family>sans-serif</family>
-            <prefer>
-              <family>emoji</family>
-            </prefer>
-          </alias>
-          <alias binding="weak">
-            <family>serif</family>
-            <prefer>
-              <family>emoji</family>
-            </prefer>
-          </alias>
-        </fontconfig>
-      '';
+localConf = ''
+<?xml version="1.0"?>
+<!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+<fontconfig>
+
+ <alias>
+   <family>sans-serif</family>
+   <prefer>
+     <family>Main sans-serif font name goes here</family>
+     <family>Noto Color Emoji</family>
+     <family>Noto Emoji</family>
+   </prefer> 
+ </alias>
+
+ <alias>
+   <family>serif</family>
+   <prefer>
+     <family>Main serif font name goes here</family>
+     <family>Noto Color Emoji</family>
+     <family>Noto Emoji</family>
+   </prefer>
+ </alias>
+
+ <alias>
+  <family>monospace</family>
+  <prefer>
+    <family>Main monospace font name goes here</family>
+    <family>Noto Color Emoji</family>
+    <family>Noto Emoji</family>
+   </prefer>
+ </alias>
+</fontconfig>
+'';
+
+#        localConf = ''
+#        <?xml version="1.0"?>
+#        <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+#        <fontconfig>
+#          <alias binding="weak">
+#            <family>monospace</family>
+#            <prefer>
+#              <family>emoji</family>
+#            </prefer>
+#          </alias>
+#          <alias binding="weak">
+#            <family>sans-serif</family>
+#            <prefer>
+#              <family>emoji</family>
+#            </prefer>
+#          </alias>
+#          <alias binding="weak">
+#            <family>serif</family>
+#            <prefer>
+#              <family>emoji</family>
+#            </prefer>
+#          </alias>
+#        </fontconfig>
+#      '';
       defaultFonts = {
         emoji = [ "Noto Color Emoji" ];
         monospace = [ "FreeMono" ];
