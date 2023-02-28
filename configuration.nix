@@ -302,49 +302,220 @@
     fontDir.enable = true;
     fonts = with pkgs; [
        # fontconfig
-       arphic-ukai
-       arphic-uming
-       aurulent-sans
-       babelstone-han # https://www.reddit.com/r/NixOS/comments/10lyw6d/certain_asian_characters_show_as_boxes/
-       comic-relief
-       corefonts           # Microsoft free fonts
-       dejavu_fonts
-       dina-font
-       fira                # Monospace
-       fira-code
-       fira-code-symbols
-       font-awesome # Old named as: font-awesome-ttf
-       font-awesome_4
-       freefont_ttf
-       hack-font
-       hanazono
-       hasklig
-       inconsolata         # Monospace
-       lato
-       liberation_ttf
-       montserrat
-       nerdfonts # Really big
-       noto-fonts
-       noto-fonts-cjk-sans
-       noto-fonts-cjk-serif
-       noto-fonts-emoji
-       noto-fonts-extra
-       powerline
-       powerline-fonts
-       source-han-sans-japanese
-       source-han-sans-korean
-       source-han-sans-simplified-chinese
-       source-han-sans-traditional-chinese
-       source-sans
-       source-sans-pro
-       sudo-font
-       symbola # TODO: Was broken
-       twemoji-color-font
-       ubuntu_font_family
-       unifont             # International languages
-       wqy_microhei
-       wqy_zenhei
-       xkcd-font
+andagii
+anonymousPro
+# apple-fonts
+arc-icon-theme
+arkpandora_ttf
+arphic-ukai
+arphic-uming
+aurulent-sans
+babelstone-han # https://www.reddit.com/r/NixOS/comments/10lyw6d/certain_asian_characters_show_as_boxes/
+baekmuk-ttf
+cabin
+caladea
+cantarell-fonts
+# cantarell_fonts
+carlito
+cascadia-code
+clearlyU
+cm_unicode
+comfortaa
+comic-neue
+comic-relief
+corefonts           # Microsoft free fonts
+crimson
+curie
+dejavu_fonts
+dina-font
+dina-font-pcf
+ditaa
+dosis
+eb-garamond
+emacs-all-the-icons-fonts
+emojione
+encode-sans
+envypn-font
+etBook
+faba-icon-theme
+faba-mono-icons
+fantasque-sans-mono
+fira                # Monospace
+fira-code
+# fira-code-symbol
+fira-code-symbols
+fira-mono
+font-awesome
+font-awesome # Old named as: font-awesome-ttf
+font-awesome_4
+font-awesome_5
+font-awesome_5 # 6 breaks polybar?
+font-manager
+# fontconfig-penultimate # It was a fork of the abandoned
+freefont_ttf
+ftgl
+gbdfed
+gentium-book-basic
+ghostscript
+ghostscriptX
+gnome3.gnome-font-viewer
+go-font
+gohufont
+google-fonts
+google-fonts # this kills doom emacs performance for some reason. Do not use.
+gtk2fontsel
+hack-font
+hanazono
+hasklig
+helvetica-neue-lt-std
+ia-writer-duospace
+ibm-plex
+inconsolata
+inconsolata         # Monospace
+inconsolata-lgc
+inconsolata-nerdfont
+inter
+iosevka
+iosevka-bin
+iosevka-comfy.comfy
+jetbrains-mono
+jost
+# joypixels # joypixels.acceptLicense = true;
+jre
+junicode
+kawkab-mono-font
+lato
+lexend
+liberastika
+liberation_ttf
+libertine
+libre-baskerville
+libre-franklin
+lmmath
+lmodern
+lobster-two
+lxappearance
+maia-icon-theme
+# maple-mono-SC-NF
+marathi-cursive
+material-design-icons
+material-icons
+# material-symbols
+meslo-lg
+meslo-lgs-nf
+migu
+moka-icon-theme
+monoid # https://larsenwork.com/monoid/
+mononoki
+montserrat
+mph_2b_damase
+# mplus-outline-fonts
+mro-unicode
+nafees
+nerdfonts
+nerdfonts # Really big
+norwester-font
+noto-fonts
+noto-fonts noto-fonts-cjk
+noto-fonts-cjk
+noto-fonts-cjk-sans
+noto-fonts-cjk-serif
+noto-fonts-emoji
+noto-fonts-emoji-blob-bin
+noto-fonts-extra
+numix-icon-theme
+numix-icon-theme-circle
+numix-icon-theme-square
+office-code-pro
+oldsindhi
+oldstandard
+open-dyslexic
+open-sans
+openmoji-color
+overpass
+oxygen-icons5
+oxygenfonts
+paper-icon-theme
+paratype-pt-mono
+paratype-pt-sans
+paratype-pt-serif
+pecita
+plantuml
+poly
+powerline
+powerline-fonts
+# pragmataPro
+profont
+proggyfonts
+# pxplus-ibm-vga8-bin
+quattrocento
+quattrocento-sans
+raleway
+recursive
+roboto
+roboto-mono
+roboto-slab
+sampradaya
+sarasa-gothic # A CJK programming font based on Iosevka and Source Han Sans
+scientifica
+# sf-mono-liga
+# sfmono
+shrikhand
+signwriting
+siji
+siji # bitmap icons
+silver-searcher
+soundfont-fluid
+source-code-pro
+source-han-sans
+source-han-sans-japanese
+source-han-sans-korean
+source-han-sans-simplified-chinese
+source-han-sans-traditional-chinese
+source-han-serif-japanese
+source-han-serif-korean
+source-han-serif-simplified-chinese
+source-han-serif-traditional-chinese
+source-sans
+source-sans-pro
+source-serif-pro
+stix-two
+sudo-font
+symbola
+tai-ahom
+tango-icon-theme
+tempora_lgc
+# terminus # terminus has been removed, it was unmaintained in nixpkgs
+# terminus-td1
+terminus_font
+terminus_font_ttf
+tewi-font
+tewi-font # bitmap icons + letters
+theano
+tipa
+# ttf-ms-win10
+ttf_bitstream_vera
+# ttfautohunt
+ttmkfdir
+twemoji-color-font
+ubuntu_font_family
+# unfree
+uni-vga
+unifont             # International languages
+unifont_upper
+vanilla-dmz
+vegur
+victor-mono
+vistafonts
+vistafonts-chs
+vistafonts-cht
+weather-icons
+work-sans
+wqy_microhei
+wqy_zenhei
+xfontsel
+xkcd-font
+
     ];
     enableDefaultFonts = false;
   };
