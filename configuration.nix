@@ -420,7 +420,7 @@ iosevka-bin
 iosevka-comfy.comfy
 jetbrains-mono
 jost
-# joypixels # joypixels.acceptLicense = true;
+joypixels # joypixels.acceptLicense = true;
 jre
 junicode
 kawkab-mono-font
@@ -562,7 +562,8 @@ xkcd-font
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-  
+  nixpkgs.config.joypixels.acceptLicense = true;
+
   #
   nix = {
      package = pkgs.nixFlakes;
