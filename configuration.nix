@@ -113,8 +113,7 @@
   # Select internationalisation properties.
   # The installer was broken!
   # https://github.com/NixOS/nixpkgs/issues/182631#issuecomment-1193307060
-  # i18n.defaultLocale = "en_US.UTF-8";
-
+  i18n.defaultLocale = "en_US.UTF-8";
   i18n.extraLocaleSettings = {
     LANG = "en_US.UTF-8";
     LC_ALL = "en_US.UTF-8";
