@@ -393,6 +393,7 @@
 
         localConf = ''
             <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+            <fontconfig>
             <match>
              <test name="family"><string>sans-serif</string></test>
              <edit name="family" mode="prepend" binding="strong">
@@ -411,6 +412,7 @@
              <string>Noto Color Emoji</string>
              </edit>
              </match>
+            </fontconfig>
         '';
 
       defaultFonts = {
