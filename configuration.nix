@@ -645,11 +645,14 @@
         twitter-color-emoji
         rxvt-unicode-emoji
         emojione
+        joypixels
         noto-fonts-emoji-blob-bin
+        openmoji-color
+        openmoji-black
         # ttf_bitstream_vera
         # babelstone-han
         # google-fonts
-        noto-fonts-emoji
+        # noto-fonts-emoji
 
     ];
     enableDefaultFonts = false;
