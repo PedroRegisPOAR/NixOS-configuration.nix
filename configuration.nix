@@ -641,7 +641,7 @@
         nerdfonts
         powerline
         powerline-fonts
-        twemoji-color-font
+        # twemoji-color-font
         twitter-color-emoji
         # ttf_bitstream_vera
         # google-fonts
