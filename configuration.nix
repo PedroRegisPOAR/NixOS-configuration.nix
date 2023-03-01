@@ -638,15 +638,18 @@
         #xfontsel
         #xkcd-font
 
-        # nerdfonts
-        # powerline
-        # powerline-fonts
+        nerdfonts
+        powerline
+        powerline-fonts
         # twemoji-color-font
-        # twitter-color-emoji
+        twitter-color-emoji
+        rxvt-unicode-emoji
+        emojione
+        noto-fonts-emoji-blob-bin
         # ttf_bitstream_vera
-        babelstone-han
+        # babelstone-han
         # google-fonts
-        # noto-fonts-emoji
+        noto-fonts-emoji
 
     ];
     enableDefaultFonts = false;
