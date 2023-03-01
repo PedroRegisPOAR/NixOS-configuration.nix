@@ -415,12 +415,12 @@
 #            </fontconfig>
 #        '';
 
-      defaultFonts = {
-        emoji = [ "Twitter Color Emoji" ];
-        monospace = [ "FreeMono" ];
-        sansSerif = [ "FreeSans" ];
-        serif = [ "FreeSerif" ];
-      };
+#      defaultFonts = {
+#        emoji = [ "Twitter Color Emoji" ];
+#        monospace = [ "FreeMono" ];
+#        sansSerif = [ "FreeSans" ];
+#        serif = [ "FreeSerif" ];
+#      };
     };
     fonts = with pkgs; [
        # fontconfig
@@ -641,8 +641,9 @@
         nerdfonts
         powerline
         powerline-fonts
-        twemoji-color-font
-        # twitter-color-emoji
+        # twemoji-color-font
+        twitter-color-emoji
+        # symbola
         # rxvt-unicode-emoji
         # emojione
         # joypixels
