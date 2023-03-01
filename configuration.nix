@@ -650,9 +650,9 @@
         noto-fonts-emoji-blob-bin
         noto-fonts-extra
 
-        # twemoji-color-font
-        # twitter-color-emoji
-        # symbola
+        twemoji-color-font
+        twitter-color-emoji
+        symbola
         # rxvt-unicode-emoji
         # emojione
         # joypixels
