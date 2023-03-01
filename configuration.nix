@@ -367,54 +367,54 @@
 #        </fontconfig>
 #        '';
 
-#        localConf = ''
-#            <?xml version="1.0" encoding="UTF-8"?>
-#            <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
-#            <fontconfig>
-#              <alias binding="weak">
-#                <family>monospace</family>
-#                <prefer>
-#                  <family>emoji</family>
-#                </prefer>
-#              </alias>
-#              <alias binding="weak">
-#                <family>sans-serif</family>
-#                <prefer>
-#                  <family>emoji</family>
-#                </prefer>
-#              </alias>
-#              <alias binding="weak">
-#                <family>serif</family>
-#                <prefer>
-#                  <family>emoji</family>
-#                </prefer>
-#              </alias>
-#            </fontconfig>
-#        '';
-
         localConf = ''
-            <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+            <?xml version="1.0" encoding="UTF-8"?>
+            <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
             <fontconfig>
-            <match>
-             <test name="family"><string>sans-serif</string></test>
-             <edit name="family" mode="prepend" binding="strong">
-             <string>Noto Color Emoji</string>
-             </edit>
-             </match>
-            <match>
-             <test name="family"><string>serif</string></test>
-             <edit name="family" mode="prepend" binding="strong">
-             <string>Noto Color Emoji</string>
-             </edit>
-             </match>
-            <match>
-             <test name="family"><string>Apple Color Emoji</string></test>
-             <edit name="family" mode="prepend" binding="strong">
-             <string>Noto Color Emoji</string>
-             </edit>
-             </match>
+              <alias binding="weak">
+                <family>monospace</family>
+                <prefer>
+                  <family>emoji</family>
+                </prefer>
+              </alias>
+              <alias binding="weak">
+                <family>sans-serif</family>
+                <prefer>
+                  <family>emoji</family>
+                </prefer>
+              </alias>
+              <alias binding="weak">
+                <family>serif</family>
+                <prefer>
+                  <family>emoji</family>
+                </prefer>
+              </alias>
             </fontconfig>
         '';
+
+#        localConf = ''
+#            <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+#            <fontconfig>
+#            <match>
+#             <test name="family"><string>sans-serif</string></test>
+#             <edit name="family" mode="prepend" binding="strong">
+#             <string>Noto Color Emoji</string>
+#             </edit>
+#             </match>
+#            <match>
+#             <test name="family"><string>serif</string></test>
+#             <edit name="family" mode="prepend" binding="strong">
+#             <string>Noto Color Emoji</string>
+#             </edit>
+#             </match>
+#            <match>
+#             <test name="family"><string>Apple Color Emoji</string></test>
+#             <edit name="family" mode="prepend" binding="strong">
+#             <string>Noto Color Emoji</string>
+#             </edit>
+#             </match>
+#            </fontconfig>
+#        '';
 
 #      defaultFonts = {
 #        emoji = [ "Twitter Color Emoji" ];
