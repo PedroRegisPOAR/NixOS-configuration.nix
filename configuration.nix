@@ -643,7 +643,8 @@
         powerline-fonts
         # twemoji-color-font
         twitter-color-emoji
-        ttf_bitstream_vera
+        # ttf_bitstream_vera
+        babelstone-han
         # google-fonts
         # noto-fonts-emoji
 
