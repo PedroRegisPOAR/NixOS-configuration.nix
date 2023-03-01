@@ -654,7 +654,7 @@
         twitter-color-emoji
         symbola
         # rxvt-unicode-emoji
-        # emojione
+        emojione
         # joypixels
          openmoji-color
          openmoji-black
