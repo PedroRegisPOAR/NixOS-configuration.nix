@@ -643,7 +643,7 @@
         powerline-fonts
         # twemoji-color-font
         twitter-color-emoji
-        # symbola
+        symbola
         # rxvt-unicode-emoji
         # emojione
         # joypixels
