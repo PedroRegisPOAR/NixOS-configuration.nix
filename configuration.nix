@@ -653,14 +653,14 @@
         twemoji-color-font
         twitter-color-emoji
         symbola
-         rxvt-unicode-emoji
-         emojione
-         joypixels
+        # rxvt-unicode-emoji
+        # emojione
+        # joypixels
          openmoji-color
          openmoji-black
          ttf_bitstream_vera
          babelstone-han
-         google-fonts
+        # google-fonts
 
     ];
     enableDefaultFonts = false;
