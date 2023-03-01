@@ -638,11 +638,11 @@
         #xfontsel
         #xkcd-font
 
-        nerdfonts
-        powerline
-        powerline-fonts
+        # nerdfonts
+        # powerline
+        # powerline-fonts
         # twemoji-color-font
-        twitter-color-emoji
+        # twitter-color-emoji
         # ttf_bitstream_vera
         babelstone-han
         # google-fonts
