@@ -114,7 +114,7 @@
   # The installer was broken!
   # https://github.com/NixOS/nixpkgs/issues/182631#issuecomment-1193307060
   # i18n.defaultLocale = "en_US.UTF-8";
-  console.font = "Noto Color Emoji"; # https://stackoverflow.com/questions/51922651/in-nixos-is-there-a-way-to-get-a-list-of-available-console-fonts
+  console.font = "Twitter Color Emoji"; # https://stackoverflow.com/questions/51922651/in-nixos-is-there-a-way-to-get-a-list-of-available-console-fonts
   i18n.extraLocaleSettings = {
     # LANG = "en_US.UTF-8";
     LC_ALL = "en_US.UTF-8";
@@ -643,7 +643,7 @@
         powerline
         powerline-fonts
         twitter-color-emoji
-        noto-fonts-emoji
+        # noto-fonts-emoji
 
     ];
     enableDefaultFonts = false;
