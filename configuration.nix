@@ -643,6 +643,7 @@
         powerline
         powerline-fonts
         twitter-color-emoji
+        ttf_bitstream_vera
         # noto-fonts-emoji
 
     ];
