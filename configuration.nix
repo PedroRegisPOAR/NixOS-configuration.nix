@@ -546,7 +546,6 @@
         #nerdfonts # Really big
         #norwester-font
         #noto-fonts
-        #noto-fonts noto-fonts-cjk
         #noto-fonts-cjk
         #noto-fonts-cjk-sans
         #noto-fonts-cjk-serif
@@ -642,8 +641,9 @@
         nerdfonts
         powerline
         powerline-fonts
-        twitter-color-emoji
-        ttf_bitstream_vera
+        # twitter-color-emoji
+        # ttf_bitstream_vera
+        google-fonts
         # noto-fonts-emoji
 
     ];
