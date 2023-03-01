@@ -416,7 +416,7 @@
 #        '';
 
       defaultFonts = {
-        emoji = [ "Noto Color Emoji" ];
+        emoji = [ "Twitter Color Emoji" ];
         monospace = [ "FreeMono" ];
         sansSerif = [ "FreeSans" ];
         serif = [ "FreeSerif" ];
