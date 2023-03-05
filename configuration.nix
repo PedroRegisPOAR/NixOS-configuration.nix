@@ -732,7 +732,7 @@
      # unzip
      tree
      nix-index
-     # xorg.xhost
+     xorg.xhost
 
      gzip
      unrar
@@ -749,7 +749,7 @@
      gcc
      # gcc6
      
-     # anydesk
+     anydesk
      # discord
      firefox
      # google-chrome
