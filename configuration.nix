@@ -761,6 +761,7 @@
      # discord
      # spotify
      # tdesktop
+     slack
      vlc
      xorg.xkill
      # discord
