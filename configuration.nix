@@ -711,7 +711,8 @@
      zsh-autosuggestions
      zsh-completions
      # bottom  # the binary is btm 
-     bpytop
+     # bpytop
+     btop
      fontforge-gtk # Really helps: https://joyofhaskell.com/posts/2018-11-30-font-name.html
 
     
