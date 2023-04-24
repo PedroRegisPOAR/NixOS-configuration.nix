@@ -809,6 +809,7 @@
      
      # sl
      # hello
+     pkgsCross.aarch64-multiplatform-musl.pkgsStatic.hello
      # figlet
      # cowsay
 
@@ -1122,6 +1123,7 @@
        writeScriptBin "mansf" ''
          #! ${pkgs.runtimeShell} -e
          # https://unix.stackexchange.com/a/302792
+         # https://askubuntu.com/questions/20752/how-can-i-search-within-a-manpage/1155761#1155761
          # msf, stand for: Man Search Flag
          # function mansf () { man $1 | less -p "^ +$2" }
          # Call the function
