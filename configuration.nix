@@ -969,6 +969,7 @@
            && podman pod list --quiet | xargs --no-run-if-empty podman pod rm --force
          fi
 
+         nix profile list
          nix profile remove '.*'
          
          find ~ \( -iname '*.iso' -o -iname '*.qcow2*' -o -iname '*.img' -o -iname 'result' \) -exec rm -frv -- {} + 2> /dev/null | tr ' ' '\n'
@@ -978,6 +979,7 @@
          sudo rm -fr "$HOME"/.local/share/containers
          sudo rm -frv /var/{tmp,lib,log}/*
          
+         nix profile list
          nix profile remove '.*'
          
          nix \
@@ -993,14 +995,14 @@
          su \
          -c \
          '
-         nix \
-         store \
-         gc \
-         --verbose \
-         --option keep-derivations false \
-         --option keep-outputs false \
-         && nix-collect-garbage --delete-old \
-         && nix store optimise --verbose
+           nix \
+           store \
+           gc \
+             --verbose \
+             --option keep-derivations false \
+             --option keep-outputs false \
+           && nix-collect-garbage --delete-old \
+           && nix store optimise --verbose
          '
 
         test -z "$TMPDIR" || du -hs "$TMPDIR"
