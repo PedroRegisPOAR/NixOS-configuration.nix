@@ -29,6 +29,12 @@
                    # For virtualisation settings.
                    # It brings among other things the `.vm` attr need for 
                    # (nixpkgs + "/nixos/modules/virtualisation/qemu-vm.nix")
+
+                   {
+                     nix.registry.nixpkgs.flake = nixpkgs;
+                   }
+
+
                  ];
           # TODO
           # https://www.reddit.com/r/NixOS/comments/oyo5mw/stuck_in_migration_to_flake_for_configurationnix/
