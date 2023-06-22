@@ -32,6 +32,7 @@
 
                    {
                      nix.registry.nixpkgs.flake = nixpkgs;
+                     nix.package = pkgs.nixVersions.nix_2_10;
                    }
 
 
