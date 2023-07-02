@@ -887,7 +887,7 @@
      (
        writeScriptBin "schownme" ''
          #! ${pkgs.runtimeShell} -e
-         sudo -k chown "$(id -u)"':'"$(id -g)" "$@"         
+         sudo -k chown -Rv "$(id -u)"':'"$(id -g)" "$@"
        ''
      )
 
