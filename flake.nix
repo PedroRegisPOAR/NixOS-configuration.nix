@@ -7,7 +7,7 @@
     # nixos-unstable = { url = "github:nixos/nixpkgs/nixos-unstable"; };
 #  };
 
-  outputs = { self, nixpkgs }:
+  outputs = { self, nixpkgs }@attrs:
     let
       system = "x86_64-linux";
 
@@ -19,6 +19,8 @@
     in {
        nixosConfigurations.pedroregispoar= nixpkgs.lib.nixosSystem {
          inherit system;
+         # 
+         specialArgs = { inherit attrs; };
          modules = [
                    ./configuration.nix
 
