@@ -24,11 +24,16 @@ su \
 sudo \
 su \
 -c \
-'nix store gc --verbose \
---option keep-derivations false \
---option keep-outputs false \
-&& nix-collect-garbage --delete-old \
-&& nix store optimise -v'
+'
+  nix \
+    store \
+    gc \
+    --verbose \
+    --option keep-derivations false \
+    --option keep-outputs false \
+  && nix-collect-garbage --delete-old \
+  && nix store optimise --verbose
+'
 ```
 
 To list all generations:
@@ -39,7 +44,7 @@ sudo nix-env --profile /nix/var/nix/profiles/system --list-generations
 ```bash
 nix profile list --profile "${HOME}"/.nix-profile
 
-nix show-derivation -r /run/current-system
+nix show-derivation --recursive /run/current-system
 ```
 
 
@@ -61,8 +66,9 @@ sudo bash -c "cd /boot/loader/entries; ls | xargs echo"
 ```bash
 sudo bash -c "cd /boot/loader/entries; ls | grep -v 'nixos-generation-13.conf' | xargs rm"
 ```
-Adapted from: [gist](https://gist.github.com/xeppaka/f6126eebe030a000aa14ed63cc6e8496) and 
-[--profile-name](https://stackoverflow.com/a/35664788)
+Adapted from: 
+- [gist](https://gist.github.com/xeppaka/f6126eebe030a000aa14ed63cc6e8496)
+- [--profile-name](https://stackoverflow.com/a/35664788)
 
 
 
