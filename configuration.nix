@@ -778,7 +778,8 @@
      gnupg
      gparted
      
-     youtube-dl
+     # youtube-dl # It is abandoned AFAIK
+     yt-dlp
      htop
      jetbrains.pycharm-community
      keepassxc
