@@ -1138,7 +1138,17 @@
      # 
      # kill -TERM $(lsof -t filename)
      
-     (
+     ( /*
+         TODO: compare other solutions:
+	  sman() {
+            man "${1}" \
+            | grep -iozP -- "(?s)\n+\s+\K\Q${2}\E.*?\n*(?=\n+\s+-)"
+          }
+         https://askubuntu.com/a/1281460
+
+        man -wK --regex 'Brace Expansion' | sort -u | xargs man -l -P cat | grep -inF 'Brace Expansion'
+        https://unix.stackexchange.com/a/498063
+       */
        writeScriptBin "mansf" ''
          #! ${pkgs.runtimeShell} -e
          # https://unix.stackexchange.com/a/302792
