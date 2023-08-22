@@ -998,12 +998,13 @@
          nix profile list
          nix profile remove '.*'
          
+         # TODO: calibrate what is too much
          nix \
          store \
          gc \
          --verbose \
-         --option keep-derivations false \
-         --option keep-outputs false \
+         --option keep-derivations true \
+         --option keep-outputs true \
          && nix-collect-garbage --delete-old
          
          # TODO: what is removed when using sudo?
