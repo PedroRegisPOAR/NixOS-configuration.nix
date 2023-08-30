@@ -727,6 +727,7 @@
      nixpkgs-fmt
      nixos-option
      hydra-check
+     patchelf
      ripgrep
      strace
      # util-linux
