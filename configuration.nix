@@ -87,7 +87,7 @@
     # "fat16"
     # "fat32"
     # "fat8"
-    # "ntfs"
+    "ntfs" # TODO: how to test it?
     # "reiserfs"
     # "vfat"
     # "xfs"
