@@ -70,12 +70,21 @@
     "vm.swappiness" = 0;
   };
 
+  /*
   # https://nix.dev/tutorials/building-bootable-iso-image
   # Needed for https://github.com/NixOS/nixpkgs/issues/58959
   # https://www.reddit.com/r/NixOS/comments/ni79b8/list_of_all_nixos_supported_file_systems/
   #
   # For allow mount HDD
   # https://www.reddit.com/r/NixOS/comments/f2e9cb/unable_to_mount_external_drives_properly_in_nixos/
+    
+    https://nixos.wiki/wiki/NTFS
+    https://discourse.nixos.org/t/how-can-i-access-an-external-ntfs-hard-drive/15622/2
+    https://bbs.archlinux.org/viewtopic.php?id=271650
+    https://bugs.kde.org/show_bug.cgi?id=445468
+    https://www.reddit.com/r/NixOS/comments/qd8olg/what_does_enabling_ntfs_support_mean/
+
+  */
   boot.supportedFilesystems = [ 
     # "btrfs"
     # "cifs"
