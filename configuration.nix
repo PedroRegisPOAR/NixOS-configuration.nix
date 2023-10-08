@@ -40,6 +40,38 @@
   # https://www.reddit.com/r/NixOS/comments/wcxved/i_gave_an_adhoc_lightning_talk_at_mch2022/
   # Matthew Croughan - Use flake.nix, not Dockerfile - MCH2022
   # https://www.youtube.com/embed/0uixRE8xlbY?start=707&end=827&version=3
+/*
+
+nix \
+build \
+--max-jobs 0 \
+--no-link \
+--print-build-logs \
+--print-out-paths \
+--system 'aarch64-linux' \
+nixpkgs#hello
+
+
+nix \
+build \
+--max-jobs 0 \
+--no-link \
+--print-build-logs \
+--print-out-paths \
+--system 'x86_64-linux' \
+nixpkgs#hello
+
+
+
+nix \
+build \
+--max-jobs 0 \
+--no-link \
+--print-build-logs \
+--print-out-paths \
+--system 'aarch64-darwin' \
+nixpkgs#hello
+*/
   boot.binfmt.emulatedSystems = ["aarch64-linux"];
 
   programs.dconf.enable = true;
