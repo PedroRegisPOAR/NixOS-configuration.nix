@@ -801,6 +801,7 @@ nixpkgs#hello
      anydesk
      # discord
      firefox
+     qbittorrent
      # google-chrome
      # chromium
      # freeoffice     
@@ -853,6 +854,7 @@ nixpkgs#hello
      # qemu
      virt-manager
 
+     libcgroup # lscgroup and others
      pciutils # lspci and others
      coreboot-utils # acpidump-all
      
