@@ -764,6 +764,7 @@ nixpkgs#hello
      mtpaint
     
      # Some utils
+     # typos
      binutils
      coreutils
      dnsutils
