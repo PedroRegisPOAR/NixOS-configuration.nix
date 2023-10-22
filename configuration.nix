@@ -765,6 +765,7 @@ nixpkgs#hello
     
      # Some utils
      # typos
+     # lsb_release
      binutils
      coreutils
      dnsutils
@@ -794,7 +795,7 @@ nixpkgs#hello
      graphviz # dot command comes from here
      jq
      unixtools.xxd
-    
+
      # Caching compilers
      gcc
      # gcc6
