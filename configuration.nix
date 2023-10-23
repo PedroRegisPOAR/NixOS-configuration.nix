@@ -766,6 +766,7 @@ nixpkgs#hello
      # Some utils
      # typos
      # lsb_release
+     # smartmontools
      binutils
      coreutils
      dnsutils
