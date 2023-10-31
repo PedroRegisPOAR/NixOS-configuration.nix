@@ -42,6 +42,11 @@
   # https://www.youtube.com/embed/0uixRE8xlbY?start=707&end=827&version=3
 /*
 
+
+https://github.com/cleverca22/nixos-configs/blob/0055f11b62b3278adebdfa115386e0ccf3d350f8/qemu.nix#L16-L20
+https://codepyre.com/2019/12/arming-yourself/#required-packages-ubuntu-1804
+https://nixos.wiki/wiki/NixOS_on_ARM#Compiling_through_binfmt_QEMU
+
 nix \
 build \
 --max-jobs 0 \
