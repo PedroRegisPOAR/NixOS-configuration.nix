@@ -722,6 +722,10 @@ nixpkgs#hello
      extraOptions = ''
        experimental-features = nix-command flakes 
      '';
+     
+     settings.keep-derivations = true;
+     settings.keep-env-derivations = true;
+     settings.keep-outputs = true;
     
     # 
     # "relaxed"
@@ -1056,8 +1060,9 @@ nixpkgs#hello
          store \
          gc \
          --verbose \
-         --option keep-derivations true \
-         --option keep-outputs true \
+         --option keep-derivations false \
+         --option keep-env-derivations false \
+         --option keep-outputs false \
          && nix-collect-garbage --delete-old
          
          # TODO: what is removed when using sudo?
@@ -1070,6 +1075,7 @@ nixpkgs#hello
            gc \
              --verbose \
              --option keep-derivations false \
+             --option keep-env-derivations false \
              --option keep-outputs false \
            && nix-collect-garbage --delete-old \
            && nix store optimise --verbose
