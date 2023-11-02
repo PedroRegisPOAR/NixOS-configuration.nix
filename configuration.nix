@@ -731,6 +731,8 @@ nixpkgs#hello
      settings.keep-derivations = true;
      settings.keep-env-derivations = true;
      settings.keep-outputs = true;
+
+     settings.max-jobs = 3;
     
     # 
     # "relaxed"
