@@ -59,6 +59,15 @@ sudo nix-env --profile /nix/var/nix/profiles/system --delete-generations old
 ```
 
 ```bash
+sudo nix --extra-experimental-features nix-command profile history --profile /nix/var/nix/profiles/system
+```
+
+Be carefull, this may break the system!
+```bash
+nix --extra-experimental-features nix-command profile wipe-history --profile /nix/var/nix/profiles/system
+```
+
+```bash
 sudo bash -c "cd /boot/loader/entries; ls | xargs echo"
 ```
 
